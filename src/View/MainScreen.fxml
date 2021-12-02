@@ -9,17 +9,25 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="1152.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="804.0" prefWidth="1368.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TableView layoutX="14.0" layoutY="71.0" prefHeight="461.0" prefWidth="502.0">
+      <TableView layoutX="629.0" layoutY="63.0" prefHeight="468.0" prefWidth="736.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn prefWidth="113.0" text="Appointment_ID" />
+          <TableColumn minWidth="0.0" prefWidth="0.0" text="Title" />
+            <TableColumn prefWidth="70.0" text="Description" />
+            <TableColumn prefWidth="61.0" text="Location" />
+            <TableColumn prefWidth="57.0" text="Contact" />
+            <TableColumn prefWidth="55.0" text="Type" />
+            <TableColumn prefWidth="52.0" text="Start Date &amp; Time" />
+            <TableColumn prefWidth="41.0" text="End Date &amp; Time" />
+            <TableColumn prefWidth="84.0" text="Customer_ID" />
+            <TableColumn prefWidth="53.0" text="User_ID" />
         </columns>
       </TableView>
       <RadioButton layoutX="910.0" layoutY="41.0" mnemonicParsing="false" text="Month" />
       <RadioButton layoutX="1017.0" layoutY="41.0" mnemonicParsing="false" text="Week" />
-      <TableView layoutX="566.0" layoutY="71.0" prefHeight="461.0" prefWidth="502.0">
+      <TableView layoutX="14.0" layoutY="63.0" prefHeight="461.0" prefWidth="502.0">
          <columns>
             <TableColumn prefWidth="75.0" text="C1" />
             <TableColumn prefWidth="75.0" text="C2" />
@@ -30,17 +38,17 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="566.0" layoutY="36.0" text="Appointments">
+      <Label layoutX="659.0" layoutY="36.0" text="Appointments">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="47.0" layoutY="550.0" mnemonicParsing="false" text="Add" />
-      <Button layoutX="1068.0" layoutY="694.0" mnemonicParsing="false" text="Exit" />
-      <Button layoutX="112.0" layoutY="550.0" mnemonicParsing="false" text="Edit" />
-      <Button layoutX="177.0" layoutY="550.0" mnemonicParsing="false" text="Delete" />
-      <Button layoutX="601.0" layoutY="550.0" mnemonicParsing="false" text="Add" />
-      <Button layoutX="666.0" layoutY="550.0" mnemonicParsing="false" text="Edit" />
-      <Button layoutX="731.0" layoutY="550.0" mnemonicParsing="false" text="Delete" />
+      <Button layoutX="14.0" layoutY="550.0" mnemonicParsing="false" text="Add" />
+      <Button layoutX="1312.0" layoutY="765.0" mnemonicParsing="false" text="Exit" />
+      <Button layoutX="79.0" layoutY="550.0" mnemonicParsing="false" text="Edit" />
+      <Button layoutX="144.0" layoutY="550.0" mnemonicParsing="false" text="Delete" />
+      <Button layoutX="659.0" layoutY="550.0" mnemonicParsing="false" text="Add" />
+      <Button layoutX="724.0" layoutY="550.0" mnemonicParsing="false" text="Edit" />
+      <Button layoutX="789.0" layoutY="550.0" mnemonicParsing="false" text="Delete" />
    </children>
 </AnchorPane>
