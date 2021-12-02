@@ -34,6 +34,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -47,11 +48,11 @@
       <Label fx:id="usernametxt" layoutX="154.0" layoutY="117.0" text="Username:" />
       <Button fx:id="LoginButton" layoutX="286.0" layoutY="223.0" mnemonicParsing="false" onAction="#LoginHandler" text="Login" />
       <TextField fx:id="userNamefld" layoutX="234.0" layoutY="113.0" onAction="#userNamefldHandler" />
-      <TextField fx:id="passwordfld" layoutX="234.0" layoutY="176.0" onAction="#passwordfldHandler" />
       <Label fx:id="SchedulingAppLogintxt" layoutX="24.0" layoutY="23.0" text="Scheduling Application Login">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
+      <PasswordField fx:id="PasswordFld" layoutX="235.0" layoutY="176.0" onAction="#PasswordFldHandler" />
    </children>
 </AnchorPane>
