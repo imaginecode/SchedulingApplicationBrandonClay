@@ -1,10 +1,7 @@
 package Controller;
 
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 
 public class MainMenu {
     public Button makeAppointment;
@@ -33,6 +30,7 @@ public class MainMenu {
     public TableColumn name;
     public TableColumn postal;
     public TableColumn phone;
+    public ToggleGroup MonthWeek;
 
     public void reportsHandler(ActionEvent actionEvent) {
     }
