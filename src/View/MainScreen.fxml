@@ -5,40 +5,13 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="748.0" prefWidth="1368.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/16" fx:controller="Controller.MainMenu">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="748.0" prefWidth="1368.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenu">
    <children>
-      <TableView fx:id="appointmentsTable" layoutX="629.0" layoutY="63.0" prefHeight="468.0" prefWidth="736.0">
-        <columns>
-          <TableColumn fx:id="apt_ID" prefWidth="113.0" text="Appointment_ID" />
-          <TableColumn minWidth="0.0" prefWidth="0.0" text="Title" />
-            <TableColumn fx:id="description" prefWidth="70.0" text="Description" />
-            <TableColumn fx:id="location" prefWidth="61.0" text="Location" />
-            <TableColumn fx:id="contact" prefWidth="57.0" text="Contact" />
-            <TableColumn fx:id="type" prefWidth="55.0" text="Type" />
-            <TableColumn fx:id="startDate" prefWidth="52.0" text="Start Date &amp; Time" />
-            <TableColumn fx:id="endDate" prefWidth="41.0" text="End Date &amp; Time" />
-            <TableColumn fx:id="customer_IDApts" prefWidth="84.0" text="Customer_ID" />
-            <TableColumn fx:id="userID" prefWidth="53.0" text="User_ID" />
-        </columns>
-      </TableView>
-      <RadioButton fx:id="monthFilter" layoutX="910.0" layoutY="41.0" mnemonicParsing="false" onAction="#monthFilterHandler" selected="true" text="Month">
-         <toggleGroup>
-            <ToggleGroup fx:id="MonthWeek" />
-         </toggleGroup></RadioButton>
-      <RadioButton fx:id="weekFilter" layoutX="1017.0" layoutY="41.0" mnemonicParsing="false" onAction="#weekFilterHandler" text="Week" toggleGroup="$MonthWeek" />
-      <TableView fx:id="customerTable" layoutX="14.0" layoutY="63.0" prefHeight="461.0" prefWidth="502.0">
-         <columns>
-            <TableColumn fx:id="customer_ID" prefWidth="107.99996662139893" text="Customer_ID" />
-            <TableColumn fx:id="name" prefWidth="59.999969482421875" text="Name" />
-            <TableColumn fx:id="postal" prefWidth="94.40000915527344" text="Postal_Code" />
-            <TableColumn fx:id="phone" prefWidth="109.5999755859375" text="Phone" />
-            <TableColumn fx:id="address" prefWidth="129.60003662109375" text="Address" />
-         </columns>
-      </TableView>
+      <RadioButton layoutX="910.0" layoutY="41.0" mnemonicParsing="false" text="Month" />
+      <RadioButton layoutX="1017.0" layoutY="41.0" mnemonicParsing="false" text="Week" />
       <Label layoutX="14.0" layoutY="36.0" text="Customers">
          <font>
             <Font size="18.0" />
@@ -49,14 +22,37 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="addAppointment" layoutX="14.0" layoutY="550.0" mnemonicParsing="false" onAction="#addAppointmentHandler" text="Add" />
-      <Button fx:id="exit" layoutX="1254.0" layoutY="667.0" mnemonicParsing="false" onAction="#ExitHandler" text="Exit" />
-      <Button fx:id="editCustomer" layoutX="79.0" layoutY="550.0" mnemonicParsing="false" onAction="#editCustomerHandler" text="Edit" />
-      <Button fx:id="deleteApt" layoutX="144.0" layoutY="550.0" mnemonicParsing="false" onAction="#deleteAptHandler" text="Delete" />
+      <Button layoutX="14.0" layoutY="550.0" mnemonicParsing="false" text="Add" />
+      <Button layoutX="1254.0" layoutY="667.0" mnemonicParsing="false" text="Exit" />
+      <Button layoutX="79.0" layoutY="550.0" mnemonicParsing="false" text="Edit" />
+      <Button layoutX="144.0" layoutY="550.0" mnemonicParsing="false" text="Delete" />
       <Button fx:id="makeAppointment" layoutX="334.0" layoutY="576.0" mnemonicParsing="false" onAction="#makeAppointmentHandler" text="Make Appointment" />
-      <Button fx:id="editAppointment" layoutX="724.0" layoutY="550.0" mnemonicParsing="false" onAction="#editAppointmentHandler" text="Edit Appointment" />
-      <Button fx:id="deleteAppointment" layoutX="885.0" layoutY="550.0" mnemonicParsing="false" onAction="#deleteAppointmentHandler" text="Delete" />
+      <Button layoutX="724.0" layoutY="550.0" mnemonicParsing="false" text="Edit Appointment" />
+      <Button layoutX="885.0" layoutY="550.0" mnemonicParsing="false" text="Delete" />
       <Button fx:id="Reports" layoutX="724.0" layoutY="633.0" mnemonicParsing="false" onAction="#reportsHandler" text="Reports" />
       <Label layoutX="296.0" layoutY="554.0" text="*To make an appointment select customer first" />
+      <TableView layoutX="24.0" layoutY="73.0" prefHeight="461.0" prefWidth="502.0">
+         <columns>
+            <TableColumn prefWidth="107.99996662139893" text="Customer_ID" />
+            <TableColumn prefWidth="59.999969482421875" text="Name" />
+            <TableColumn prefWidth="94.40000915527344" text="Postal_Code" />
+            <TableColumn prefWidth="109.5999755859375" text="Phone" />
+            <TableColumn prefWidth="129.60003662109375" text="Address" />
+         </columns>
+      </TableView>
+      <TableView layoutX="599.0" layoutY="70.0" prefHeight="468.0" prefWidth="736.0">
+         <columns>
+            <TableColumn prefWidth="113.0" text="Appointment_ID" />
+            <TableColumn minWidth="0.0" prefWidth="0.0" text="Title" />
+            <TableColumn prefWidth="70.0" text="Description" />
+            <TableColumn prefWidth="61.0" text="Location" />
+            <TableColumn prefWidth="57.0" text="Contact" />
+            <TableColumn prefWidth="55.0" text="Type" />
+            <TableColumn prefWidth="52.0" text="Start Date &amp; Time" />
+            <TableColumn prefWidth="41.0" text="End Date &amp; Time" />
+            <TableColumn prefWidth="84.0" text="Customer_ID" />
+            <TableColumn prefWidth="53.0" text="User_ID" />
+         </columns>
+      </TableView>
    </children>
 </AnchorPane>
