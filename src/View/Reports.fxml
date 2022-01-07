@@ -3,14 +3,11 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="904.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="548.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label text="Reports">
          <font>
@@ -20,25 +17,11 @@
       <Label layoutX="17.0" layoutY="74.0" text="Total number of customer appointments by type and month" />
       <Label layoutX="17.0" layoutY="279.0" text="Customers by Postal Code" />
       <Label layoutX="17.0" layoutY="182.0" text="Customer Schedule" />
-      <ComboBox layoutX="127.0" layoutY="178.0" prefWidth="150.0" />
+      <ComboBox fx:id="pickCustomerSchedule" layoutX="127.0" layoutY="178.0" onAction="#pickCustomerScheduleHandler" prefWidth="150.0" promptText="Pick customer" />
       <Button fx:id="appointmentsByTimeMonth" layoutX="361.0" layoutY="70.0" mnemonicParsing="false" onAction="#appointmentsByTimeMonthHandler" text="Generate" />
-      <TableView layoutX="284.0" layoutY="138.0" prefHeight="87.0" prefWidth="611.0">
-        <columns>
-          <TableColumn prefWidth="66.4000244140625" text="Appointment_ID" />
-          <TableColumn prefWidth="84.0" text="Title" />
-            <TableColumn prefWidth="152.0" text="Type_Description" />
-            <TableColumn minWidth="0.0" prefWidth="107.99993896484375" text="Start" />
-            <TableColumn prefWidth="106.4000244140625" text="End" />
-            <TableColumn prefWidth="94.39990234375" text="Customer_ID" />
-        </columns>
-      </TableView>
-      <Button fx:id="exitReports" layoutX="806.0" layoutY="349.0" mnemonicParsing="false" onAction="#ExitReportsHandler" text="Exit Reports" />
-      <TextField fx:id="searchPostalCode" layoutX="166.0" layoutY="275.0" onAction="#searchPostalCodeHandler" />
-      <TableView layoutX="361.0" layoutY="240.0" prefHeight="130.0" prefWidth="206.0">
-        <columns>
-          <TableColumn fx:id="Name" prefWidth="75.0" text="Name" />
-          <TableColumn fx:id="Customer_IDPostalCode" prefWidth="130.4" text="Customer_ID" />
-        </columns>
-      </TableView>
+      <Button fx:id="exitReports" layoutX="447.0" layoutY="355.0" mnemonicParsing="false" onAction="#ExitReportsHandler" text="Exit Reports" />
+      <TextField fx:id="searchPostalCode" layoutX="166.0" layoutY="275.0" onAction="#searchPostalCodeHandler" promptText="Enter Zip" />
+      <Button fx:id="genCustomerSchedule" layoutX="296.0" layoutY="178.0" mnemonicParsing="false" onAction="#genCustomerScheduleHandler" text="Generate" />
+      <Button fx:id="genCustomerSchedule1" layoutX="336.0" layoutY="275.0" mnemonicParsing="false" onAction="#genCustomerScheduleHandler" text="Generate" />
    </children>
 </AnchorPane>

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ModifyAppointment">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ModifyAppointment">
    <children>
       <Label text="Appointment Update">
          <font>
@@ -35,8 +35,9 @@
       <TextField fx:id="Customer_ID" editable="false" layoutX="132.0" layoutY="236.0" onAction="#Customer_IDHandler" opacity="0.6" />
       <TextField fx:id="User_ID" editable="false" layoutX="132.0" layoutY="267.0" onAction="#User_IDHandler" opacity="0.6" />
       <TextField fx:id="title" layoutX="132.0" layoutY="300.0" onAction="#titleHandler" />
-      <DatePicker fx:id="aptDate" layoutX="300.0" layoutY="193.0" onAction="#aptDateHandler" />
+      <DatePicker fx:id="aptStartDate" layoutX="289.0" layoutY="183.0" onAction="#aptStartDateHandler" />
       <ComboBox fx:id="startTime" layoutX="132.0" layoutY="183.0" onAction="#startTimeHandler" prefWidth="150.0" />
       <ComboBox layoutX="132.0" layoutY="206.0" prefWidth="150.0" />
+      <DatePicker fx:id="aptEndDate" layoutX="289.0" layoutY="206.0" onAction="#aptEndDateHandler" />
    </children>
 </AnchorPane>

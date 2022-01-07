@@ -6,21 +6,21 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CustomerAppointmentReport">
    <children>
       <Button fx:id="exitReport" layoutX="506.0" layoutY="336.0" mnemonicParsing="false" onAction="#exitReportHandler" text="Exit" />
       <TableView fx:id="monthTable" layoutX="100.0" layoutY="209.0" prefHeight="108.0" prefWidth="602.0">
          <columns>
             <TableColumn fx:id="janCol" prefWidth="48.0" text="Jan" />
             <TableColumn fx:id="febCol" prefWidth="38.0" text="Feb" />
-            <TableColumn fx:id="marcol" prefWidth="63.0" text="Mar" />
+            <TableColumn fx:id="marCol" prefWidth="63.0" text="Mar" />
             <TableColumn fx:id="aprCol" prefWidth="47.0" text="Apr" />
             <TableColumn fx:id="mayCol" prefWidth="56.0" text="May" />
             <TableColumn fx:id="juneCol" prefWidth="47.0" text="Jun" />
             <TableColumn fx:id="julCol" prefWidth="50.0" text="Jul" />
             <TableColumn fx:id="augCol" prefWidth="52.0" text="Aug" />
             <TableColumn fx:id="sepCol" prefWidth="54.0" text="Sept" />
-            <TableColumn fx:id="octcol" prefWidth="40.0" text="Oct" />
+            <TableColumn fx:id="octCol" prefWidth="40.0" text="Oct" />
             <TableColumn fx:id="novCol" prefWidth="50.0" text="Nov" />
             <TableColumn fx:id="decCol" prefWidth="52.0" text="Dec" />
          </columns>

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Model.Controller">
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Model.Controller">
    <columnConstraints>
       <ColumnConstraints />
    </columnConstraints>
@@ -33,10 +33,10 @@
             <TextField fx:id="Postal" layoutX="97.0" layoutY="141.0" onAction="#PostalHandler" />
             <TextField fx:id="Name" layoutX="97.0" layoutY="104.0" onAction="#NameHandler" />
             <TextField fx:id="Customer_ID" layoutX="97.0" layoutY="64.0" onAction="#Customer_IDHandler" />
-            <Button fx:id="saveAdd" layoutX="382.0" layoutY="410.0" mnemonicParsing="false" onAction="#saveAddHandler" text="Save" />
-            <Button fx:id="cancelAdd" layoutX="446.0" layoutY="410.0" mnemonicParsing="false" onAction="#cancelAddHandler" text="Cancel" />
+            <Button fx:id="saveAdd" layoutX="430.0" layoutY="396.0" mnemonicParsing="false" onAction="#saveAddHandler" text="Save" />
+            <Button fx:id="cancelAdd" layoutX="494.0" layoutY="396.0" mnemonicParsing="false" onAction="#cancelAddHandler" text="Cancel" />
             <ComboBox fx:id="countryCombo" layoutX="73.0" layoutY="296.0" onAction="#countryComboHandler" prefWidth="150.0" />
-            <ComboBox layoutX="244.0" layoutY="296.0" prefWidth="150.0" />
+            <ComboBox fx:id="firstLevelUpdate" layoutX="244.0" layoutY="296.0" onAction="#firstLevelUpdateHandler" prefWidth="150.0" />
             <Label layoutX="75.0" layoutY="264.0" text="Country" />
             <Label layoutX="244.0" layoutY="264.0" text="First Level Division" />
             <Label layoutX="8.0" layoutY="347.0" text="Street Address" />
