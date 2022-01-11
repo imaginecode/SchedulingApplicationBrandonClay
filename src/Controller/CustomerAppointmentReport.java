@@ -1,27 +1,22 @@
 package Controller;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class CustomerAppointmentReport {
-    public TableView appointmentTypes;
-    public TableColumn decCol;
-    public TableColumn novCol;
-    public TableColumn octCol;
-    public TableColumn sepCol;
-    public TableColumn augCol;
-    public TableColumn julCol;
-    public TableColumn juneCol;
-    public TableColumn mayCol;
-    public TableColumn marCol;
-    public TableColumn aprCol;
-    public TableColumn febCol;
-    public TableColumn janCol;
-    public TableView monthTable;
-    public Button exitReport;
 
-    public void exitReportHandler(ActionEvent actionEvent) {
+
+    public void exitReportHandler(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+        Parent scene = FXMLLoader.load(getClass().getResource("/View/Reports.fxml"));
+        stage.setTitle("Reports");
+        stage.setScene(new Scene(scene));
+        stage.show();
     }
 }

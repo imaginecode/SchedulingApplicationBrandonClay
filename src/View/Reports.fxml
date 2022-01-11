@@ -18,10 +18,10 @@
       <Label layoutX="17.0" layoutY="279.0" text="Customers by Postal Code" />
       <Label layoutX="17.0" layoutY="182.0" text="Customer Schedule" />
       <ComboBox fx:id="pickCustomerSchedule" layoutX="127.0" layoutY="178.0" onAction="#pickCustomerScheduleHandler" prefWidth="150.0" promptText="Pick customer" />
-      <Button fx:id="appointmentsByTimeMonth" layoutX="361.0" layoutY="70.0" mnemonicParsing="false" onAction="#appointmentsByTimeMonthHandler" text="Generate" />
+      <Button fx:id="customerAppointmentsReport" layoutX="361.0" layoutY="70.0" mnemonicParsing="false" onAction="#customerAppointmentsReportHandler" text="Generate" />
       <Button fx:id="exitReports" layoutX="447.0" layoutY="355.0" mnemonicParsing="false" onAction="#ExitReportsHandler" text="Exit Reports" />
       <TextField fx:id="searchPostalCode" layoutX="166.0" layoutY="275.0" onAction="#searchPostalCodeHandler" promptText="Enter Zip" />
       <Button fx:id="genCustomerSchedule" layoutX="296.0" layoutY="178.0" mnemonicParsing="false" onAction="#genCustomerScheduleHandler" text="Generate" />
-      <Button fx:id="genCustomerSchedule1" layoutX="336.0" layoutY="275.0" mnemonicParsing="false" onAction="#genCustomerScheduleHandler" text="Generate" />
+      <Button fx:id="zipReports" layoutX="336.0" layoutY="275.0" mnemonicParsing="false" onAction="#zipReportHandler" text="Generate" />
    </children>
 </AnchorPane>
