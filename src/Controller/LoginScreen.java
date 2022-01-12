@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class LoginScreen implements Initializable {
@@ -22,6 +23,8 @@ public class LoginScreen implements Initializable {
     public TextField userNameFld;
     public Label SchedulingAppLoginTxt;
     public PasswordField PasswordFld;
+    /** Resource Bundle for language translation */
+    ResourceBundle rb = ResourceBundle.getBundle("LanguageProperties/language", Locale.getDefault());
     /** String for name of file that will record login attempts */
     String filename = "login_activity";
 
@@ -127,7 +130,19 @@ public class LoginScreen implements Initializable {
 
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(URL url, ResourceBundle rb) {
+        public void initialize(URL url, ResourceBundle rb) {
+            Locale locale = Locale.getDefault();
+            rb = ResourceBundle.getBundle("languages/login", locale);
+            usernameTxt.setText(rb.getString("Username:"));
+            passwordTxt.setText(rb.getString("Password:"));
+            LoginButton.setText(rb.getString("Login"));
+            mainMessage.setText(rb.getString("message"));
+            languageMessage.setText(rb.getString("language"));
+            errorHeader = rb.getString("errorheader");
+            errorTitle = rb.getString("errortitle");
+            errorText = rb.getString("errortext");
+        }
 
     }
 }
