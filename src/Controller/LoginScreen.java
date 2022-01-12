@@ -84,34 +84,30 @@ public class LoginScreen implements Initializable {
     /** Displays messages for empty login fields and invalid usernames and passwords
      * @param alertnum is for selecting which specific alert case is needed */
     public void loginErrors(int alertnum) {
+        if((Locale.getDefault().getLanguage().equals("fr") || Locale.getDefault().getLanguage().equals("en") )) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
 
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+            switch (alertnum) {
+                case 1:
+                    alert.setTitle(rb.getString("nousername"));
+                    alert.setHeaderText(rb.getString("nousername"));
+                    alert.setContentText(rb.getString("nousername"));
+                    alert.showAndWait();
+                    break;
+                case 2:
+                    alert.setTitle(rb.getString("nopassword"));
+                    alert.setHeaderText(rb.getString("nopassword"));
+                    alert.setContentText(rb.getString("nopassword"));
+                    alert.showAndWait();
+                    break;
+                case 3:
+                    alert.setTitle(rb.getString("incorrectCredentials"));
+                    alert.setHeaderText(rb.getString("incorrectCredentials"));
+                    alert.setContentText(rb.getString("incorrectCredentials"));
+                    alert.showAndWait();
+                    break;
 
-        switch (alertnum) {
-            case 1:
-                alert.setTitle("Invalid password or UserName");
-                alert.setHeaderText("Invalid values");
-                alert.setContentText("UserName is empty.");
-                alert.showAndWait();
-                break;
-            case 2:
-                alert.setTitle("Empty Password Field");
-                alert.setHeaderText("Invalid Values");
-                alert.setContentText("The password field can not be empty.\n");
-                alert.showAndWait();
-                break;
-            case 3:
-                alert.setTitle("Empty UserName Field");
-                alert.setHeaderText("Invalid Values");
-                alert.setContentText("The UserName Field can not be empty. Please enter a UserName");
-                alert.showAndWait();
-                break;
-            case 4:
-                alert.setTitle("Upcoming Appointment");
-                alert.setHeaderText("Appointments");
-                alert.setContentText("You have no upcoming appointments in the next 15 minutes");
-                alert.showAndWait();
-                break;
+            }
         }
     }
 
