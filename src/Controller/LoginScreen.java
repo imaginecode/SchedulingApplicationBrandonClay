@@ -135,10 +135,18 @@ public class LoginScreen implements Initializable {
          rb = ResourceBundle.getBundle("LanguageProperties/language", Locale.getDefault());
 //|| Locale.getDefault().getLanguage().equals("en")
         if (Locale.getDefault().getLanguage().equals("fr") ) {
-            usernameTxt.setText(rb.getString("Username:"));
-            passwordTxt.setText(rb.getString("Password:"));
+
+            usernameTxt.setText(rb.getString("Username"));
+           passwordTxt.setText(rb.getString("Password"));
             LoginButton.setText(rb.getString("Login"));
-            locationLabelTxt.setText(rb.getString("Location:"));
+           locationLabelTxt.setText(rb.getString("Location"));
+           SchedulingAppLoginTxt.setText(rb.getString("Scheduling"));
+
+            usernameTxt.setText(rb.getString("Username"));
+            passwordTxt.setText(rb.getString("Password"));
+            LoginButton.setText(rb.getString("Login"));
+            locationLabelTxt.setText(rb.getString("Location"));
+
         }
 
 
