@@ -1,5 +1,6 @@
 package Controller;
 
+import Data.UserNamePassQuery;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,6 +22,8 @@ public class LoginScreen implements Initializable {
     public TextField userNameFld;
     public Label SchedulingAppLoginTxt;
     public PasswordField PasswordFld;
+    /** String for name of file that will record login attempts */
+    String filename = "login_activity";
 
     public void PasswordFldHandler(ActionEvent actionEvent) {
     }
@@ -35,7 +38,7 @@ public class LoginScreen implements Initializable {
     public void LoginHandler(ActionEvent actionEvent) throws IOException {
 
 //            createLoginAttemptsLog();
-        if (loginChecks()) {
+        if (loginChecks(userNameFld.getText(), PasswordFld.getText())) {
 
 
 //            successfulLogin();
@@ -59,13 +62,16 @@ public class LoginScreen implements Initializable {
     }
     /** Checks username and password fields to see if they are correct and also checks for empty fields. If incorrect calls appropriate loginError
      * @return*/
-    private boolean loginChecks() {
+    private boolean loginChecks(String userNameFld, String PasswordFld) {
         if(userNameFld.isEmpty()){
             loginErrors(1);
             return false;
         }
         if(PasswordFld.isEmpty()){
             loginErrors(2);
+            return false;
+        }
+        if(!UserNamePassQuery.validateUser(userNameFld, PasswordFld)){
             return false;
         }
         return true;
@@ -82,7 +88,7 @@ public class LoginScreen implements Initializable {
             case 1:
                 alert.setTitle("Invalid password or UserName");
                 alert.setHeaderText("Invalid values");
-                alert.setContentText("Your password or UserName is invalid.");
+                alert.setContentText("UserName is empty.");
                 alert.showAndWait();
                 break;
             case 2:
