@@ -39,20 +39,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="361.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginScreen">
    <children>
-      <Label fx:id="locationLabelTxt" layoutX="422.0" layoutY="344.0" text="Location:" />
-      <Label fx:id="userLocationTxt" layoutX="478.0" layoutY="344.0" text="User Location" />
+      <Label fx:id="locationLabelTxt" layoutX="393.0" layoutY="344.0" text="Location:" />
+      <Label fx:id="userLocationTxt" layoutX="513.0" layoutY="344.0" text="User Location" />
       <Label fx:id="passwordTxt" layoutX="154.0" layoutY="180.0" text="Password:" />
       <Label fx:id="usernameTxt" layoutX="154.0" layoutY="117.0" text="Username:" />
       <Button fx:id="LoginButton" layoutX="286.0" layoutY="223.0" mnemonicParsing="false" onAction="#LoginHandler" text="Login" />
-      <TextField fx:id="userNameFld" layoutX="234.0" layoutY="113.0" onAction="#userNameFldHandler" />
+      <TextField fx:id="userNameFld" layoutX="252.0" layoutY="113.0" onAction="#userNameFldHandler" prefHeight="25.0" prefWidth="131.0" />
       <Label fx:id="SchedulingAppLoginTxt" layoutX="24.0" layoutY="23.0" text="Scheduling Application Login">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <PasswordField fx:id="PasswordFld" layoutX="235.0" layoutY="176.0" onAction="#PasswordFldHandler" />
+      <PasswordField fx:id="PasswordFld" layoutX="253.0" layoutY="176.0" onAction="#PasswordFldHandler" prefHeight="25.0" prefWidth="131.0" />
    </children>
 </AnchorPane>
