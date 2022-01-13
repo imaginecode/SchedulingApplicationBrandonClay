@@ -124,12 +124,13 @@ public class LoginScreen implements Initializable {
     public void createLoginAttemptsLog() {
     }
 
+    /** Alerts User to appointment that is within 15 minutes of user login */
+    private void appointmentAlert(){}
 
     @Override
     public void initialize(URL url, ResourceBundle bundle) {
         /** Resource Bundle for language translation */
          rb = ResourceBundle.getBundle("LanguageProperties/language", Locale.getDefault());
-//|| Locale.getDefault().getLanguage().equals("en")
         if (Locale.getDefault().getLanguage().equals("fr") ) {
 
             usernameTxt.setText(rb.getString("Username"));
