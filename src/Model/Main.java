@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -40,19 +41,36 @@ public class Main extends Application {
         JDBC.makeConnection();
         Connection conn = JDBC.getConnection();
         System.out.println(conn);
-        DBQuery.setStatement(conn);
-        Statement statement = DBQuery.getStatement(); //Get Statement Reference
-//        // Raw SQL insert statement
-        String insertStatement = "INSERT INTO countries(Country, Create_Date, Created_By, Last_Update, Last_Updated_By) VALUES('US',now(),'admin',now(),'admin')";
-//
-//        //Execute SQL statement
-        statement.executeUpdate(insertStatement);
-//
-//        //Confirm rows affected
-        if(statement.getUpdateCount() > 0)
-            System.out.println(statement.getUpdateCount() + " Rows affected");
-       else
-           System.out.println("No change");
+        //Insert Statement
+        String insertStatement = "INSERT into Countries(country,Create_Date,Created_By,Last_Updated_By) VALUES (?,?,?,?)";
+
+        DBQuery.setPreparedStatement(conn, insertStatement);//Create PreparedStatement
+        PreparedStatement ps = DBQuery.getPreparedStatement(); // Reference for PreparedStatement Object
+
+
+        String countryName = "admin";
+        String createDate = "2020-03-21 00:00:00";
+        String createdBy = "admin";
+        String lastUpdatedBy = "admin";
+
+        //key value mapping
+        ps.setString(1,countryName);
+        ps.setString(2,createDate);
+        ps.setString(3,createdBy);
+        ps.setString(4,lastUpdatedBy);
+
+        ps.execute(); //Execute Prepared Statement
+
+        //Check rows affected
+
+        if(ps.getUpdateCount() > 0){
+            System.out.println(ps.getUpdateCount() + "Rows affected");
+        }
+        else
+            System.out.println("no change");
+
+
+
 
         launch(args);
         JDBC.closeConnection();

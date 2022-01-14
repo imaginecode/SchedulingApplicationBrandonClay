@@ -1,0 +1,13 @@
+DBQuery.setStatement(conn);
+        Statement statement = DBQuery.getStatement(); //Get Statement Reference
+//        // Raw SQL insert statement
+        String insertStatement = "INSERT INTO countries(Country, Create_Date, Created_By, Last_Update, Last_Updated_By) VALUES('US',now(),'admin',now(),'admin')";
+//
+//        //Execute SQL statement
+        statement.executeUpdate(insertStatement);
+//
+//        //Confirm rows affected
+        if(statement.getUpdateCount() > 0)
+            System.out.println(statement.getUpdateCount() + " Rows affected");
+       else
+           System.out.println("No change");
