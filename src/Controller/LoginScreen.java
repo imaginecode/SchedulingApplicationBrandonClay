@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.ZoneId;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -42,32 +43,40 @@ public class LoginScreen implements Initializable {
      */
     public void LoginHandler(ActionEvent actionEvent) throws IOException {
 
-//            createLoginAttemptsLog();
-        if (loginChecks(userNameFld.getText(), PasswordFld.getText())) {
+        try{
+            //            createLoginAttemptsLog();
+            if (loginChecks(userNameFld.getText(), PasswordFld.getText())) {
+
+                loginLogger(Boolean.TRUE);
+                appointmentAlert();
+
+                try {
+                    Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+                    Parent scene = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
+                    stage.setTitle("Home");
+                    stage.setScene(new Scene(scene));
+                    stage.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
 
-//            successfulLogin();
-
-            try {
-                Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-                Parent scene = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
-                stage.setTitle("Home");
-                stage.setScene(new Scene(scene));
-                stage.show();
-            } catch (Exception e) {
-                e.printStackTrace();
             }
 
-        }
+            else {
+                loginLogger(Boolean.FALSE);
+            }}
 
-        else {
-            invalidLoginAttempt();
+        catch(SQLException e){
+            System.out.println(e.getMessage());
         }
 
     }
     /** Checks username and password fields to see if they are correct and also checks for empty fields. If incorrect calls appropriate loginError
+     * @param userNameFld username entered by user in login screen
+     * @param PasswordFld password entered by user in login screen
      * @return if credentials are verified in the database with t/f bool*/
-    private boolean loginChecks(String userNameFld, String PasswordFld) {
+    private boolean loginChecks(String userNameFld, String PasswordFld) throws SQLException {
         if(userNameFld.isEmpty()){
             loginErrors(1);
             return false;
@@ -76,10 +85,10 @@ public class LoginScreen implements Initializable {
             loginErrors(2);
             return false;
         }
-        if(!UserNamePassQuery.validateUser(userNameFld, PasswordFld)){
-            return false;
-        }
-        return true;
+        if (UserNamePassQuery.validateUser(userNameFld, PasswordFld))
+            loginErrors(3);
+        return true ;
+
     }
 
 
@@ -116,9 +125,11 @@ public class LoginScreen implements Initializable {
 
 
 
-    /** On a successful login program  */
-    public void successfulLogin(){}
-    public void invalidLoginAttempt () {}
+    /** Logs successful and unsuccessful logins to Login_Attempt.txt   */
+
+    public void loginLogger (Boolean successStatus ) {
+
+    }
 
 
     /** Creates Login_Attempt.txt if not already created

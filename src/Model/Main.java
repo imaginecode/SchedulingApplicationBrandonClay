@@ -31,14 +31,13 @@ public class Main extends Application {
 
         Parent root = FXMLLoader.load(getClass().getResource("/View/LoginScreen.fxml"));
         primaryStage.setTitle("Login");
-        primaryStage.setScene(new Scene(root, 600, 600));
+        primaryStage.setScene(new Scene(root, 650, 600));
         primaryStage.show();
 
     }
 
 /** First thing to run in program makes connection to MSQL database and launches JavaFX runtime & JavaFX application */
-    public static void main(String[] args) throws SQLException {
-        //This bit of code was from what was provided however to complete tutorial a different setup is used
+    public static void main(String[] args) {
         JDBC.makeConnection();
         Connection conn = JDBC.getConnection();
         System.out.println(conn);
