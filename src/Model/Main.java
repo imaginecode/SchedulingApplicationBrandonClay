@@ -36,7 +36,8 @@ public class Main extends Application {
 
     }
 
-/** First thing to run in program makes connection to MSQL database and launches JavaFX runtime & JavaFX application */
+/** First thing to run in program makes connection to MSQL database and launches JavaFX runtime & JavaFX application
+ * @param args  */
     public static void main(String[] args) {
         JDBC.makeConnection();
         Connection conn = JDBC.getConnection();

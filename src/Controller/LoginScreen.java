@@ -1,6 +1,7 @@
 package Controller;
 
 import Data.UserNamePassQuery;
+import com.mysql.cj.log.Log;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -9,13 +10,23 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.ResourceBundle;
+/** class LoginScreen.java
+ * Login screen for getting into the scheduling application. Includes username and password and user location as well as login validity checks.
+ * Also methods are included that automatically translate this login menu to french*/
 
+/**@author Brandon Clay */
 public class LoginScreen implements Initializable {
     public Label locationLabelTxt;
     public Label userLocationTxt;
@@ -26,7 +37,8 @@ public class LoginScreen implements Initializable {
     public Label SchedulingAppLoginTxt;
     public PasswordField PasswordFld;
     private ResourceBundle rb;
-
+    /** Status of if user name and password credentials are valid */
+    private boolean successStatus;
 
     /** String for name of file that will record login attempts */
     String filename = "login_activity";
@@ -44,10 +56,11 @@ public class LoginScreen implements Initializable {
     public void LoginHandler(ActionEvent actionEvent) throws IOException {
 
         try{
-            //            createLoginAttemptsLog();
-            if (loginChecks(userNameFld.getText(), PasswordFld.getText())) {
 
-                loginLogger(Boolean.TRUE);
+            if (loginChecks(userNameFld.getText(), PasswordFld.getText())) {
+                successStatus = true;
+                System.out.println(successStatus);
+                loginLogger();
                 appointmentAlert();
 
                 try {
@@ -64,7 +77,8 @@ public class LoginScreen implements Initializable {
             }
 
             else {
-                loginLogger(Boolean.FALSE);
+                successStatus = false;
+                loginLogger();
             }}
 
         catch(SQLException e){
@@ -85,9 +99,12 @@ public class LoginScreen implements Initializable {
             loginErrors(2);
             return false;
         }
-        if (UserNamePassQuery.validateUser(userNameFld, PasswordFld))
+        if (!UserNamePassQuery.validateUser(userNameFld, PasswordFld)) {
             loginErrors(3);
-        return true ;
+            return false;
+        }
+
+        return true;
 
     }
 
@@ -127,15 +144,32 @@ public class LoginScreen implements Initializable {
 
     /** Logs successful and unsuccessful logins to Login_Attempt.txt   */
 
-    public void loginLogger (Boolean successStatus ) {
+    public void loginLogger () {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu/MM/dd");
+        LocalDate localDate = LocalDate.now();
+        try {
+            File newlog = new File(filename);
+            if (newlog.createNewFile())
+                System.out.println("Log file created");
+            else
+                System.out.println("Log file already created previously");
+
+                //Success of login and log it as a valid attempt with userdata and time stamp
+            FileWriter fw = new FileWriter(filename, true);
+            PrintWriter outputFile = new PrintWriter(fw);
+            if (successStatus) {
+                outputFile.println("Valid Login attempt by Username: " + userNameFld.getText() + " Password:" + PasswordFld.getText() + "at time"  + dtf.format(localDate) );
+            }
+                //Log invalid details
+            else {
+                outputFile.println("Invalid Login attempt by Username: " + userNameFld.getText() + " Password:" + PasswordFld.getText() + "at time"  + dtf.format(localDate) );
+            }
+            outputFile.close();
+        }
+        catch (IOException e){ e.printStackTrace();}
 
     }
 
-
-    /** Creates Login_Attempt.txt if not already created
-     * catches exception and prints stack trace */
-    public void createLoginAttemptsLog() {
-    }
 
     /** Alerts User to appointment that is within 15 minutes of user login */
     private void appointmentAlert(){}
