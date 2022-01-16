@@ -60,7 +60,6 @@ public class LoginScreen implements Initializable {
 
             if (loginChecks(userNameFld.getText(), PasswordFld.getText())) {
                 successStatus = true;
-                System.out.println(successStatus);
                 loginLogger();
                 appointmentAlert();
 
