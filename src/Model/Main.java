@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.ZoneId;
 
 /**
  * Main class.
@@ -41,33 +42,9 @@ public class Main extends Application {
         JDBC.makeConnection();
         Connection conn = JDBC.getConnection();
         System.out.println(conn);
-        //Insert Statement
-        String insertStatement = "INSERT into Countries(country,Create_Date,Created_By,Last_Updated_By) VALUES (?,?,?,?)";
+        //Printing zone ID for user
+        System.out.println(ZoneId.systemDefault());
 
-        DBQuery.setPreparedStatement(conn, insertStatement);//Create PreparedStatement
-        PreparedStatement ps = DBQuery.getPreparedStatement(); // Reference for PreparedStatement Object
-
-
-        String countryName = "admin";
-        String createDate = "2020-03-21 00:00:00";
-        String createdBy = "admin";
-        String lastUpdatedBy = "admin";
-
-        //key value mapping
-        ps.setString(1,countryName);
-        ps.setString(2,createDate);
-        ps.setString(3,createdBy);
-        ps.setString(4,lastUpdatedBy);
-
-        ps.execute(); //Execute Prepared Statement
-
-        //Check rows affected
-
-        if(ps.getUpdateCount() > 0){
-            System.out.println(ps.getUpdateCount() + "Rows affected");
-        }
-        else
-            System.out.println("no change");
 
 
 

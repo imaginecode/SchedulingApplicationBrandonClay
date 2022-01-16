@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.ZoneId;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -24,6 +25,7 @@ public class LoginScreen implements Initializable {
     public Label SchedulingAppLoginTxt;
     public PasswordField PasswordFld;
     private ResourceBundle rb;
+
 
     /** String for name of file that will record login attempts */
     String filename = "login_activity";
@@ -145,6 +147,8 @@ public class LoginScreen implements Initializable {
             locationLabelTxt.setText(rb.getString("Location"));
 
         }
+        // Sets user location based on time zone of users system
+        userLocationTxt.setText(String.valueOf(ZoneId.systemDefault()));
 
 
     }
