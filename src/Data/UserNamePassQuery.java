@@ -18,7 +18,8 @@ public class UserNamePassQuery {
  * @throws SQLException stack trace is printed for reference */
     public static boolean validateUser(String username, String password) throws SQLException {
         //Select Statement
-        String  findUserStatement = "SELECT * FROM users WHERE UserName=? AND Password=?";
+        String  findUserStatement = "SELECT * FROM users WHERE User_Name=? AND Password=?";
+
 
         DBQuery.setPreparedStatement(JDBC.getConnection(), findUserStatement);
         PreparedStatement ps = DBQuery.getPreparedStatement();

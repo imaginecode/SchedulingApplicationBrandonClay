@@ -17,6 +17,7 @@ import java.io.PrintWriter;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -99,12 +100,14 @@ public class LoginScreen implements Initializable {
             loginErrors(2);
             return false;
         }
-        if (!UserNamePassQuery.validateUser(userNameFld, PasswordFld)) {
+        if (UserNamePassQuery.validateUser(userNameFld, PasswordFld)) {
+
+            return true;
+        }
+        else {
             loginErrors(3);
             return false;
         }
-
-        return true;
 
     }
 
@@ -147,6 +150,9 @@ public class LoginScreen implements Initializable {
     public void loginLogger () {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu/MM/dd");
         LocalDate localDate = LocalDate.now();
+        String hms = "HH:mm:ss";
+        DateTimeFormatter timeColonFormatter = DateTimeFormatter.ofPattern(hms);
+        LocalTime currentTime = LocalTime.now();
         try {
             File newlog = new File(filename);
             if (newlog.createNewFile())
@@ -158,11 +164,11 @@ public class LoginScreen implements Initializable {
             FileWriter fw = new FileWriter(filename, true);
             PrintWriter outputFile = new PrintWriter(fw);
             if (successStatus) {
-                outputFile.println("Valid Login attempt by Username: " + userNameFld.getText() + " Password:" + PasswordFld.getText() + "at time"  + dtf.format(localDate) );
+                outputFile.println("Valid Login attempt by Username: " + userNameFld.getText() + " Password:" + PasswordFld.getText() + " at Datetime "  + dtf.format(localDate) + " " + currentTime + " " + String.valueOf(ZoneId.systemDefault()));
             }
                 //Log invalid details
             else {
-                outputFile.println("Invalid Login attempt by Username: " + userNameFld.getText() + " Password:" + PasswordFld.getText() + "at time"  + dtf.format(localDate) );
+                outputFile.println("Invalid Login attempt by Username: " + userNameFld.getText() + " Password:" + PasswordFld.getText() + " at time "  + dtf.format(localDate) + " " + currentTime + " " + String.valueOf(ZoneId.systemDefault()) );
             }
             outputFile.close();
         }
