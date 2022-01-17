@@ -44,6 +44,7 @@ public class MainMenu {
     public TableColumn customerIDAptTable;
     public TableColumn userID;
     public ToggleGroup appointments;
+    public RadioButton allView;
 
     /**Reports Handler is the button for navigating to the reports menu
      * @param actionEvent button click */
@@ -74,7 +75,8 @@ public class MainMenu {
     }
 
 
-
+    /**Navigates to edit customer menu and passed data of selected customer
+     * @param actionEvent button click */
     public void editCustomerHandler(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         Parent scene = FXMLLoader.load(getClass().getResource("/View/CustomerUpdate.fxml"));
@@ -82,10 +84,12 @@ public class MainMenu {
         stage.setScene(new Scene(scene));
         stage.show();
     }
-
+    /** Deleted selected customer
+     * @param actionEvent button click */
     public void deleteCustomerHandler(ActionEvent actionEvent) {
     }
-
+    /** Navigates to edit appointment menu and passes data of selected appointment for editing
+     * @param actionEvent button click */
     public void editAppointmentHandler(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         Parent scene = FXMLLoader.load(getClass().getResource("/View/AppointmentUpdate.fxml"));
@@ -93,14 +97,21 @@ public class MainMenu {
         stage.setScene(new Scene(scene));
         stage.show();
     }
-
+    /**Deletes selected appointment
+     * @[param actionEvent button */
     public void deleteAppointmentHandler(ActionEvent actionEvent) {
     }
-
+    /**Changes tableview of appointments to a week time frame
+     * @param actionEvent radio button selected */
     public void weekViewHandler(ActionEvent actionEvent) {
     }
-
+    /**Changes tableview of appointments to a month time frame
+     * @param actionEvent radio button selected */
     public void monthViewHandler(ActionEvent actionEvent) {
+    }
+    /**Changes tableview of appointments to all appointments
+     * @param actionEvent radio button selected */
+    public void allViewHandler(ActionEvent actionEvent) {
     }
 
     /**Exit handler exit the program and confirm users action with dialog box
@@ -108,4 +119,6 @@ public class MainMenu {
     public void exitMainMenuHandler(ActionEvent actionEvent) {
         System.exit(0);
     }
+
+
 }
