@@ -1,5 +1,6 @@
 package Model;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 /**
@@ -50,6 +51,9 @@ public class Appointment {
         this.userID = userID;
         this.contactID = contactID;
     }
+
+
+
     /**Get appointment ID
      * @return aptID  */
     public int getAptID() {

@@ -1,7 +1,13 @@
 package Controller;
 
+import Data.AppointmentsData;
+import Model.Appointment;
+import Model.Customer;
+import javafx.beans.Observable;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -9,12 +15,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * Main Menu Controller contains the navigation to the other views and also populates the data in customer and appointment
  * table view. MainMenu also posses the data to other controllers for actions such as modify customer and modify appointment*/
 /** @author Brandon Clay */
-public class MainMenu {
+public class MainMenu  implements Initializable {
 
     public Button makeAppointment;
     public Button Reports;
@@ -43,8 +51,13 @@ public class MainMenu {
     public TableColumn end;
     public TableColumn customerIDAptTable;
     public TableColumn userID;
-    public ToggleGroup appointments;
+    public ToggleGroup appointmentsToggle;
     public RadioButton allView;
+    /** Non static Observable List of appointments*/
+    public static ObservableList<Appointment> appointments;
+    /** Observable List of customers*/
+    public static ObservableList<Customer> customers;
+
 
     /**Reports Handler is the button for navigating to the reports menu
      * @param actionEvent button click */
@@ -98,7 +111,7 @@ public class MainMenu {
         stage.show();
     }
     /**Deletes selected appointment
-     * @[param actionEvent button */
+     * @param actionEvent button */
     public void deleteAppointmentHandler(ActionEvent actionEvent) {
     }
     /**Changes tableview of appointments to a week time frame
@@ -120,5 +133,13 @@ public class MainMenu {
         System.exit(0);
     }
 
+    /**Pulls data into tableview for customer and appointment tableviews
+     * @param url resolve relative paths for the root object
+     * @param resourceBundle resources used to localize the root object
+     * catches SQLException prints stack trace */
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        appointments = AppointmentsData.getAllAppointments();
 
+    }
 }
