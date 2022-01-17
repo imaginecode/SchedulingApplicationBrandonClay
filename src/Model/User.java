@@ -1,6 +1,6 @@
 package Model;
 /**
- *User Class used to create country objects for the scheduling program and assign values to object */
+ *User Class used to create user objects for the scheduling program and assign values to object */
 /** @author Brandon Clay */
 public class User {
     private int userID;
