@@ -5,7 +5,7 @@ import java.time.LocalTime;
 /**
  *Appointment Class used to create appointment objects and assign values to object */
 /** @author Brandon Clay */
-public class Appointement{
+public class Appointment {
     private int aptID;
     private String aptTitle;
     private String aptDescription;
@@ -33,9 +33,9 @@ public class Appointement{
      * @param endTime End time of appointment
      * @param userID ID of user logged into  scheduling application
      * */
-    public Appointement(int aptID, String aptTitle, String aptDescription, String aptLocation, String type,
-                        LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime,
-                        int customerID, int userID, int contactID)
+    public Appointment(int aptID, String aptTitle, String aptDescription, String aptLocation, String type,
+                       LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime,
+                       int customerID, int userID, int contactID)
     {
         this.aptID = aptID;
         this.aptTitle = aptTitle;
