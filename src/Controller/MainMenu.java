@@ -10,6 +10,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Main Menu Controller contains the navigation to the other views and also populates the data in customer and appointment
+ * table view. MainMenu also posses the data to other controllers for actions such as modify customer and modify appointment*/
+/** @author Brandon Clay */
 public class MainMenu {
 
     public Button makeAppointment;
@@ -39,8 +43,10 @@ public class MainMenu {
     public TableColumn end;
     public TableColumn customerIDAptTable;
     public TableColumn userID;
+    public ToggleGroup appointments;
 
-
+    /**Reports Handler is the button for navigating to the reports menu
+     * @param actionEvent button click */
     public void reportsHandler(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         Parent scene = FXMLLoader.load(getClass().getResource("/View/Reports.fxml"));
@@ -48,7 +54,8 @@ public class MainMenu {
         stage.setScene(new Scene(scene));
         stage.show();
     }
-
+    /**Make appointment handler loads Add appointment menu
+     * @param actionEvent button click */
     public void makeAppointmentHandler(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         Parent scene = FXMLLoader.load(getClass().getResource("/View/AppointmentsAdd.fxml"));
@@ -56,7 +63,8 @@ public class MainMenu {
         stage.setScene(new Scene(scene));
         stage.show();
     }
-
+    /** Navigates to add customer form
+     * @param actionEvent button click */
     public void addCustomerHandler(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         Parent scene = FXMLLoader.load(getClass().getResource("/View/CustomerAdd.fxml"));
@@ -65,11 +73,7 @@ public class MainMenu {
         stage.show();
     }
 
-    /**Exit handler exit the program and confirm users action with dialog box
-     * @param actionEvent exit button action */
-    public void exitMainMenuHandler(ActionEvent actionEvent) {
-        System.exit(0);
-    }
+
 
     public void editCustomerHandler(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
@@ -97,5 +101,11 @@ public class MainMenu {
     }
 
     public void monthViewHandler(ActionEvent actionEvent) {
+    }
+
+    /**Exit handler exit the program and confirm users action with dialog box
+     * @param actionEvent exit button action */
+    public void exitMainMenuHandler(ActionEvent actionEvent) {
+        System.exit(0);
     }
 }

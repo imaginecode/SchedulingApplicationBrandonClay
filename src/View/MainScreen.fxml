@@ -5,13 +5,17 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="customerTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="748.0" prefWidth="1368.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenu">
    <children>
-      <RadioButton fx:id="monthView" layoutX="910.0" layoutY="41.0" mnemonicParsing="false" onAction="#monthViewHandler" selected="true" text="Month" />
-      <RadioButton fx:id="weekView" layoutX="1017.0" layoutY="41.0" mnemonicParsing="false" onAction="#weekViewHandler" text="Week" />
+      <RadioButton fx:id="monthView" layoutX="910.0" layoutY="41.0" mnemonicParsing="false" onAction="#monthViewHandler" text="Month">
+         <toggleGroup>
+            <ToggleGroup fx:id="appointments" />
+         </toggleGroup></RadioButton>
+      <RadioButton fx:id="weekView" layoutX="1017.0" layoutY="41.0" mnemonicParsing="false" onAction="#weekViewHandler" text="Week" toggleGroup="$appointments" />
       <Label layoutX="14.0" layoutY="36.0" text="Customers">
          <font>
             <Font size="18.0" />
@@ -54,5 +58,6 @@
             <TableColumn fx:id="userID" prefWidth="53.0" text="User_ID" />
          </columns>
       </TableView>
+      <RadioButton layoutX="816.0" layoutY="41.0" mnemonicParsing="false" selected="true" text="All" toggleGroup="$appointments" />
    </children>
 </AnchorPane>
