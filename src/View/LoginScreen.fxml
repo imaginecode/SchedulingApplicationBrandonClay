@@ -46,12 +46,12 @@
       <Label fx:id="passwordTxt" layoutX="154.0" layoutY="180.0" text="Password:" />
       <Label fx:id="usernameTxt" layoutX="154.0" layoutY="117.0" text="Username:" />
       <Button fx:id="LoginButton" layoutX="286.0" layoutY="223.0" mnemonicParsing="false" onAction="#LoginHandler" text="Login" />
-      <TextField fx:id="userNameFld" layoutX="252.0" layoutY="113.0" onAction="#userNameFldHandler" prefHeight="25.0" prefWidth="131.0" />
+      <TextField fx:id="userNameFld" layoutX="252.0" layoutY="113.0" prefHeight="25.0" prefWidth="131.0" />
       <Label fx:id="SchedulingAppLoginTxt" layoutX="24.0" layoutY="23.0" text="Scheduling Application Login">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <PasswordField fx:id="PasswordFld" layoutX="253.0" layoutY="176.0" onAction="#PasswordFldHandler" prefHeight="25.0" prefWidth="131.0" />
+      <PasswordField fx:id="PasswordFld" layoutX="253.0" layoutY="176.0" prefHeight="25.0" prefWidth="131.0" />
    </children>
 </AnchorPane>

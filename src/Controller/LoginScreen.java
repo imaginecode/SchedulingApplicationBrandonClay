@@ -44,11 +44,6 @@ public class LoginScreen implements Initializable {
     /** String for name of file that will record login attempts */
     String filename = "login_activity";
 
-    public void PasswordFldHandler(ActionEvent actionEvent) {
-    }
-
-    public void userNameFldHandler(ActionEvent actionEvent) {
-    }
 
     /** Login button and checks for a successful or unsuccessful login attempt. Directs to main menu if successful otherwise
      * logs invalid attempt and displays error messages.
