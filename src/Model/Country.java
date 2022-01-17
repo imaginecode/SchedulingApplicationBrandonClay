@@ -7,7 +7,7 @@ public class Country {
     private int countryID;
     private String country;
 
-    /** Country contructor
+    /** Country constructor
      * @param country name of country
      * @param countryID ID of country*/
     public Country(int countryID, String country) {
