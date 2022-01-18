@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 /**
@@ -139,7 +140,14 @@ public class MainMenu  implements Initializable {
      * catches SQLException prints stack trace */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        appointments = AppointmentsData.getAllAppointments();
+        try {
+            appointments = AppointmentsData.getAllAppointments();
+
+            //Initializing Appointment table values
+            a
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
 
     }
 }

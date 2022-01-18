@@ -2,6 +2,7 @@ package Data;
 /**
  * This class contains MYSQL queries for appointments*/
 
+import Controller.MainMenu;
 import Model.Appointment;
 import Utilities.JDBC;
 import javafx.beans.Observable;
@@ -14,41 +15,42 @@ import java.sql.SQLException;
 
 /** @author Brandon Clay */
 
-//Work on consolidating code and figuring out how to reference observable lists without having to instantiate
-    //Currently working on building executeAndResultSet method need to finishing making new appointment object filled with result set code
 public class AppointmentsData {
-    private ObservableList<Appointment> appointments = FXCollections.observableArrayList();
-    private String query;
+    public static ObservableList<Appointment> aptResultSet;
 
-    public static ObservableList<Appointment> getAllAppointments() {
+    public static ObservableList<Appointment> getAllAppointments() throws SQLException {
+       try{String query = "SELECT * FROM appointments";
+           executeAndResultSet(query);
 
 
-        String query;
-
-        return appointments;
+           return aptResultSet;}
+       catch (SQLException e){
+           e.printStackTrace();
+           return null;
+       }
     }
-//Not sure if I need this or not
-    public ObservableList<Appointment> getAppointments() {
-        return appointments;
-    }
 
-    private ObservableList<Appointment> executeAndResultSet() throws SQLException {
+    /** Prepare and execute statement that creates new appointment object
+     * @param query Unique query string that can be passed in*/
+    private static void executeAndResultSet(String query) throws SQLException {
         DBQuery.setPreparedStatement(JDBC.getConnection(), query);
         PreparedStatement preparedStatement = DBQuery.getPreparedStatement();
 
         try {
             preparedStatement.execute();
             ResultSet rs = preparedStatement.getResultSet();
-
+            //Going through result set
             while (rs.next()) {
-                Appointment newAppointment = new Appointment(rs.getInt("Appointment_ID"));
+                Appointment newApt = new Appointment(rs.getInt("Appointment_ID"), rs.getString("Title"), rs.getString("Description"),
+                                                            rs.getString("Location"), rs.getString("Type"), rs.getDate("Start").toLocalDate(),
+                                                            rs.getDate("End").toLocalDate(), rs.getTimestamp("Start").toLocalDateTime().toLocalTime(),
+                                                            rs.getTimestamp("End").toLocalDateTime().toLocalTime(), rs.getInt("Customer_ID"),
+                                                            rs.getInt("User_ID"),rs.getInt("Contact_ID"));
 
-                appointments.add(newAppointment);
+                aptResultSet.add(newApt);
             }
-            return appointments;
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-            return null;
+            System.out.println(" SQL Error: " + e.getMessage());
         }
     }
 }
