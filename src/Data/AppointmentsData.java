@@ -38,19 +38,19 @@ public class AppointmentsData {
                 String appointmentLocation = rs.getString("Location");
                 String appointmentType = rs.getString("Type");
 
-                // times and dates converted to local time of user
-                LocalDate startDate = rs.getTimestamp("Start").toLocalDateTime().toLocalDate();
-                LocalDate endDate = rs.getTimestamp("End").toLocalDateTime().toLocalDate();
-                LocalTime startTime = rs.getTimestamp("Start").toLocalDateTime().toLocalTime();
-                LocalTime endTime = rs.getTimestamp("End").toLocalDateTime().toLocalTime();
+                // times and dates converted to local time and date of user
+                LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
+                LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
+
                 int customerID = rs.getInt("Customer_ID");
                 int userID = rs.getInt("User_ID");
                 int contactID = rs.getInt("Contact_ID");
 
- //               System.out.println(appointmentTitle + appointmentDescription+appointmentLocation+appointmentType+startDate+endDate+startTime+endTime+customerID+userID+contactID);
+                System.out.println(appointmentTitle + appointmentDescription+appointmentLocation + appointmentType+start+end+
+                                    " " +customerID + " " +userID+ " " +contactID);
 //                //Creating new appointment object
                 Appointment newApt = new Appointment(appointmentID, appointmentTitle, appointmentDescription, appointmentLocation,
-                        appointmentType, startDate, endDate, startTime, endTime, customerID, userID, contactID);
+                        appointmentType, start, end , customerID, userID, contactID);
                 aptResultSet.add(newApt);
 
             }

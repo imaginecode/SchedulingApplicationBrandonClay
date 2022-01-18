@@ -146,13 +146,14 @@ public class MainMenu  implements Initializable {
 
             //Initializing Appointment table values
             appointmentsTable.setItems(appointments);
-            description.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
-            place.setCellValueFactory(new PropertyValueFactory<>("description"));
-            contact.setCellValueFactory(new PropertyValueFactory<>("contact"));
+            appointmentID.setCellValueFactory(new PropertyValueFactory<>("aptID"));
+            description.setCellValueFactory(new PropertyValueFactory<>("aptDescription"));
+            place.setCellValueFactory(new PropertyValueFactory<>("aptLocation"));
+            contact.setCellValueFactory(new PropertyValueFactory<>("contactID"));
             type.setCellValueFactory(new PropertyValueFactory<>("type"));
             start.setCellValueFactory(new PropertyValueFactory<>("start"));
             end.setCellValueFactory(new PropertyValueFactory<>("end"));
-            customerID.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+            customerIDAptTable.setCellValueFactory(new PropertyValueFactory<>("customerID"));
             userID.setCellValueFactory(new PropertyValueFactory<>("userID"));
 
         } catch (SQLException sqlException) {

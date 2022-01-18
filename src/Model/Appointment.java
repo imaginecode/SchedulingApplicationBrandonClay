@@ -12,10 +12,8 @@ public class Appointment {
     private String aptDescription;
     private String aptLocation;
     private String type;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private LocalTime startTime;
-    private LocalTime endTime;
+    private LocalDateTime start;
+    private LocalDateTime end;
     private int customerID;
     private int userID;
     private int contactID;
@@ -28,31 +26,24 @@ public class Appointment {
      * @param contactID ID of the contact associated with customer such as the marketeer who contacted them initially
      * @param type type of appointment
      * @param customerID ID of the customer
-     * @param startDate Start date of appointment
-     * @param endDate End date of appointment
-     * @param startTime Start time of appointment
-     * @param endTime End time of appointment
+     * @param start Start date and time of appointment
+     * @param end End date and time of appointment
      * @param userID ID of user logged into  scheduling application
      * */
     public Appointment(int aptID, String aptTitle, String aptDescription, String aptLocation, String type,
-                       LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime,
-                       int customerID, int userID, int contactID)
+                       LocalDateTime start, LocalDateTime end, int customerID, int userID, int contactID)
     {
         this.aptID = aptID;
         this.aptTitle = aptTitle;
         this.aptDescription = aptDescription;
         this.aptLocation = aptLocation;
         this.type = type;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.start = start;
+        this.end = end;
         this.customerID = customerID;
         this.userID = userID;
         this.contactID = contactID;
     }
-
-
 
     /**Get appointment ID
      * @return aptID  */
@@ -99,42 +90,25 @@ public class Appointment {
     public void setType(String type) {
         this.type = type;
     }
-    /**Get startdate of appointment
-     * @return startDate Date of appointment start LocalDate obj */
-    public LocalDate getStartDate() {
-        return startDate;
+    /**  Get start date and time of appointment
+     * @return start time*/
+    public LocalDateTime getStart() {
+        return start;
     }
-    /**Set start date for appointment */
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
+    /**Set start date and time of appointment */
+    public void setStart(LocalDateTime start) {
+        this.start = start;
     }
-    /**Get end date of appointment
-     * @return  endDate End date of appointment LocalDate obj */
-    public LocalDate getEndDate() {
-        return endDate;
+    /**Get end date and time of appointment
+     * @return end time */
+    public LocalDateTime getEnd() {
+        return end;
     }
-    /**Set end date of appointment */
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
+    /**Set end date and time of appointment */
+    public void setEnd(LocalDateTime end) {
+        this.end = end;
     }
-    /** Get start time of appointment
-     * @return startTime of appointment LocalTime obj */
-    public LocalTime getStartTime() {
-        return startTime;
-    }
-    /** Set start time of appointment */
-    public void setStartTime(LocalTime startTime) {
-        this.startTime = startTime;
-    }
-    /** Get end time of appointment
-     * @return endTime of appointment LocalTime obj*/
-    public LocalTime getEndTime() {
-        return endTime;
-    }
-    /** set end time of appointment */
-    public void setEndTime(LocalTime endTime) {
-        this.endTime = endTime;
-    }
+
     /**Get CustomerID
      * @return customerID ID of customer */
     public int getCustomerID() {
