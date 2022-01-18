@@ -42,3 +42,32 @@ DBQuery.setStatement(conn);
         }
         else
             System.out.println("no change");
+
+
+
+
+
+            *********************** Alternate way of creating  and filling in apt object
+
+
+            //           try {
+            //               preparedStatement.execute();
+            //               ResultSet rs = preparedStatement.getResultSet();
+            //               //Going through result set
+            //               while (rs.next()) {
+            //                   Appointment newApt = new Appointment(rs.getInt("Appointment_ID"), rs.getString("Title"), rs.getString("Description"),
+            //                           rs.getString("Location"), rs.getString("Type"), rs.getDate("Start").toLocalDate(),
+            //                           rs.getDate("End").toLocalDate(), rs.getTimestamp("Start").toLocalDateTime().toLocalTime(),
+            //                           rs.getTimestamp("End").toLocalDateTime().toLocalTime(), rs.getInt("Customer_ID"),
+            //                           rs.getInt("User_ID"),rs.getInt("Contact_ID"));
+            //
+            //
+            //
+            //               }
+            //               return aptResultSet;
+            //           }
+            //           catch (Exception e) {
+            //               e.printStackTrace();
+            //               System.out.println("getAllAppointments Query not returning a result");
+            //               return null;
+            //           }

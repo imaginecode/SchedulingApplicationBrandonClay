@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -144,7 +145,16 @@ public class MainMenu  implements Initializable {
             appointments = AppointmentsData.getAllAppointments();
 
             //Initializing Appointment table values
-            a
+            appointmentsTable.setItems(appointments);
+            description.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
+            place.setCellValueFactory(new PropertyValueFactory<>("description"));
+            contact.setCellValueFactory(new PropertyValueFactory<>("contact"));
+            type.setCellValueFactory(new PropertyValueFactory<>("type"));
+            start.setCellValueFactory(new PropertyValueFactory<>("start"));
+            end.setCellValueFactory(new PropertyValueFactory<>("end"));
+            customerID.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+            userID.setCellValueFactory(new PropertyValueFactory<>("userID"));
+
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
