@@ -1,6 +1,7 @@
 package Controller;
 
 import Data.AppointmentsData;
+import Data.CustomersData;
 import Model.Appointment;
 import Model.Customer;
 import javafx.beans.Observable;
@@ -143,6 +144,8 @@ public class MainMenu  implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             appointments = AppointmentsData.getAllAppointments();
+            customers = CustomersData.getAllCustomers();
+
 
             //Initializing Appointment table values
             appointmentsTable.setItems(appointments);
@@ -155,6 +158,16 @@ public class MainMenu  implements Initializable {
             end.setCellValueFactory(new PropertyValueFactory<>("end"));
             customerIDAptTable.setCellValueFactory(new PropertyValueFactory<>("customerID"));
             userID.setCellValueFactory(new PropertyValueFactory<>("userID"));
+
+            //Initializing Customer table values
+            customersTable.setItems(customers);
+            customerID.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+            name.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+            address.setCellValueFactory(new PropertyValueFactory<>("address"));
+            zip.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
+            phone.setCellValueFactory(new PropertyValueFactory<>("phone"));
+
+
 
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();

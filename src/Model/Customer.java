@@ -6,21 +6,24 @@ public class Customer {
     private int customerID;
     private String customerName;
     private String address;
-    private int postalCode;
+    private String postalCode;
     private int divisionID;
+    private String phone;
 
     /** Customer Constructor
      * @param customerID ID of customer
-     * @param address address of customer
      * @param customerName Name of customer
-     * @param divisionID Division ID of customer
-     * @param postalCode Zip/PostalCode of customer*/
-    public Customer(int customerID, String customerName, String address, int postalCode, int divisionID) {
+     * @param address address of customer
+     * @param postalCode Zip/PostalCode of customer
+     * @param phone phone number of customer
+     * @param divisionID Division ID of customer*/
+    public Customer(int customerID, String customerName, String address, String postalCode, String phone, int divisionID) {
         this.customerID = customerID;
         this.customerName = customerName;
         this.address = address;
         this.postalCode = postalCode;
         this.divisionID = divisionID;
+        this.phone = phone;
     }
     /** Gets customer ID
      * @return customerID Id of customer */
@@ -51,11 +54,11 @@ public class Customer {
     }
     /**Get postal code of customer
      * @return postalCode */
-    public int getPostalCode() {
+    public String getPostalCode() {
         return postalCode;
     }
     /**Set postal code of customer */
-    public void setPostalCode(int postalCode) {
+    public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
     }
     /**Get division ID of customer
@@ -66,5 +69,14 @@ public class Customer {
     /**Set divisionID of customer */
     public void setDivisionID(int divisionID) {
         this.divisionID = divisionID;
+    }
+    /**Get Phone Number of customer
+     * @return phone number */
+    public String getPhone() {
+        return phone;
+    }
+    /**Set phone number of customer */
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }
