@@ -31,7 +31,7 @@ public class CustomersData {
                 String phone = rs.getString("Phone");
                 int divID = rs.getInt("Division_ID");
 
-                System.out.println(customerID + customerName + address + zip + phone + divID);
+//                System.out.println(customerID + customerName + address + zip + phone + divID);
 
 
 //                //Creating new customer object

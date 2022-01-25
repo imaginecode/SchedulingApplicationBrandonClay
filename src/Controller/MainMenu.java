@@ -119,15 +119,43 @@ public class MainMenu  implements Initializable {
     }
     /**Changes tableview of appointments to a week time frame
      * @param actionEvent radio button selected */
-    public void weekViewHandler(ActionEvent actionEvent) {
+    public void weekViewHandler(ActionEvent actionEvent) throws SQLException {
+        try {
+            appointments = AppointmentsData.getWeekAppointments();
+            appointmentsTable.setItems(appointments);
+            appointmentsTable.refresh();
+        }
+
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+
     }
     /**Changes tableview of appointments to a month time frame
      * @param actionEvent radio button selected */
     public void monthViewHandler(ActionEvent actionEvent) {
+        try {
+            appointments = AppointmentsData.getMonthAppointments();
+            appointmentsTable.setItems(appointments);
+            appointmentsTable.refresh();
+        }
+
+        catch(SQLException e){
+            e.printStackTrace();
+        }
     }
     /**Changes tableview of appointments to all appointments
      * @param actionEvent radio button selected */
     public void allViewHandler(ActionEvent actionEvent) {
+        try {
+            appointments = AppointmentsData.getAllAppointments();
+            appointmentsTable.setItems(appointments);
+            appointmentsTable.refresh();
+        }
+
+        catch(SQLException e){
+            e.printStackTrace();
+        }
     }
 
     /**Exit handler exit the program and confirm users action with dialog box
