@@ -114,18 +114,19 @@ public class AppointmentsData {
     }
 
 
-
+        /** Gets appointments by month starting from current day and going 30 days forward
+         * @return aptResultSet result set from query*/
     public static ObservableList<Appointment> getMonthAppointments() throws SQLException {
         ObservableList<Appointment> aptResultSet = FXCollections.observableArrayList();
         LocalDate today = LocalDateTime.now().toLocalDate();
-        LocalDate weekTimeFrame = today.plusDays(30);
+        LocalDate monthTimeFrame = today.plusDays(30);
         String query = "SELECT * FROM AppointmentsView WHERE Start < ? AND Start > ?";
 
         DBQuery.setPreparedStatement(JDBC.getConnection(), query);
         PreparedStatement preparedStatement = DBQuery.getPreparedStatement();
 
         preparedStatement.setDate(1, Date.valueOf(today));
-        preparedStatement.setDate(2, Date.valueOf(weekTimeFrame));
+        preparedStatement.setDate(2, Date.valueOf(monthTimeFrame));
 
         try {
             preparedStatement.execute();
