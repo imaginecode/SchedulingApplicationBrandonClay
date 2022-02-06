@@ -11,10 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.ScatterChart;
 
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -24,7 +21,9 @@ import java.time.LocalTime;
 public class AppointmentsData {
 
     /** Query for all appointments.
-     * @return aptResultSet a result set of all appointments */
+     * @return aptResultSet a result set of all appointments
+     * @throws SQLException and prints error message
+     */
     public static ObservableList<Appointment> getAllAppointments() throws SQLException {
         ObservableList<Appointment> aptResultSet = FXCollections.observableArrayList();
         String query = "SELECT * FROM appointments";
@@ -60,13 +59,15 @@ public class AppointmentsData {
             }
         }
             catch(SQLException e){
+                System.out.println(e.getStackTrace());
                 return null;
             }
         return aptResultSet;
 
     }
     /**Queries appointments for a one week period starting at current date and showing a week into the future
-     * @return aptResultSet result set from query */
+     * @return aptResultSet result set from query
+     * @throws SQLException and prints stack trace*/
     public static ObservableList<Appointment> getWeekAppointments() throws SQLException {
         ObservableList<Appointment> aptResultSet = FXCollections.observableArrayList();
         LocalDate today = LocalDateTime.now().toLocalDate();
@@ -108,6 +109,7 @@ public class AppointmentsData {
             }
         }
         catch(SQLException e){
+            System.out.println(e.getStackTrace());
             return null;
         }
         return aptResultSet;
@@ -115,7 +117,8 @@ public class AppointmentsData {
 
 
         /** Gets appointments by month starting from current day and going 30 days forward
-         * @return aptResultSet result set from query*/
+         * @return aptResultSet result set from query
+         * @throws SQLException and prints stack trace*/
     public static ObservableList<Appointment> getMonthAppointments() throws SQLException {
         ObservableList<Appointment> aptResultSet = FXCollections.observableArrayList();
         LocalDate today = LocalDateTime.now().toLocalDate();
@@ -157,17 +160,132 @@ public class AppointmentsData {
             }
         }
         catch(SQLException e){
+            System.out.println(e.getStackTrace());
             return null;
         }
         return aptResultSet;
     }
+    /** Creating new appointment.
+     * @param userID userID ID of user
+     * @param contactID ID of contact
+     * @param customerId ID of customer
+     * @param description written description of appointment
+     * @param start beginning of appointment and start date of appointment
+     * @param end ending of appointment in a timestamp
+     * @param location where the appointment is going to be
+     * @param title Title of appointment
+     * @param type type of appointment
+     * @return boolean true if it properly executes query and false if query doesn't get executed
+     * @throws SQLException and prints stack trace
+     * */
+    public static boolean newAppointment (String title, String description, String location, String type,
+                                          LocalDateTime start, LocalDateTime end, Integer customerId, Integer userID, Integer contactID) throws SQLException {
+        // might need to pass in the contact id here? I would like to try and get the contactID from when I select the customer and then pass it in as an argument
+
+        String query = "INSERT INTO appointment(Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID" +
+                "       VALUES (?,?,?,?,?,?,?,?,?)";
+        DBQuery.setPreparedStatement(JDBC.getConnection(), query);
+        PreparedStatement ps = DBQuery.getPreparedStatement();
+
+        ps.setString(1, title);
+        ps.setString(2, description);
+        ps.setString(3, location);
+        ps.setString(4, type);
+        ps.setTimestamp(5, Timestamp.valueOf(start));
+        ps.setTimestamp(6, Timestamp.valueOf(end));
+        ps.setInt(7, customerId);
+        ps.setInt(8, userID);
+        ps.setInt(9, contactID);
+
+        try {
+            ps.execute();
+            if (ps.getUpdateCount() > 0) {
+                System.out.println("Rows(s) affected: " + ps.getUpdateCount());
+            } else {
+                System.out.println("No rows affected by INSERT");
+            }
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+
+    }
+
+    /** Creating new appointment.
+     * @param userID userID ID of user
+     * @param Appointment_ID id of appointment being updated
+     * @param contactID ID of contact
+     * @param customerId ID of customer
+     * @param description written description of appointment
+     * @param start beginning of appointment and start date of appointment
+     * @param end ending of appointment in a timestamp
+     * @param location where the appointment is going to be
+     * @param title Title of appointment
+     * @param type type of appointment
+     * @return boolean true if it properly executes query and false if query doesn't get executed
+     * @throws SQLException and prints stack trace
+     * */
+    public static boolean editAppointment (Integer Appointment_ID, String title, String description, String location, String type,
+                                           LocalDateTime start, LocalDateTime end, Integer customerId, Integer userID, Integer contactID) throws SQLException {
+
+        String query = "UPDATE appointments SET Title=?, Description=?, Location=?, Type=?, Start=?, End=?, Customer_ID=?, Contact_ID=?, User_ID=? WHERE Appointment_ID = ?;";
+        DBQuery.setPreparedStatement(JDBC.getConnection(), query);
+        PreparedStatement ps = DBQuery.getPreparedStatement();
 
 
+        ps.setString(1, title);
+        ps.setString(2, description);
+        ps.setString(3, location);
+        ps.setString(4, type);
+        ps.setTimestamp(5, Timestamp.valueOf(start));
+        ps.setTimestamp(6, Timestamp.valueOf(end));
+        ps.setInt(7, customerId);
+        ps.setInt(8, userID);
+        ps.setInt(9, contactID);
+        ps.setInt(10, Appointment_ID);
+
+        try {
+            ps.execute();
+            if (ps.getUpdateCount() > 0) {
+                System.out.println("Rows(s) affected: " + ps.getUpdateCount());
+            } else {
+                System.out.println("No rows affected by INSERT");
+            }
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+
+    }
+    /** Deletes an appointment by Appointment_ID
+     * @param appointmentID ID of appointment being deleted
+     * @return true if appointment query was successfully done false if it throws an error
+     * @throws SQLException and prints stacktrace
+     * */
+    public static boolean deleteAppointment(Integer appointmentID) throws SQLException {
+        String query = "DELETE from appointments WHERE Appointment_ID=?";
+        DBQuery.setPreparedStatement(JDBC.getConnection(), query);
+        PreparedStatement ps = DBQuery.getPreparedStatement();
+
+        ps.setInt(1, appointmentID);
+
+        try {
+            ps.execute();
+            if (ps.getUpdateCount() > 0) {
+                System.out.println("Rows(s) affected: " + ps.getUpdateCount());
+            } else {
+                System.out.println("No rows affected by INSERT");
+            }
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
 
 
-
-
-
+    }
 
 
 
