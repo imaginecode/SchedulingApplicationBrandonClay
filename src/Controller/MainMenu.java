@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
@@ -116,6 +117,7 @@ public class MainMenu  implements Initializable {
     /**Deletes selected appointment
      * @param actionEvent button */
     public void deleteAppointmentHandler(ActionEvent actionEvent) {
+        appointmentsTable.getSelectionModel().getSelectedItem();
     }
     /**Changes tableview of appointments to a week time frame
      * @param actionEvent radio button selected */
@@ -162,6 +164,41 @@ public class MainMenu  implements Initializable {
      * @param actionEvent exit button action */
     public void exitMainMenuHandler(ActionEvent actionEvent) {
         System.exit(0);
+    }
+
+    /** Displays messages for empty login fields and invalid usernames and passwords
+     * @param alertnum is for selecting which specific alert case is needed */
+    public void errorMsgs(int alertnum) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+
+            switch (alertnum) {
+                case 1:
+                    alert.setTitle("Confirm Delete");
+                    alert.setHeaderText("Confirm Delete");
+                    alert.setContentText("Confirm that you want Delete selected item");
+                    alert.showAndWait();
+                    break;
+                case 2:
+                    alert.setTitle("No item selected");
+                    alert.setHeaderText("No item selected");
+                    alert.setContentText("No item selected for deletion. Please click the item you want to delete.");
+                    alert.showAndWait();
+                    break;
+                case 3:
+                    alert.setTitle("Error deleting selected item");
+                    alert.setHeaderText("Error deleting selected item");
+                    alert.setContentText("Error deleting selected item");
+                    alert.showAndWait();
+                    break;
+                case 4:
+                    alert.setTitle("Selected item successfully deleted");
+                    alert.setHeaderText("Selected item successfully deleted");
+                    alert.setContentText("Selected item successfully deleted. Congrats!!");
+                    alert.showAndWait();
+                    break;
+
+
+            }
     }
 
     /**Pulls data into tableview for customer and appointment tableviews
