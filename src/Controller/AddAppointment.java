@@ -1,7 +1,10 @@
 package Controller;
 
+import Data.UserNamePassQuery;
+import Model.Customer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,8 +14,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class AddAppointment {
+public class AddAppointment implements Initializable {
     public ComboBox contactCombo;
     public ComboBox endTime;
     public ComboBox startTime;
@@ -27,6 +33,8 @@ public class AddAppointment {
     public Button cancelAptAdd;
     public DatePicker aptStartDate;
     public DatePicker aptEndDate;
+    private Customer selectedCustomer;
+
 
     public void cancelAptAddHandler(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
@@ -73,5 +81,22 @@ public class AddAppointment {
     }
 
     public void aptStartDateHandler(ActionEvent actionEvent) {
+
+    }
+
+//    public void dataHandoff(Customer controller){
+//        Customer_ID.setText(String.valueOf(controller.getCustomerID()));
+//    }
+
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        Customer_ID.setText(String.valueOf(MainMenu.CID));
+        try {
+            User_ID.setText(String.valueOf(UserNamePassQuery.getCurrentUser()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -1,6 +1,11 @@
 package Data;
 
+import Controller.LoginScreen;
+import Model.User;
 import Utilities.JDBC;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +17,9 @@ import java.sql.SQLException;
 /**@author Brandon Clay */
 
 public class UserNamePassQuery {
-/** Queries username and password entered in the login screen
+    public static int currentUserID;
+
+    /** Queries username and password entered in the login screen
  * @param username username checked
  * @param password  password checked
  * @throws SQLException stack trace is printed for reference */
@@ -43,5 +50,35 @@ public class UserNamePassQuery {
 
 
 
+    }
+
+    public static int getCurrentUser() throws SQLException {
+        ObservableList<User> currentUser = FXCollections.observableArrayList();
+
+        String  findUserStatement = "SELECT * FROM users WHERE User_Name=?";
+
+
+        DBQuery.setPreparedStatement(JDBC.getConnection(), findUserStatement);
+        PreparedStatement ps = DBQuery.getPreparedStatement();
+        //Key value mapping for username
+        ps.setString(1, String.valueOf(LoginScreen.currentUser));
+        //Execute Statement
+        try
+        {
+            System.out.println(LoginScreen.currentUser);
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+
+            while (rs.next()) {
+                currentUserID = rs.getInt("User_ID");
+            }
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getStackTrace());
+
+        }
+        return currentUserID;
     }
 }

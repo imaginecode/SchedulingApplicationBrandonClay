@@ -86,11 +86,7 @@ public class MainMenu  implements Initializable {
 //        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
 //        stage.setScene(scene);
 //        stage.show();
-
-
-
-
-        Customer selectedCustomer = (Customer) customersTable.getSelectionModel().getSelectedItem();
+    try{ Customer selectedCustomer = (Customer) customersTable.getSelectionModel().getSelectedItem();
         CID = selectedCustomer.getCustomerID();
 
 
@@ -99,7 +95,14 @@ public class MainMenu  implements Initializable {
         Parent scene = FXMLLoader.load(getClass().getResource("/View/AppointmentsAdd.fxml"));
         stage.setTitle("Add Appointment");
         stage.setScene(new Scene(scene));
-        stage.show();
+        stage.show();}
+    catch(NullPointerException e){
+        errorMsgs(6);
+    }
+
+
+
+
     }
     /** Navigates to add customer form
      * @param actionEvent button click */
@@ -216,6 +219,13 @@ public class MainMenu  implements Initializable {
                     alert.setContentText("Selected item successfully deleted. Congrats!!");
                     alert.showAndWait();
                     break;
+                case 6:
+                    alert.setTitle("Please Select a customer");
+                    alert.setHeaderText("Please Select a customer");
+                    alert.setContentText("Please Select a customer you wish to make an appointment for.");
+                    alert.showAndWait();
+                    break;
+
 
 
             }

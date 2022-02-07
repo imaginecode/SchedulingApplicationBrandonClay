@@ -38,6 +38,7 @@ public class LoginScreen implements Initializable {
     public Label SchedulingAppLoginTxt;
     public PasswordField PasswordFld;
     private ResourceBundle rb;
+    public static String currentUser;
     /** Status of if user name and password credentials are valid */
     private boolean successStatus;
 
@@ -95,7 +96,7 @@ public class LoginScreen implements Initializable {
             return false;
         }
         if (UserNamePassQuery.validateUser(userNameFld, PasswordFld)) {
-
+            currentUser = String.valueOf(userNameFld);
             return true;
         }
         else {
