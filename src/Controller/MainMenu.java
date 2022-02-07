@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -61,6 +62,7 @@ public class MainMenu  implements Initializable {
     public static ObservableList<Appointment> appointments;
     /** Observable List of customers*/
     public static ObservableList<Customer> customers;
+    public static int CID;
 
 
     /**Reports Handler is the button for navigating to the reports menu
@@ -75,6 +77,24 @@ public class MainMenu  implements Initializable {
     /**Make appointment handler loads Add appointment menu
      * @param actionEvent button click */
     public void makeAppointmentHandler(ActionEvent actionEvent) throws IOException {
+//        FXMLLoader loader = new FXMLLoader();
+//        loader.setLocation(getClass().getResource("/View/AppointmentsAdd.fxml"));
+//        Parent root = loader.load();
+//        Scene scene = new Scene(root);
+//        Customer controller = loader.getController();
+//        controller.dataHandoff(customersTable.getSelectionModel().getSelectedItem());
+//        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+//        stage.setScene(scene);
+//        stage.show();
+
+
+
+
+        Customer selectedCustomer = (Customer) customersTable.getSelectionModel().getSelectedItem();
+        CID = selectedCustomer.getCustomerID();
+
+
+
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         Parent scene = FXMLLoader.load(getClass().getResource("/View/AppointmentsAdd.fxml"));
         stage.setTitle("Add Appointment");
