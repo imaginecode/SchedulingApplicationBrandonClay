@@ -1,9 +1,11 @@
 package Controller;
 
 import Data.ContactsData;
+import Data.CustomersData;
 import Data.UserNamePassQuery;
 import Model.Contact;
 import Model.Customer;
+import Model.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,7 +22,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class AddAppointment implements Initializable{
-    public ComboBox <String> contactCombo;
+    public ComboBox<String> contactCombo;
     public ComboBox <String> endTime;
     public ComboBox <String> startTime;
     public TextField title;
@@ -31,7 +33,7 @@ public class AddAppointment implements Initializable{
     public Button SaveAptAdd;
     public Button cancelAptAdd;
     public DatePicker aptStartDate;
-    public ComboBox <String> customerCombo;
+    public ComboBox <Integer> customerCombo;
     public ComboBox <Integer> userIDCombo;
     public ComboBox <String> typeCombo;
     public ComboBox <String> aptLocationCombo;
@@ -120,8 +122,40 @@ public class AddAppointment implements Initializable{
 
     /** Populates all customer ID from query in combo box*/
     public void customerIDCombo(){
+        ObservableList<Integer> customerIDList = FXCollections.observableArrayList();
+
+        try{
+            if (CustomersData.getAllCustomers() != null){
+                for (Customer customer: CustomersData.getAllCustomers()) {
+                    customerIDList.add(customer.getCustomerID());
+                }
+            }
+            customerCombo.setItems(customerIDList);
+        }
+
+        catch (SQLException e){
+        System.out.println(e.getStackTrace());
+        }
+    }
+
+    /**Populates all user IDs in combo box from query of users */
+    public void userIDCombo(){
+        ObservableList<Integer> userList = FXCollections.observableArrayList();
+        try {
+
+            if (UserNamePassQuery.allUsers() != null){
+                for (User user: UserNamePassQuery.allUsers()) {
+                    userList.add(user.getUserID());
+                }
+            }
+            userIDCombo.setItems(userList);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
+
 
 //    public void dataHandoff(Customer selectedCustomer){
 //        Customer_ID.setText(String.valueOf(selectedCustomer.getCustomerID()));
@@ -165,5 +199,7 @@ public class AddAppointment implements Initializable{
         aptTypeCombo();
         aptLocationCombo();
         contactCombo();
+        customerIDCombo();
+        userIDCombo();
     }
 }

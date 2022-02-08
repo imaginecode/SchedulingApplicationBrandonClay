@@ -35,14 +35,15 @@ public class CustomersData {
 
 
 //                //Creating new customer object
-                Customer newCustomer = new Customer(customerID,customerName,address,zip,phone,divID);
+                Customer newCustomer = new Customer(customerID, customerName, address, zip, phone, divID);
                 customerResultSet.add(newCustomer);
             }
-        }
-        catch(SQLException e){
+        } catch (SQLException e) {
             return null;
         }
         return customerResultSet;
 
     }
 }
+
+

@@ -25,11 +25,11 @@ public class ContactsData {
         ObservableList<Contact> contactResultSet = FXCollections.observableArrayList();
         String query = "SELECT * FROM contacts";
         DBQuery.setPreparedStatement(JDBC.getConnection(), query);
-        PreparedStatement preparedStatement = DBQuery.getPreparedStatement();
+        PreparedStatement ps = DBQuery.getPreparedStatement();
 
         try {
-            preparedStatement.execute();
-            ResultSet rs = preparedStatement.getResultSet();
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
             //Going through result set
             while (rs.next()) {
                 int contactID = rs.getInt("Contact_ID");
