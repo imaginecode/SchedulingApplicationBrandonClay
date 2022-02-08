@@ -1,7 +1,11 @@
 package Controller;
 
+import Data.ContactsData;
 import Data.UserNamePassQuery;
+import Model.Contact;
 import Model.Customer;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,22 +19,22 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class AddAppointment implements Initializable {
-    public ComboBox contactCombo;
-    public ComboBox endTime;
-    public ComboBox startTime;
+public class AddAppointment implements Initializable{
+    public ComboBox <String> contactCombo;
+    public ComboBox <String> endTime;
+    public ComboBox <String> startTime;
     public TextField title;
-    public TextField User_ID;
     public TextField Customer_ID;
     public TextField type;
-    public TextField aptLocation;
     public TextField aptDescription;
     public TextField appointment_ID;
     public Button SaveAptAdd;
     public Button cancelAptAdd;
     public DatePicker aptStartDate;
-    public DatePicker aptEndDate;
-    private Customer selectedCustomer;
+    public ComboBox <String> customerCombo;
+    public ComboBox <Integer> userIDCombo;
+    public ComboBox <String> typeCombo;
+    public ComboBox <String> aptLocationCombo;
 
 
     public void cancelAptAddHandler(ActionEvent actionEvent) throws IOException {
@@ -65,29 +69,9 @@ public class AddAppointment implements Initializable {
         //Checks too see if appointment is with business hours defined as 8:00 a.m. to 10:00 p.m. EST, including weekends
 
 
-
+        return true;
     }
 
-    public void appointment_IDHandler(ActionEvent actionEvent) {
-    }
-
-    public void aptDescriptionHandler(ActionEvent actionEvent) {
-    }
-
-    public void AptLocationHandler(ActionEvent actionEvent) {
-    }
-
-    public void handler(ActionEvent actionEvent) {
-    }
-
-    public void Customer_IDHandler(ActionEvent actionEvent) {
-    }
-
-    public void User_IDHandler(ActionEvent actionEvent) {
-    }
-
-    public void titleHandler(ActionEvent actionEvent) {
-    }
 
     public void startTimeHandler(ActionEvent actionEvent) {
     }
@@ -95,18 +79,52 @@ public class AddAppointment implements Initializable {
     public void endTimeHandler(ActionEvent actionEvent) {
     }
 
-    public void contactComboHandler(ActionEvent actionEvent) {
-    }
-
-    public void aptEndDateHandler(ActionEvent actionEvent) {
-    }
-
     public void aptStartDateHandler(ActionEvent actionEvent) {
 
     }
 
-//    public void dataHandoff(Customer controller){
-//        Customer_ID.setText(String.valueOf(controller.getCustomerID()));
+
+    /**Populates type combo with default data*/
+    public void aptTypeCombo() {
+        ObservableList<String> aptTypes = FXCollections.observableArrayList();
+
+        aptTypes.addAll("Sprint","Demo","Breakout","Kick off");
+        typeCombo.setItems(aptTypes);
+    }
+
+    /**Populates location combo with default data*/
+    public void aptLocationCombo(){
+        ObservableList<String> aptLocations = FXCollections.observableArrayList();
+        aptLocations.addAll("ConferenceRoom1", "ConferenceRoom2", "ConferenceRoom3");
+
+        aptLocationCombo.setItems(aptLocations);
+    }
+
+    /**Populates type combo with data from query of all contacts*/
+    public void contactCombo(){
+        ObservableList<String> contactList = FXCollections.observableArrayList();
+        try {
+
+            if (ContactsData.getAllContacts() != null){
+                for (Contact contact: ContactsData.getAllContacts()) {
+                    contactList.add(contact.getContactName());
+                }
+            }
+            contactCombo.setItems(contactList);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /** Populates all customer ID from query in combo box*/
+    public void customerIDCombo(){
+
+    }
+
+//    public void dataHandoff(Customer selectedCustomer){
+//        Customer_ID.setText(String.valueOf(selectedCustomer.getCustomerID()));
 //    }
 
     /** Displays messages for add appointment errors such as empty fields
@@ -142,14 +160,10 @@ public class AddAppointment implements Initializable {
     }
 
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Customer_ID.setText(String.valueOf(MainMenu.CID));
-        try {
-            User_ID.setText(String.valueOf(UserNamePassQuery.getCurrentUser()));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        aptTypeCombo();
+        aptLocationCombo();
+        contactCombo();
     }
 }

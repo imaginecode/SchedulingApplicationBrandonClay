@@ -51,34 +51,39 @@ public class UserNamePassQuery {
 
 
     }
+//    /**Upgrade for the future that queries user that is logged in instead of having user select from a combo box
+//     * specifying what user to use when making and updating appointments */
+//    public static int getCurrentUser() throws SQLException {
+//        ObservableList<User> currentUser = FXCollections.observableArrayList();
+//
+//        String  findUserStatement = "SELECT * FROM users WHERE User_Name=?";
+//
+//
+//        DBQuery.setPreparedStatement(JDBC.getConnection(), findUserStatement);
+//        PreparedStatement ps = DBQuery.getPreparedStatement();
+//        //Key value mapping for username
+//        ps.setString(1, String.valueOf(LoginScreen.currentUser));
+//        //Execute Statement
+//        try
+//        {
+//            System.out.println(LoginScreen.currentUser);
+//            ps.execute();
+//            ResultSet rs = ps.getResultSet();
+//
+//            while (rs.next()) {
+//                currentUserID = rs.getInt("User_ID");
+//            }
+//
+//        }
+//        catch (Exception e)
+//        {
+//            System.out.println(e.getStackTrace());
+//
+//        }
+//        return currentUserID;
+//    }
 
-    public static int getCurrentUser() throws SQLException {
-        ObservableList<User> currentUser = FXCollections.observableArrayList();
-
-        String  findUserStatement = "SELECT * FROM users WHERE User_Name=?";
 
 
-        DBQuery.setPreparedStatement(JDBC.getConnection(), findUserStatement);
-        PreparedStatement ps = DBQuery.getPreparedStatement();
-        //Key value mapping for username
-        ps.setString(1, String.valueOf(LoginScreen.currentUser));
-        //Execute Statement
-        try
-        {
-            System.out.println(LoginScreen.currentUser);
-            ps.execute();
-            ResultSet rs = ps.getResultSet();
 
-            while (rs.next()) {
-                currentUserID = rs.getInt("User_ID");
-            }
-
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getStackTrace());
-
-        }
-        return currentUserID;
-    }
 }

@@ -16,25 +16,24 @@
             <ToggleGroup fx:id="appointmentsToggle" />
          </toggleGroup></RadioButton>
       <RadioButton fx:id="weekView" layoutX="1017.0" layoutY="41.0" mnemonicParsing="false" onAction="#weekViewHandler" text="Week" toggleGroup="$appointmentsToggle" />
-      <Label layoutX="14.0" layoutY="36.0" text="Customers">
+      <Label layoutX="24.0" layoutY="36.0" text="Customers">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="659.0" layoutY="36.0" text="Appointments">
+      <Label layoutX="600.0" layoutY="36.0" text="Appointments">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="addCustomer" layoutX="14.0" layoutY="550.0" mnemonicParsing="false" onAction="#addCustomerHandler" text="Add" />
+      <Button fx:id="addCustomer" layoutX="24.0" layoutY="550.0" mnemonicParsing="false" onAction="#addCustomerHandler" text="Add" />
       <Button fx:id="exit" layoutX="1254.0" layoutY="667.0" mnemonicParsing="false" onAction="#exitMainMenuHandler" text="Exit" />
-      <Button fx:id="editCustomer" layoutX="79.0" layoutY="550.0" mnemonicParsing="false" onAction="#editCustomerHandler" text="Edit" />
-      <Button fx:id="deleteCustomer" layoutX="144.0" layoutY="550.0" mnemonicParsing="false" onAction="#deleteCustomerHandler" text="Delete" />
-      <Button fx:id="makeAppointment" layoutX="334.0" layoutY="576.0" mnemonicParsing="false" onAction="#makeAppointmentHandler" text="Make Appointment" />
-      <Button fx:id="editAppointment" layoutX="724.0" layoutY="550.0" mnemonicParsing="false" onAction="#editAppointmentHandler" text="Edit Appointment" />
-      <Button fx:id="deleteAppointment" layoutX="885.0" layoutY="550.0" mnemonicParsing="false" onAction="#deleteAppointmentHandler" text="Delete" />
+      <Button fx:id="editCustomer" layoutX="89.0" layoutY="550.0" mnemonicParsing="false" onAction="#editCustomerHandler" text="Edit" />
+      <Button fx:id="deleteCustomer" layoutX="154.0" layoutY="550.0" mnemonicParsing="false" onAction="#deleteCustomerHandler" text="Delete" />
+      <Button fx:id="makeAppointment" layoutX="597.0" layoutY="550.0" mnemonicParsing="false" onAction="#makeAppointmentHandler" text="Make Appointment" />
+      <Button fx:id="editAppointment" layoutX="736.0" layoutY="550.0" mnemonicParsing="false" onAction="#editAppointmentHandler" text="Edit Appointment" />
+      <Button fx:id="deleteAppointment" layoutX="897.0" layoutY="550.0" mnemonicParsing="false" onAction="#deleteAppointmentHandler" text="Delete" />
       <Button fx:id="Reports" layoutX="724.0" layoutY="633.0" mnemonicParsing="false" onAction="#reportsHandler" text="Reports" />
-      <Label layoutX="296.0" layoutY="554.0" text="*To make an appointment select customer first" />
       <TableView fx:id="customersTable" layoutX="24.0" layoutY="73.0" prefHeight="461.0" prefWidth="502.0">
          <columns>
             <TableColumn fx:id="customerID" prefWidth="107.99996662139893" text="Customer_ID" />

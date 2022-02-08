@@ -77,17 +77,24 @@ public class MainMenu  implements Initializable {
     /**Make appointment handler loads Add appointment menu
      * @param actionEvent button click */
     public void makeAppointmentHandler(ActionEvent actionEvent) throws IOException {
+//        Customer selectedCustomer;
+//        selectedCustomer = (Customer) customersTable.getSelectionModel().getSelectedItem();
 //        FXMLLoader loader = new FXMLLoader();
 //        loader.setLocation(getClass().getResource("/View/AppointmentsAdd.fxml"));
 //        Parent root = loader.load();
 //        Scene scene = new Scene(root);
-//        Customer controller = loader.getController();
-//        controller.dataHandoff(customersTable.getSelectionModel().getSelectedItem());
+//        AddAppointment controller = loader.getController();
+//        controller.dataHandoff(selectedCustomer);
 //        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
 //        stage.setScene(scene);
 //        stage.show();
-    try{ Customer selectedCustomer = (Customer) customersTable.getSelectionModel().getSelectedItem();
-        CID = selectedCustomer.getCustomerID();
+
+
+
+
+
+
+
 
 
 
@@ -95,15 +102,12 @@ public class MainMenu  implements Initializable {
         Parent scene = FXMLLoader.load(getClass().getResource("/View/AppointmentsAdd.fxml"));
         stage.setTitle("Add Appointment");
         stage.setScene(new Scene(scene));
-        stage.show();}
-    catch(NullPointerException e){
-        errorMsgs(6);
-    }
-
-
+        stage.show();
 
 
     }
+
+
     /** Navigates to add customer form
      * @param actionEvent button click */
     public void addCustomerHandler(ActionEvent actionEvent) throws IOException {
