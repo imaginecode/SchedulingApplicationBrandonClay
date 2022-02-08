@@ -38,8 +38,11 @@ public class AddAppointment implements Initializable{
     public ComboBox <String> typeCombo;
     public ComboBox <String> aptLocationCombo;
 
-
+/** Cancels and returns to MainMenu and confirms users action with a dialog box*/
     public void cancelAptAddHandler(ActionEvent actionEvent) throws IOException {
+
+        addErrors(3);
+
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         Parent scene = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
         stage.setTitle("Home");
@@ -180,20 +183,19 @@ public class AddAppointment implements Initializable{
                 alert.showAndWait();
                 break;
             case 3:
+                alert.setAlertType(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Confirm Cancel");
                 alert.setHeaderText("Confirm Cancel");
                 alert.setContentText("Confirm Cancel");
                 alert.showAndWait();
                 break;
 
-
-
-
-
         }
     }
 
-
+/** Calls methods that set default data in combo boxes for creating new appointments
+ * @param url resolve relative paths for the root object
+ * @param resourceBundle resources used to localize the root object */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         aptTypeCombo();
