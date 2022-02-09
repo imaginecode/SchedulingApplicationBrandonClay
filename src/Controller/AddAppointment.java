@@ -19,7 +19,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.*;
 import java.util.ResourceBundle;
+import java.util.TimeZone;
 
 public class AddAppointment implements Initializable{
     public ComboBox<String> contactCombo;
@@ -38,7 +40,9 @@ public class AddAppointment implements Initializable{
     public ComboBox <String> typeCombo;
     public ComboBox <String> aptLocationCombo;
 
-/** Cancels and returns to MainMenu and confirms users action with a dialog box*/
+/** Cancels and returns to MainMenu and confirms users action with a dialog box
+ * @param actionEvent button click of cancel button
+ * @throws IOException thrown while accessing information using streams, files and directories*/
     public void cancelAptAddHandler(ActionEvent actionEvent) throws IOException {
 
         addErrors(3);
@@ -50,14 +54,15 @@ public class AddAppointment implements Initializable{
         stage.show();
     }
 
-    public void SaveAptAddHandler(ActionEvent actionEvent) {
+    /** */
+    public void SaveAptAddHandler(ActionEvent actionEvent) throws IOException {
         if (appointmentChecks()){
-
+            Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+            Parent scene = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
+            stage.setTitle("Home");
+            stage.setScene(new Scene(scene));
+            stage.show();
         }
-        else{
-
-        }
-
 
     }
 /**Checks to make sure appointment is valid fields are not empty as well as checking for overlapping appointments,
@@ -159,6 +164,40 @@ public class AddAppointment implements Initializable{
 
     }
 
+    /** Populates time combos in 30 min increments for both start and end combos*/
+    public void timeCombo(){
+        ObservableList<String> aptSlots = FXCollections.observableArrayList();
+
+        int now = LocalTime.now().getHour();
+//        long diff = TimeZone.getTimeZone(ZoneId.systemDefault()).getOffset(now) - TimeZone.getTimeZone("EST").getOffset(now);
+        int diff = TimeZone.getTimeZone(ZoneId.systemDefault()).getOffset(now) - TimeZone.getTimeZone("EST").getOffset(now);
+        System.out.println(diff);
+
+        LocalTime startHour = LocalTime.of(8 ,0);
+
+
+        int i = 0;
+        aptSlots.add(startHour.toString());
+        while(i < 28){
+
+            startHour = startHour.plusMinutes(30);
+            aptSlots.add(startHour.toString());
+            ++i;
+
+            startTime.setItems(aptSlots);
+        }
+
+//        int zoneDifference = TimeZone.getTimeZone("EST").getOffset();
+//        LocalTime bizHoursStart = LocalTime.of(+ 2);
+//        ZonedDateTime zdtStart = ZonedDateTime.of();
+//        //Opening is 1pm in UTC
+//        int openingTime = ZonedDateTime.of();
+//
+//        // Closing time in UTC 4am next day
+//        int closingTime =
+//        LocalTime bizHoursEnd = LocalTime.of(closingTime)
+    }
+
 
 //    public void dataHandoff(Customer selectedCustomer){
 //        Customer_ID.setText(String.valueOf(selectedCustomer.getCustomerID()));
@@ -177,6 +216,7 @@ public class AddAppointment implements Initializable{
                 alert.showAndWait();
                 break;
             case 2:
+                alert.setAlertType(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Confirm Save");
                 alert.setHeaderText("Confirm Save");
                 alert.setContentText("Confirm Save");
@@ -189,6 +229,8 @@ public class AddAppointment implements Initializable{
                 alert.setContentText("Confirm Cancel");
                 alert.showAndWait();
                 break;
+
+
 
         }
     }
@@ -203,5 +245,6 @@ public class AddAppointment implements Initializable{
         contactCombo();
         customerIDCombo();
         userIDCombo();
+        timeCombo();
     }
 }
