@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.ResourceBundle;
@@ -69,7 +70,7 @@ public class AddAppointment implements Initializable{
 
     }
 /**Checks to make sure appointment is valid fields are not empty as well as checking for overlapping appointments,
- * valid dates, and that appointment is within business hours
+ * valid dates and times
  * @return boolean of t/f for if the appointment is valid if (f) then alerts are displayed*/
     private boolean appointmentChecks() {
 
@@ -116,13 +117,29 @@ public class AddAppointment implements Initializable{
         }
 
         //Checking to make sure end time is after start time
+        LocalTime start = LocalTime.parse(startTime.getSelectionModel().getSelectedItem());
+        LocalTime end = LocalTime.parse(endTime.getSelectionModel().getSelectedItem());
+//        long diffBetweenAptTimes = ChronoUnit.HOURS.between(end,start);
+        long diffBetweenAptTimes = ChronoUnit.MINUTES.between(end,start);
+        System.out.println(diffBetweenAptTimes);
+
+        if(diffBetweenAptTimes >= 30 || diffBetweenAptTimes == 0){
+            addErrors(6);
+            return false;
+        }
+
+        //Checks that appointment date is in the future
+        if (aptStartDate.getValue().isBefore(LocalDateTime.now().toLocalDate())) {
+            addErrors(5);
+            return false;
+        }
+
 
         //Checking for overlapping appointments
 
-        //Checks too see if appointment is with business hours defined as 8:00 a.m. to 10:00 p.m. EST, including weekends
 
 
-        return true;
+        return false;
     }
 
 
@@ -207,7 +224,8 @@ public class AddAppointment implements Initializable{
 
     }
 
-    /** Populates time combos in 30 min increments for both start and end combos*/
+    /** Populates time combos in 30 min increments for both start and end combos. Start and end times are shown in local times that are between 8am-10pm EST
+     *  to make it impossible for a user to schedule an appointment outside of business hours*/
     public void timeCombo(){
         ObservableList<String> aptSlotsStart = FXCollections.observableArrayList();
         ObservableList<String> aptSlotsEnd = FXCollections.observableArrayList();
@@ -217,9 +235,8 @@ public class AddAppointment implements Initializable{
         LocalTime two = LocalTime.now(zone2);
 // Finding the difference between local time and EST
         int diff = (int) ChronoUnit.HOURS.between(two, one);
-        System.out.println(diff);
 
-        ZoneId zone1 = ZoneId.of(String.valueOf(ZoneId.systemDefault()));
+//        ZoneId zone1 = ZoneId.of(String.valueOf(ZoneId.systemDefault()));
 
         //Second way of calculating offset in an int format. Not the preferred method.
 
@@ -238,10 +255,9 @@ public class AddAppointment implements Initializable{
 
         //Business starts  at 8am and then difference is added to convert  starttime from EST to local
 
-        LocalTime Hour = LocalTime.of(8 + diff + 1, 0);
+        LocalTime Hour = LocalTime.of(8 + diff, 0);
         if(diff > 0) {
             diff = diff + 1;
-            System.out.println("1 hour added");
         }
 
 
@@ -292,6 +308,18 @@ public class AddAppointment implements Initializable{
                 alert.setTitle("Confirm Cancel");
                 alert.setHeaderText("Confirm Cancel");
                 alert.setContentText("Confirm Cancel");
+                alert.showAndWait();
+                break;
+            case 5:
+                alert.setTitle("Date must be in the future");
+                alert.setHeaderText("Date must be in the future");
+                alert.setContentText("Date must be in the future as appointments can not be made in the past.");
+                alert.showAndWait();
+                break;
+            case 6:
+                alert.setTitle("End time can't be before Start Time ");
+                alert.setHeaderText("End time can't be before Start Time");
+                alert.setContentText("End time can't be before Start Time. Also start and end times can't be the same");
                 alert.showAndWait();
                 break;
 
