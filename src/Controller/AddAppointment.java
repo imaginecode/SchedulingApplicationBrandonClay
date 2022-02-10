@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.*;
+import java.time.temporal.ChronoUnit;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
 
@@ -166,46 +167,52 @@ public class AddAppointment implements Initializable{
 
     /** Populates time combos in 30 min increments for both start and end combos*/
     public void timeCombo(){
-        ObservableList<String> aptSlots = FXCollections.observableArrayList();
+        ObservableList<String> aptSlotsStart = FXCollections.observableArrayList();
+        ObservableList<String> aptSlotsEnd = FXCollections.observableArrayList();
 
+        LocalTime one = LocalTime.now();
+        ZoneId zone2 = ZoneId.of("America/New_York");
+        LocalTime two = LocalTime.now(zone2);
+// Finding the difference between local time and EST
+        int diff = (int) ChronoUnit.HOURS.between(two, one);
+        System.out.println(diff);
 
         ZoneId zone1 = ZoneId.of(String.valueOf(ZoneId.systemDefault()));
-        ZoneId zone2 = ZoneId.of("America/New_York");
-        //Arbitrary date passed in so you can see the how much time in hours in an INT format is between two zones which is then passed into startHour
-        LocalDateTime dateTime = LocalDateTime.of(2022, 2, 9, 8, 0);
-        ZonedDateTime localDateTime = ZonedDateTime.of(dateTime, zone1);
-        ZonedDateTime ESTDateTime = localDateTime.withZoneSameInstant(zone2);
-//      System.out.println("Difference between two time zones in hours = "+ESTDateTime.getOffset().getTotalSeconds());
-//      System.out.println("Difference between two time zones in hours = "+localDateTime.getOffset());
 
-        //Time difference between local time and EST / 3600 to put it into hours
-        int timeDiffInHours = (localDateTime.getOffset().getTotalSeconds() - ESTDateTime.getOffset().getTotalSeconds()) / 3600;
+        //Second way of calculating offset in an int format. Not the preferred method.
+
+////        ZoneId zone2 = ZoneId.of("America/New_York");
+//        //Arbitrary date passed in so you can see the how much time in hours in an INT format is between two zones which is then passed into startHour
+//        LocalDateTime dateTime = LocalDateTime.of(2022, 2, 9, 8, 0);
+//        ZonedDateTime localDateTime = ZonedDateTime.of(dateTime, zone1);
+//        ZonedDateTime ESTDateTime = localDateTime.withZoneSameInstant(zone2);
+////      System.out.println("Difference between two time zones in hours = "+ESTDateTime.getOffset().getTotalSeconds());
+////      System.out.println("Difference between two time zones in hours = "+localDateTime.getOffset());
+//
+//        //Time difference between local time and EST / 3600 to put it into hours
+//        int timeDiffInHours = (localDateTime.getOffset().getTotalSeconds() - ESTDateTime.getOffset().getTotalSeconds()) / 3600;
 
 
 
-
-        LocalTime startHour = LocalTime.of(8 + timeDiffInHours,0);
+        //Business starts  at 8am and then difference is added to convert  starttime from EST to local
+        LocalTime Hour = LocalTime.of(8 + diff,0);
 
         int i = 0;
-        aptSlots.add(startHour.toString());
+        aptSlotsStart.add(Hour.toString());
         while(i < 28){
 
-            startHour = startHour.plusMinutes(30);
-            aptSlots.add(startHour.toString());
+            Hour = Hour.plusMinutes(30);
+            if(i <27){
+                aptSlotsStart.add(Hour.toString());
+            }
+
+            aptSlotsEnd.add(Hour.toString());
             ++i;
 
-            startTime.setItems(aptSlots);
         }
+        startTime.setItems(aptSlotsStart);
 
-//        int zoneDifference = TimeZone.getTimeZone("EST").getOffset();
-//        LocalTime bizHoursStart = LocalTime.of(+ 2);
-//        ZonedDateTime zdtStart = ZonedDateTime.of();
-//        //Opening is 1pm in UTC
-//        int openingTime = ZonedDateTime.of();
-//
-//        // Closing time in UTC 4am next day
-//        int closingTime =
-//        LocalTime bizHoursEnd = LocalTime.of(closingTime)
+        endTime.setItems(aptSlotsEnd);
     }
 
 
