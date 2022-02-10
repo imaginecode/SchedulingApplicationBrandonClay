@@ -122,7 +122,7 @@ public class AddAppointment implements Initializable{
         LocalTime start = LocalTime.parse(startTime.getSelectionModel().getSelectedItem());
         LocalTime end = LocalTime.parse(endTime.getSelectionModel().getSelectedItem());
         long diffBetweenAptTimes = ChronoUnit.MINUTES.between(end,start);
-        System.out.println(diffBetweenAptTimes);
+//        System.out.println(diffBetweenAptTimes);
         // Appointments are min 30 minutes and appointments can't start at the same time so difference must be less than 0 and !=
         if(diffBetweenAptTimes >= 30 || diffBetweenAptTimes == 0){
             addErrors(6);
@@ -141,12 +141,26 @@ public class AddAppointment implements Initializable{
             ObservableList<Appointment> existingAppointments = FXCollections.observableArrayList();
             existingAppointments = AppointmentsData.getAllAppointments();
 
+            //Test Data//
+            LocalDate testDate = LocalDate.now();
+            LocalTime testStart = LocalTime.of(9,0);
+            LocalTime testEnd = LocalTime.of(10,0);
+
             for(Appointment appointment : existingAppointments){
                 LocalDate existingDate = appointment.getStart().toLocalDate();
+                System.out.println(existingDate);
+                System.out.println(aptStartDate.getValue().toString());
 
-                if(appointment date is the same){
-                    LocalTime existingStart = appointment.getStart().toLocalTime();
-                    LocalTime existingEnd = appointment.getEnd().toLocalTime();
+//                if(aptStartDate.getValue().equals(appointment.getStart().toLocalDate())){
+                if(aptStartDate.getValue().isEqual(testDate)){
+//                    LocalTime existingStart = appointment.getStart().toLocalTime();
+//                    LocalTime existingEnd = appointment.getEnd().toLocalTime();
+//                    LocalTime potentialStart = LocalTime.parse(startTime.getSelectionModel().getSelectedItem());
+//                    LocalTime potentialEnd = LocalTime.parse(endTime.getSelectionModel().getSelectedItem());
+
+
+
+
                 }
 
 
@@ -157,14 +171,6 @@ public class AddAppointment implements Initializable{
             }
 
 
-            //if the appointments are on the same day then check the time overlap
-            if() {
-                // check overlaps
-
-                // alert overlap
-
-                return false;
-            }
 
         }
         catch(SQLException e){
