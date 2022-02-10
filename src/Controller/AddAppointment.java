@@ -29,7 +29,6 @@ public class AddAppointment implements Initializable{
     public ComboBox <String> endTime;
     public ComboBox <String> startTime;
     public TextField title;
-    public TextField Customer_ID;
     public TextField type;
     public TextField aptDescription;
     public TextField appointment_ID;
@@ -45,6 +44,9 @@ public class AddAppointment implements Initializable{
  * @param actionEvent button click of cancel button
  * @throws IOException thrown while accessing information using streams, files and directories*/
     public void cancelAptAddHandler(ActionEvent actionEvent) throws IOException {
+
+
+
 
         addErrors(3);
 
@@ -72,8 +74,48 @@ public class AddAppointment implements Initializable{
     private boolean appointmentChecks() {
 
         //Checking to make sure text fields aren't empty
+        if(contactCombo.getSelectionModel().isEmpty()) {
+            addErrors(1);
+            return false;
+        }
+        if(endTime.getSelectionModel().isEmpty()) {
+            addErrors(1);
+            return false;
+        }
+        if(startTime.getSelectionModel().isEmpty()) {
+            addErrors(1);
+            return false;
+        }
+        if(title.getText().isEmpty()) {
+            addErrors(1);
+            return false;
+        }
+        if(aptDescription.getText().isEmpty()) {
+            addErrors(1);
+            return false;
+        }
+        if(aptStartDate.getValue() == null) {
+            addErrors(1);
+            return false;
+        }
+        if(customerCombo.getSelectionModel().isEmpty()) {
+            addErrors(1);
+            return false;
+        }
+        if(userIDCombo.getSelectionModel().isEmpty()) {
+            addErrors(1);
+            return false;
+        }
+        if(typeCombo.getSelectionModel().isEmpty()) {
+            addErrors(1);
+            return false;
+        }
+        if(aptLocationCombo.getSelectionModel().isEmpty()) {
+            addErrors(1);
+            return false;
+        }
 
-        //Checking to make sure end date is after start date
+        //Checking to make sure end time is after start time
 
         //Checking for overlapping appointments
 
@@ -195,7 +237,13 @@ public class AddAppointment implements Initializable{
 
 
         //Business starts  at 8am and then difference is added to convert  starttime from EST to local
-        LocalTime Hour = LocalTime.of(8 + diff,0);
+
+        LocalTime Hour = LocalTime.of(8 + diff + 1, 0);
+        if(diff > 0) {
+            diff = diff + 1;
+            System.out.println("1 hour added");
+        }
+
 
         int i = 0;
         aptSlotsStart.add(Hour.toString());
@@ -229,7 +277,7 @@ public class AddAppointment implements Initializable{
             case 1:
                 alert.setTitle("All fields must be filled");
                 alert.setHeaderText("All fields must be filled");
-                alert.setContentText("All fields  and combo boxes must be filled selected");
+                alert.setContentText("All fields  and combo boxes must be filled or selected");
                 alert.showAndWait();
                 break;
             case 2:
