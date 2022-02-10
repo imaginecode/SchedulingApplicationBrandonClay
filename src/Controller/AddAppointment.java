@@ -1,8 +1,10 @@
 package Controller;
 
+import Data.AppointmentsData;
 import Data.ContactsData;
 import Data.CustomersData;
 import Data.UserNamePassQuery;
+import Model.Appointment;
 import Model.Contact;
 import Model.Customer;
 import Model.User;
@@ -119,10 +121,9 @@ public class AddAppointment implements Initializable{
         //Checking to make sure end time is after start time
         LocalTime start = LocalTime.parse(startTime.getSelectionModel().getSelectedItem());
         LocalTime end = LocalTime.parse(endTime.getSelectionModel().getSelectedItem());
-//        long diffBetweenAptTimes = ChronoUnit.HOURS.between(end,start);
         long diffBetweenAptTimes = ChronoUnit.MINUTES.between(end,start);
         System.out.println(diffBetweenAptTimes);
-
+        // Appointments are min 30 minutes and appointments can't start at the same time so difference must be less than 0 and !=
         if(diffBetweenAptTimes >= 30 || diffBetweenAptTimes == 0){
             addErrors(6);
             return false;
@@ -136,7 +137,39 @@ public class AddAppointment implements Initializable{
 
 
         //Checking for overlapping appointments
+        try{
+            ObservableList<Appointment> existingAppointments = FXCollections.observableArrayList();
+            existingAppointments = AppointmentsData.getAllAppointments();
 
+            for(Appointment appointment : existingAppointments){
+                LocalDate existingDate = appointment.getStart().toLocalDate();
+
+                if(appointment date is the same){
+                    LocalTime existingStart = appointment.getStart().toLocalTime();
+                    LocalTime existingEnd = appointment.getEnd().toLocalTime();
+                }
+
+
+
+
+
+
+            }
+
+
+            //if the appointments are on the same day then check the time overlap
+            if() {
+                // check overlaps
+
+                // alert overlap
+
+                return false;
+            }
+
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
 
 
         return false;
@@ -320,6 +353,13 @@ public class AddAppointment implements Initializable{
                 alert.setTitle("End time can't be before Start Time ");
                 alert.setHeaderText("End time can't be before Start Time");
                 alert.setContentText("End time can't be before Start Time. Also start and end times can't be the same");
+                alert.showAndWait();
+                break;
+            case 7:
+                alert.setTitle("Appointment overlap");
+                alert.setHeaderText("Appointment overlap");
+                alert.setContentText("Appointment overlap, you can not schedule an appointment that overlaps with another customers appointment." +
+                        " The appointment you overlap with is" );
                 alert.showAndWait();
                 break;
 
