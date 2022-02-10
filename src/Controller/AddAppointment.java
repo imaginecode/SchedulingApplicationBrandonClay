@@ -168,13 +168,23 @@ public class AddAppointment implements Initializable{
     public void timeCombo(){
         ObservableList<String> aptSlots = FXCollections.observableArrayList();
 
-        int now = LocalTime.now().getHour();
-//        long diff = TimeZone.getTimeZone(ZoneId.systemDefault()).getOffset(now) - TimeZone.getTimeZone("EST").getOffset(now);
-        int diff = TimeZone.getTimeZone(ZoneId.systemDefault()).getOffset(now) - TimeZone.getTimeZone("EST").getOffset(now);
-        System.out.println(diff);
 
-        LocalTime startHour = LocalTime.of(8 ,0);
+        ZoneId zone1 = ZoneId.of(String.valueOf(ZoneId.systemDefault()));
+        ZoneId zone2 = ZoneId.of("America/New_York");
+        //Arbitrary date passed in so you can see the how much time in hours in an INT format is between two zones which is then passed into startHour
+        LocalDateTime dateTime = LocalDateTime.of(2022, 2, 9, 8, 0);
+        ZonedDateTime localDateTime = ZonedDateTime.of(dateTime, zone1);
+        ZonedDateTime ESTDateTime = localDateTime.withZoneSameInstant(zone2);
+//      System.out.println("Difference between two time zones in hours = "+ESTDateTime.getOffset().getTotalSeconds());
+//      System.out.println("Difference between two time zones in hours = "+localDateTime.getOffset());
 
+        //Time difference between local time and EST / 3600 to put it into hours
+        int timeDiffInHours = (localDateTime.getOffset().getTotalSeconds() - ESTDateTime.getOffset().getTotalSeconds()) / 3600;
+
+
+
+
+        LocalTime startHour = LocalTime.of(8 + timeDiffInHours,0);
 
         int i = 0;
         aptSlots.add(startHour.toString());
