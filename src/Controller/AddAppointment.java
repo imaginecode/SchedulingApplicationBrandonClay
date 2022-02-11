@@ -144,7 +144,7 @@ public class AddAppointment implements Initializable{
             //Test Data//
             LocalDate testDate = LocalDate.now();
             LocalTime testStart = LocalTime.of(9,0);
-            LocalTime testEnd = LocalTime.of(10,0);
+            LocalTime testEnd = LocalTime.of(11,0);
 
             for(Appointment appointment : existingAppointments){
                 LocalDate existingDate = appointment.getStart().toLocalDate();
@@ -155,17 +155,24 @@ public class AddAppointment implements Initializable{
                 if(aptStartDate.getValue().isEqual(testDate)){
 //                    LocalTime existingStart = appointment.getStart().toLocalTime();
 //                    LocalTime existingEnd = appointment.getEnd().toLocalTime();
-//                    LocalTime potentialStart = LocalTime.parse(startTime.getSelectionModel().getSelectedItem());
-//                    LocalTime potentialEnd = LocalTime.parse(endTime.getSelectionModel().getSelectedItem());
-
-
-
+                    LocalTime potentialStart = LocalTime.parse(startTime.getSelectionModel().getSelectedItem());
+                    LocalTime potentialEnd = LocalTime.parse(endTime.getSelectionModel().getSelectedItem());
+//                  Replace test start and end with real appointment data once add appointment is finished
+                    if(potentialStart.isBefore(testStart) & potentialEnd.isAfter(testStart))
+                    {
+                        addErrors(7);
+                        return false;
+                    }
+                    if(potentialStart.isBefore(testEnd) & potentialEnd.isAfter(testEnd)) {
+                        addErrors(7);
+                        return false;
+                    }
+                    if((potentialStart.isAfter(testStart) || potentialStart.equals(testStart)) & (potentialEnd.isBefore(testEnd) || potentialEnd.equals(testEnd))){
+                        addErrors(7);
+                        return false;
+                    }
 
                 }
-
-
-
-
 
 
             }
