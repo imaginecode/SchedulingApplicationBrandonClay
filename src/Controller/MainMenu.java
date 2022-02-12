@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -131,6 +132,7 @@ public class MainMenu  implements Initializable {
     /** Deleted selected customer
      * @param actionEvent button click */
     public void deleteCustomerHandler(ActionEvent actionEvent) {
+        errorMsgs(1);
     }
     /** Navigates to edit appointment menu and passes data of selected appointment for editing
      * @param actionEvent button click */
@@ -141,10 +143,25 @@ public class MainMenu  implements Initializable {
         stage.setScene(new Scene(scene));
         stage.show();
     }
-    /**Deletes selected appointment
+    /**Deletes selected appointment and displays confirmation before delete
      * @param actionEvent button */
-    public void deleteAppointmentHandler(ActionEvent actionEvent) {
-        appointmentsTable.getSelectionModel().getSelectedItem();
+    public void deleteAppointmentHandler(ActionEvent actionEvent) throws SQLException {
+        Appointment selectedForDelete = (Appointment) appointmentsTable.getSelectionModel().getSelectedItem();
+        if(appointmentsTable.getSelectionModel().getSelectedItem() != null) {
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Confirm Delete");
+            Optional<ButtonType> result = alert.showAndWait();
+            if(result.isPresent() && (result.get() == ButtonType.OK)){
+                AppointmentsData.deleteAppointment(selectedForDelete.getAptID());
+                appointments = AppointmentsData.getAllAppointments();
+                //Refreshing Appointment table values
+                appointmentsTable.setItems(appointments);
+            }
+        }
+        else {
+            errorMsgs(2);
+        }
+
     }
     /**Changes tableview of appointments to a week time frame
      * @param actionEvent radio button selected */
@@ -200,6 +217,7 @@ public class MainMenu  implements Initializable {
 
             switch (alertnum) {
                 case 1:
+                    alert.setAlertType(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Confirm Delete");
                     alert.setHeaderText("Confirm Delete");
                     alert.setContentText("Confirm that you want Delete selected item");

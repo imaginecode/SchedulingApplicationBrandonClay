@@ -24,6 +24,7 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.time.*;
 import java.time.temporal.ChronoUnit;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
 
@@ -75,18 +76,19 @@ public class AddAppointment implements Initializable{
       try{
 
           if (appointmentChecks()){
+              Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Confirm Save");
+              Optional<ButtonType> result = alert.showAndWait();
+              if(result.isPresent() && (result.get() == ButtonType.OK)) {
+                  AppointmentsData.newAppointment(title.getText(), aptDescription.getText(), aptLocationCombo.getSelectionModel().getSelectedItem(),
+                          typeCombo.getSelectionModel().getSelectedItem(), startAptTime, endAptTime, customerCombo.getSelectionModel().getSelectedItem(),
+                          userIDCombo.getSelectionModel().getSelectedItem(), contactID.getContactID());
 
-              AppointmentsData.newAppointment(title.getText(), aptDescription.getText(),aptLocationCombo.getSelectionModel().getSelectedItem(),
-                                                typeCombo.getSelectionModel().getSelectedItem(),startAptTime, endAptTime, customerCombo.getSelectionModel().getSelectedItem(),
-                                                userIDCombo.getSelectionModel().getSelectedItem(),contactID.getContactID());
-
-              addErrors(2);
-
-              Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-              Parent scene = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
-              stage.setTitle("Home");
-              stage.setScene(new Scene(scene));
-              stage.show();
+                  Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+                  Parent scene = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
+                  stage.setTitle("Home");
+                  stage.setScene(new Scene(scene));
+                  stage.show();
+              }
           }
 
       }
@@ -360,7 +362,7 @@ public class AddAppointment implements Initializable{
                 alert.setTitle("Confirm Save");
                 alert.setHeaderText("Confirm Save");
                 alert.setContentText("Confirm Save");
-                alert.showAndWait();
+                Optional<ButtonType> yesSave = alert.showAndWait();
                 break;
             case 3:
                 alert.setAlertType(Alert.AlertType.CONFIRMATION);
