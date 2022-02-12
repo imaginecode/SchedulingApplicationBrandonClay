@@ -183,7 +183,7 @@ public class AppointmentsData {
                                           LocalDateTime start, LocalDateTime end, Integer customerId, Integer userID, Integer contactID) throws SQLException {
 
 
-        String query = "INSERT INTO appointments(Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID" +
+        String query = "INSERT INTO appointments(Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID)" +
                 "       VALUES (?,?,?,?,?,?,?,?,?)";
         DBQuery.setPreparedStatement(JDBC.getConnection(), query);
         PreparedStatement ps = DBQuery.getPreparedStatement();
