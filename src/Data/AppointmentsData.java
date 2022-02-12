@@ -15,6 +15,7 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZonedDateTime;
 
 /** @author Brandon Clay */
 
@@ -123,7 +124,7 @@ public class AppointmentsData {
         ObservableList<Appointment> aptResultSet = FXCollections.observableArrayList();
         LocalDate today = LocalDateTime.now().toLocalDate();
         LocalDate monthTimeFrame = today.plusDays(30);
-        String query = "SELECT * FROM AppointmentsView WHERE Start < ? AND Start > ?";
+        String query = "SELECT * FROM appointments WHERE Start < ? AND Start > ?";
 
         DBQuery.setPreparedStatement(JDBC.getConnection(), query);
         PreparedStatement preparedStatement = DBQuery.getPreparedStatement();
@@ -180,9 +181,9 @@ public class AppointmentsData {
      * */
     public static boolean newAppointment (String title, String description, String location, String type,
                                           LocalDateTime start, LocalDateTime end, Integer customerId, Integer userID, Integer contactID) throws SQLException {
-        // might need to pass in the contact id here? I would like to try and get the contactID from when I select the customer and then pass it in as an argument
 
-        String query = "INSERT INTO appointment(Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID" +
+
+        String query = "INSERT INTO appointments(Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID" +
                 "       VALUES (?,?,?,?,?,?,?,?,?)";
         DBQuery.setPreparedStatement(JDBC.getConnection(), query);
         PreparedStatement ps = DBQuery.getPreparedStatement();

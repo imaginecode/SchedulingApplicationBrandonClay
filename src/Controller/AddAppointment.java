@@ -32,7 +32,6 @@ public class AddAppointment implements Initializable{
     public ComboBox <String> endTime;
     public ComboBox <String> startTime;
     public TextField title;
-    public TextField type;
     public TextField aptDescription;
     public TextField appointment_ID;
     public Button SaveAptAdd;
@@ -61,14 +60,40 @@ public class AddAppointment implements Initializable{
     }
 
     /** */
-    public void SaveAptAddHandler(ActionEvent actionEvent) throws IOException {
-        if (appointmentChecks()){
-            Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-            Parent scene = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
-            stage.setTitle("Home");
-            stage.setScene(new Scene(scene));
-            stage.show();
-        }
+    public void SaveAptAddHandler(ActionEvent actionEvent) throws IOException, SQLException {
+
+        LocalDateTime startAptTime = LocalDateTime.of(aptStartDate.getValue(), LocalTime.parse(startTime.getSelectionModel().getSelectedItem()));
+        LocalDateTime endAptTime = LocalDateTime.of(aptStartDate.getValue(), LocalTime.parse(endTime.getSelectionModel().getSelectedItem()));
+        Contact contactID = ContactsData.getContactByID(contactCombo.getSelectionModel().getSelectedItem());
+        //ContactID to pass into new appointment insert query
+        Integer contactToPass = contactID.getContactID();
+
+
+      try{
+
+          if (appointmentChecks()){
+
+                System.out.println(title.getText() + " " + aptDescription.getText()+ " " + aptLocationCombo.getSelectionModel().getSelectedItem()+ " " +
+                                typeCombo.getSelectionModel().getSelectedItem()+ " " + startAptTime+ " " +  endAptTime+ " " +  customerCombo.getSelectionModel().getSelectedItem()+ " " +
+                                userIDCombo.getSelectionModel().getSelectedItem()+ " " + contactID.getContactID());
+
+              AppointmentsData.newAppointment(title.getText(), aptDescription.getText(),aptLocationCombo.getSelectionModel().getSelectedItem(),
+                                                typeCombo.getSelectionModel().getSelectedItem(),startAptTime, endAptTime, customerCombo.getSelectionModel().getSelectedItem(),
+                                                userIDCombo.getSelectionModel().getSelectedItem(),contactID.getContactID());
+
+              Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+              Parent scene = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
+              stage.setTitle("Home");
+              stage.setScene(new Scene(scene));
+              stage.show();
+          }
+
+      }
+      catch(SQLException e){
+          e.getStackTrace();
+      }
+
+
 
     }
 /**Checks to make sure appointment is valid fields are not empty as well as checking for overlapping appointments,
@@ -185,19 +210,9 @@ public class AddAppointment implements Initializable{
         }
 
 
-        return false;
+        return true;
     }
 
-
-    public void startTimeHandler(ActionEvent actionEvent) {
-    }
-
-    public void endTimeHandler(ActionEvent actionEvent) {
-    }
-
-    public void aptStartDateHandler(ActionEvent actionEvent) {
-
-    }
 
 
     /**Populates type combo with default data*/
