@@ -27,6 +27,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
 
+/**
+ * This class contains Adds appointments to the database and performs checks to make sure it is a valid appointment before insert query
+ /** @author Brandon Clay */
 public class AddAppointment implements Initializable{
     public ComboBox<String> contactCombo;
     public ComboBox <String> endTime;
@@ -73,13 +76,11 @@ public class AddAppointment implements Initializable{
 
           if (appointmentChecks()){
 
-                System.out.println(title.getText() + " " + aptDescription.getText()+ " " + aptLocationCombo.getSelectionModel().getSelectedItem()+ " " +
-                                typeCombo.getSelectionModel().getSelectedItem()+ " " + startAptTime+ " " +  endAptTime+ " " +  customerCombo.getSelectionModel().getSelectedItem()+ " " +
-                                userIDCombo.getSelectionModel().getSelectedItem()+ " " + contactID.getContactID());
-
               AppointmentsData.newAppointment(title.getText(), aptDescription.getText(),aptLocationCombo.getSelectionModel().getSelectedItem(),
                                                 typeCombo.getSelectionModel().getSelectedItem(),startAptTime, endAptTime, customerCombo.getSelectionModel().getSelectedItem(),
                                                 userIDCombo.getSelectionModel().getSelectedItem(),contactID.getContactID());
+
+              addErrors(2);
 
               Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
               Parent scene = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));

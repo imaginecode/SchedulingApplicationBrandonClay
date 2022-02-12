@@ -78,8 +78,8 @@ public class AppointmentsData {
         DBQuery.setPreparedStatement(JDBC.getConnection(), query);
         PreparedStatement preparedStatement = DBQuery.getPreparedStatement();
 
-        preparedStatement.setDate(1, Date.valueOf(today));
-        preparedStatement.setDate(2, Date.valueOf(weekTimeFrame));
+        preparedStatement.setDate(1, Date.valueOf(weekTimeFrame));
+        preparedStatement.setDate(2, Date.valueOf(today));
 
         try {
             preparedStatement.execute();
@@ -129,8 +129,8 @@ public class AppointmentsData {
         DBQuery.setPreparedStatement(JDBC.getConnection(), query);
         PreparedStatement preparedStatement = DBQuery.getPreparedStatement();
 
-        preparedStatement.setDate(1, Date.valueOf(today));
-        preparedStatement.setDate(2, Date.valueOf(monthTimeFrame));
+        preparedStatement.setDate(1, Date.valueOf(monthTimeFrame));
+        preparedStatement.setDate(2, Date.valueOf(today));
 
         try {
             preparedStatement.execute();
