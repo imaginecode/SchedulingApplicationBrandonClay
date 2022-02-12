@@ -166,33 +166,30 @@ public class AddAppointment implements Initializable{
             ObservableList<Appointment> existingAppointments = FXCollections.observableArrayList();
             existingAppointments = AppointmentsData.getAllAppointments();
 
-            //Test Data//
-            LocalDate testDate = LocalDate.now();
-            LocalTime testStart = LocalTime.of(9,0);
-            LocalTime testEnd = LocalTime.of(11,0);
+
 
             for(Appointment appointment : existingAppointments){
                 LocalDate existingDate = appointment.getStart().toLocalDate();
                 System.out.println(existingDate);
                 System.out.println(aptStartDate.getValue().toString());
 
-//                if(aptStartDate.getValue().equals(appointment.getStart().toLocalDate())){
-                if(aptStartDate.getValue().isEqual(testDate)){
-//                    LocalTime existingStart = appointment.getStart().toLocalTime();
-//                    LocalTime existingEnd = appointment.getEnd().toLocalTime();
+
+                if(aptStartDate.getValue().isEqual(existingDate)){
+                    LocalTime existingStart = appointment.getStart().toLocalTime();
+                    LocalTime existingEnd = appointment.getEnd().toLocalTime();
                     LocalTime potentialStart = LocalTime.parse(startTime.getSelectionModel().getSelectedItem());
                     LocalTime potentialEnd = LocalTime.parse(endTime.getSelectionModel().getSelectedItem());
-//                  Replace test start and end with real appointment data once add appointment is finished
-                    if(potentialStart.isBefore(testStart) & potentialEnd.isAfter(testStart))
+
+                    if(potentialStart.isBefore(existingStart) & potentialEnd.isAfter(existingEnd))
                     {
                         addErrors(7);
                         return false;
                     }
-                    if(potentialStart.isBefore(testEnd) & potentialEnd.isAfter(testEnd)) {
+                    if(potentialStart.isBefore(existingEnd) & potentialEnd.isAfter(existingEnd)) {
                         addErrors(7);
                         return false;
                     }
-                    if((potentialStart.isAfter(testStart) || potentialStart.equals(testStart)) & (potentialEnd.isBefore(testEnd) || potentialEnd.equals(testEnd))){
+                    if((potentialStart.isAfter(existingStart) || potentialStart.equals(existingStart)) & (potentialEnd.isBefore(existingEnd) || potentialEnd.equals(existingEnd))){
                         addErrors(7);
                         return false;
                     }
