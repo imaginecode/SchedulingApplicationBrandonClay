@@ -64,8 +64,8 @@ public class AddressData {
             ResultSet rs = ps.getResultSet();
             //Going through result set
             while (rs.next()) {
-                int divisionID = rs.getInt("Country_ID");
-                String divisionName = rs.getString("Country");
+                int divisionID = rs.getInt("Division_ID");
+                String divisionName = rs.getString("Division");
 
 
 //                //Creating new country object
@@ -76,10 +76,42 @@ public class AddressData {
         }
         catch(SQLException e){
             System.out.println(e.getStackTrace());
+            System.out.println("Breaking at first level div query");
             return null;
         }
         return firstLevelResultSet;
 
+    }
+
+    /** Getting countryID by name
+     * @return id of country that has the passed in name*/
+    public static Country getCountryID(String nameOfCountry) throws SQLException {
+        String query = "SELECT * FROM countries WHERE country =?";
+        DBQuery.setPreparedStatement(JDBC.getConnection(), query);
+        PreparedStatement ps = DBQuery.getPreparedStatement();
+        ps.setString(1, nameOfCountry);
+
+        try {
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+            //Going through result set
+            while (rs.next()) {
+                int countryID = rs.getInt("Country_ID");
+                String countryName = rs.getString("Country");
+
+
+
+//                //Creating new country object
+                return new Country(countryID,countryName);
+
+            }
+        }
+
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return null;
     }
 
 

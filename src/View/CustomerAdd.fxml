@@ -32,17 +32,17 @@
             <TextField fx:id="Phone" layoutX="97.0" layoutY="179.0" />
             <TextField fx:id="Postal" layoutX="97.0" layoutY="141.0" />
             <TextField fx:id="Name" layoutX="97.0" layoutY="104.0" />
-            <TextField fx:id="Customer_ID" editable="false" layoutX="97.0" layoutY="64.0" onAction="#Customer_IDHandler" opacity="0.55" />
+            <TextField fx:id="Customer_ID" editable="false" layoutX="97.0" layoutY="64.0" opacity="0.55" />
             <Button fx:id="saveAdd" layoutX="381.0" layoutY="581.0" mnemonicParsing="false" onAction="#saveAddHandler" text="Save" />
             <Button fx:id="cancelAdd" layoutX="470.0" layoutY="581.0" mnemonicParsing="false" onAction="#cancelAddHandler" text="Cancel" />
-            <ComboBox fx:id="countryCombo" layoutX="73.0" layoutY="296.0" prefWidth="150.0" />
+            <ComboBox fx:id="countryCombo" layoutX="73.0" layoutY="296.0" onAction="#countryComboHandler" prefWidth="150.0" />
             <ComboBox fx:id="firstLevel" layoutX="244.0" layoutY="296.0" prefWidth="150.0" />
             <Label layoutX="75.0" layoutY="264.0" text="Country" />
             <Label layoutX="244.0" layoutY="264.0" text="First Level Division" />
             <Label layoutX="8.0" layoutY="347.0" text="Street Address" />
             <TextField fx:id="streetAddress" layoutX="98.0" layoutY="343.0" />
             <Label layoutX="264.0" layoutY="347.0" text="Zip Code" />
-            <TextField fx:id="zip" layoutX="339.0" layoutY="343.0" onAction="#zipHandler" />
+            <TextField fx:id="zip" layoutX="339.0" layoutY="343.0" />
          </children>
       </AnchorPane>
    </children>
