@@ -2,6 +2,7 @@ package Data;
 
 import Model.Contact;
 import Model.Country;
+import Model.FirstLvlDivisions;
 import Utilities.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -47,6 +48,37 @@ public class AddressData {
             return null;
         }
         return countryResultSet;
+
+    }
+
+    public static ObservableList<FirstLvlDivisions> getFirstLVLByID(int selectedCountryID) throws SQLException {
+        ObservableList<FirstLvlDivisions> firstLevelResultSet = FXCollections.observableArrayList();
+        String query = "SELECT * FROM first_level_divisions WHERE Country_ID =?";
+        DBQuery.setPreparedStatement(JDBC.getConnection(), query);
+        PreparedStatement ps = DBQuery.getPreparedStatement();
+
+        ps.setString(1, String.valueOf(selectedCountryID));
+
+        try {
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+            //Going through result set
+            while (rs.next()) {
+                int divisionID = rs.getInt("Country_ID");
+                String divisionName = rs.getString("Country");
+
+
+//                //Creating new country object
+                FirstLvlDivisions firstLvlDivisions = new FirstLvlDivisions(divisionID,divisionName,selectedCountryID);
+                firstLevelResultSet.add(firstLvlDivisions);
+
+            }
+        }
+        catch(SQLException e){
+            System.out.println(e.getStackTrace());
+            return null;
+        }
+        return firstLevelResultSet;
 
     }
 

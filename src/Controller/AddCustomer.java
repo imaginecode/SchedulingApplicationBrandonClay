@@ -5,6 +5,7 @@ import Data.ContactsData;
 import Data.CustomersData;
 import Model.Contact;
 import Model.Country;
+import Model.FirstLvlDivisions;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -70,7 +71,20 @@ public class AddCustomer implements Initializable {
     }
 
 
-    public void firstLvlInit(){
+    public void firstLvlInit(int selectedCountryID){
+        ObservableList<String> firstLvlList = FXCollections.observableArrayList();
+        try {
+
+            if (AddressData.getFirstLVLByID(selectedCountryID) != null){
+                for (FirstLvlDivisions firstLvlDivisions: AddressData.getFirstLVLByID(selectedCountryID)) {
+                    firstLvlList.add(firstLvlDivisions.getDivision());
+                }
+            }
+            firstLevel.setItems(firstLvlList);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -80,8 +94,6 @@ public class AddCustomer implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         countryComboInit();
-        firstLvlInit();
-
 
     }
 }
