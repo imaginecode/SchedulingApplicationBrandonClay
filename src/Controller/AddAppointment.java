@@ -54,11 +54,20 @@ public class AddAppointment implements Initializable{
 
 
 
-        addErrors(3);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Confirm Cancel");
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.isPresent() && (result.get() == ButtonType.OK)) {
+
+            Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+            Parent scene = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
+            stage.setTitle("Home Screen");
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }
 
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         Parent scene = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
-        stage.setTitle("Home");
+        stage.setTitle("Home Screen");
         stage.setScene(new Scene(scene));
         stage.show();
     }
@@ -85,7 +94,7 @@ public class AddAppointment implements Initializable{
 
                   Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
                   Parent scene = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
-                  stage.setTitle("Home");
+                  stage.setTitle("Home Screen");
                   stage.setScene(new Scene(scene));
                   stage.show();
               }
@@ -173,9 +182,6 @@ public class AddAppointment implements Initializable{
 
             for(Appointment appointment : existingAppointments){
                 LocalDate existingDate = appointment.getStart().toLocalDate();
-                System.out.println(existingDate);
-                System.out.println(aptStartDate.getValue().toString());
-
 
                 if(aptStartDate.getValue().isEqual(existingDate)){
                     LocalTime existingStart = appointment.getStart().toLocalTime();

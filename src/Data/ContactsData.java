@@ -97,7 +97,6 @@ public class ContactsData {
 
 //                //Creating new contact object
                 Contact newContact = new Contact(contactID,contactName,contactEmail);
-                System.out.println(newContact.getContactName());
                 return newContact;
 
             }

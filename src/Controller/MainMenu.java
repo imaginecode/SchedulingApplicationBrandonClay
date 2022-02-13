@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalTime;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -63,7 +64,7 @@ public class MainMenu  implements Initializable {
     public static ObservableList<Appointment> appointments;
     /** Observable List of customers*/
     public static ObservableList<Customer> customers;
-    public static int CID;
+
 
 
     /**Reports Handler is the button for navigating to the reports menu
@@ -118,6 +119,10 @@ public class MainMenu  implements Initializable {
     /** Navigates to edit appointment menu and passes data of selected appointment for editing
      * @param actionEvent button click */
     public void editAppointmentHandler(ActionEvent actionEvent) throws IOException {
+
+        if(appointmentsTable.getSelectionModel().getSelectedItem() != null){
+            errorMsgs(2);
+        }
 
                 Appointment selectedAppointment;
         selectedAppointment = (Appointment) appointmentsTable.getSelectionModel().getSelectedItem();

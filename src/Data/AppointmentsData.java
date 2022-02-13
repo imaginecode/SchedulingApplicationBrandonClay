@@ -100,8 +100,6 @@ public class AppointmentsData {
                 int userID = rs.getInt("User_ID");
                 int contactID = rs.getInt("Contact_ID");
 
-                System.out.println(appointmentTitle + appointmentDescription+appointmentLocation + appointmentType+start+end+
-                        " " +customerID + " " +userID+ " " +contactID);
 //                //Creating new appointment object
                 Appointment newApt = new Appointment(appointmentID, appointmentTitle, appointmentDescription, appointmentLocation,
                         appointmentType, start, end , customerID, userID, contactID);
@@ -151,8 +149,6 @@ public class AppointmentsData {
                 int userID = rs.getInt("User_ID");
                 int contactID = rs.getInt("Contact_ID");
 
-                System.out.println(appointmentTitle + appointmentDescription+appointmentLocation + appointmentType+start+end+
-                        " " +customerID + " " +userID+ " " +contactID);
 //                //Creating new appointment object
                 Appointment newApt = new Appointment(appointmentID, appointmentTitle, appointmentDescription, appointmentLocation,
                         appointmentType, start, end , customerID, userID, contactID);
