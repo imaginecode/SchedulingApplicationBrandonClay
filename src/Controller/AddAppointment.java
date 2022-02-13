@@ -72,7 +72,9 @@ public class AddAppointment implements Initializable{
         stage.show();
     }
 
-    /** */
+    /** saves and returns to MainMenu and confirms users action with a dialog box
+     * @param actionEvent button click of save button
+     * @throws IOException while accessing information using streams, files and directories*/
     public void SaveAptAddHandler(ActionEvent actionEvent) throws IOException, SQLException {
 
         LocalDateTime startAptTime = LocalDateTime.of(aptStartDate.getValue(), LocalTime.parse(startTime.getSelectionModel().getSelectedItem()));

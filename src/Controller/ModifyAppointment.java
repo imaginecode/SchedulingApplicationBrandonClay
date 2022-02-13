@@ -29,7 +29,9 @@ import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
+/**
+ * This class contains edits appointments to the database and performs checks to make sure it is a valid appointment before update query
+ /** @author Brandon Clay */
 public class ModifyAppointment implements Initializable {
 
     public Button cancelUpdate;
@@ -50,7 +52,9 @@ public class ModifyAppointment implements Initializable {
     private String initialEnd;
     private LocalDate intialDate;
 
-
+    /** saves and returns to MainMenu and confirms users action with a dialog box
+     * @param actionEvent button click of save button
+     * @throws IOException while accessing information using streams, files and directories*/
     public void saveUpdateHandler(ActionEvent actionEvent) throws SQLException {
         LocalDateTime startAptTime = LocalDateTime.of(aptStartDate.getValue(), LocalTime.parse(startTime.getSelectionModel().getSelectedItem()));
         LocalDateTime endAptTime = LocalDateTime.of(aptStartDate.getValue(), LocalTime.parse(endTime.getSelectionModel().getSelectedItem()));
@@ -82,7 +86,9 @@ public class ModifyAppointment implements Initializable {
             e.getStackTrace();
         }
     }
-
+    /** Cancels and returns to MainMenu and confirms users action with a dialog box
+     * @param actionEvent button click of cancel button
+     * @throws IOException thrown while accessing information using streams, files and directories*/
     public void cancelUpdateHandler(ActionEvent actionEvent) throws IOException {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Confirm Cancel");
