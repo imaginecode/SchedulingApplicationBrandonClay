@@ -341,9 +341,7 @@ public class AddAppointment implements Initializable{
     }
 
 
-//    public void dataHandoff(Customer selectedCustomer){
-//        Customer_ID.setText(String.valueOf(selectedCustomer.getCustomerID()));
-//    }
+
 
     /** Displays messages for add appointment errors such as empty fields
      * @param alertnum is for selecting which specific alert case is needed */

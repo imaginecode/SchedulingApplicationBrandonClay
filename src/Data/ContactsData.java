@@ -49,7 +49,7 @@ public class ContactsData {
         return contactResultSet;
 
     }
-  /** Getting contact by ID */
+  /** Getting contactID by name */
     public static Contact getContactByID(String nameOfContact) throws SQLException {
         String query = "SELECT * FROM contacts WHERE Contact_Name =?";
         DBQuery.setPreparedStatement(JDBC.getConnection(), query);
@@ -67,6 +67,37 @@ public class ContactsData {
 
 //                //Creating new contact object
                 Contact newContact = new Contact(contactID,contactName,contactEmail);
+                return newContact;
+
+            }
+        }
+
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return null;
+    }
+
+    /** Getting contactID by name */
+    public static Contact getContactNameByID(int CID) throws SQLException {
+        String query = "SELECT * FROM contacts WHERE Contact_ID =?";
+        DBQuery.setPreparedStatement(JDBC.getConnection(), query);
+        PreparedStatement ps = DBQuery.getPreparedStatement();
+        ps.setString(1, String.valueOf(CID));
+
+        try {
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+            while (rs.next()) {
+                int contactID = rs.getInt("Contact_ID");
+                String contactName = rs.getString("Contact_Name");
+                String contactEmail = rs.getString("Email");
+
+
+//                //Creating new contact object
+                Contact newContact = new Contact(contactID,contactName,contactEmail);
+                System.out.println(newContact.getContactName());
                 return newContact;
 
             }
