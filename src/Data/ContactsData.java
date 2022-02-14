@@ -79,7 +79,8 @@ public class ContactsData {
         return null;
     }
 
-    /** Getting contactID by name */
+    /** Getting contactID by name
+     * @param CID Customer ID  */
     public static Contact getContactNameByID(int CID) throws SQLException {
         String query = "SELECT * FROM contacts WHERE Contact_ID =?";
         DBQuery.setPreparedStatement(JDBC.getConnection(), query);

@@ -26,7 +26,6 @@ public class AddressData {
         DBQuery.setPreparedStatement(JDBC.getConnection(), query);
         PreparedStatement ps = DBQuery.getPreparedStatement();
 
-
         try {
             ps.execute();
             ResultSet rs = ps.getResultSet();
@@ -117,7 +116,33 @@ public class AddressData {
         return null;
     }
 
+/** finding the first level ID by passing in the selected item string. ie Oklahoma
+ * @param selectedItem selected first lvl division name */
+    public static int getFirstLvlID(String selectedItem) throws SQLException {
 
+        //Selected Item
+        System.out.println(selectedItem);
+        String query = "SELECT * FROM first_level_divisions WHERE Division =?";
+        DBQuery.setPreparedStatement(JDBC.getConnection(), query);
+        PreparedStatement ps = DBQuery.getPreparedStatement();
+        ps.setString(1, selectedItem);
 
+        try {
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+//            //Going through result set
+            while (rs.next()) {
+                return rs.getInt("Division_ID");
 
+            }
+        }
+
+        catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Didn't get first level ID");
+            return -1;
+        }
+        return -1;
     }
+
+}

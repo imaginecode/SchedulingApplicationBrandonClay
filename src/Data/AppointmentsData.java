@@ -3,19 +3,14 @@ package Data;
  * This class contains MYSQL queries for appointments
  /** @author Brandon Clay */
 
-import Controller.MainMenu;
 import Model.Appointment;
 import Utilities.JDBC;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.chart.ScatterChart;
 
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZonedDateTime;
 
 /** @author Brandon Clay */
 
@@ -163,20 +158,20 @@ public class AppointmentsData {
         return aptResultSet;
     }
     /** Creating new appointment.
-     * @param userID userID ID of user
-     * @param contactID ID of contact
-     * @param customerId ID of customer
+     * @param title Title of appointment
      * @param description written description of appointment
+     * @param location where the appointment is going to be
+     * @param type type of appointment
      * @param start beginning of appointment and start date of appointment
      * @param end ending of appointment in a timestamp
-     * @param location where the appointment is going to be
-     * @param title Title of appointment
-     * @param type type of appointment
-     * @return boolean true if it properly executes query and false if query doesn't get executed
+     * @param customerId ID of customer
+     * @param userID userID ID of user
+     * @param contactID ID of contact
      * @throws SQLException and prints stack trace
      * */
-    public static boolean newAppointment (String title, String description, String location, String type,
-                                          LocalDateTime start, LocalDateTime end, Integer customerId, Integer userID, Integer contactID) throws SQLException {
+    //This method was a bool I changed it to void cause I ended up not returning confirmation
+    public static void newAppointment (String title, String description, String location, String type,
+                                       LocalDateTime start, LocalDateTime end, Integer customerId, Integer userID, Integer contactID) throws SQLException {
 
 
         String query = "INSERT INTO appointments(Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID)" +
@@ -201,10 +196,8 @@ public class AppointmentsData {
             } else {
                 System.out.println("No rows affected by INSERT");
             }
-            return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return false;
         }
 
     }

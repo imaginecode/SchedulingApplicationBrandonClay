@@ -35,7 +35,48 @@ public class AddCustomer implements Initializable {
     public ComboBox countryCombo;
     public ComboBox firstLevel;
     public TextField streetAddress;
-    public TextField zip;
+
+    /** saves and returns to MainMenu and confirms users action with a dialog box
+     * @param actionEvent button click of save button
+     * @throws IOException while accessing information using streams, files and directories*/
+    public void saveAddHandler(ActionEvent actionEvent) throws IOException, SQLException {
+
+        if(customerChecks()){
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Confirm Save");
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if(result.isPresent() && (result.get() == ButtonType.OK)) {
+                // Getting first level division ID to pass into insert customer query
+                int divID = AddressData.getFirstLvlID((String) firstLevel.getSelectionModel().getSelectedItem());
+
+                CustomersData.newCustomer(Name.getText(),streetAddress.getText(),Postal.getText(),Phone.getText(),divID);
+
+                Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+                Parent scene = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
+                stage.setTitle("Home");
+                stage.setScene(new Scene(scene));
+                stage.show();
+            }
+
+        }
+    }
+
+    /** /**Checks to make sure customer is valid fields are not empty
+     * @return boolean of t/f for if the appointment is valid if (f) then alerts are displayed**/
+    public boolean customerChecks(){
+        if(Phone.getText().isEmpty() || Postal.getText().isEmpty() || Name.getText().isEmpty()
+                || streetAddress.getText().isEmpty())
+        {
+            addErrors(1);
+            return false;
+        }
+
+        if(countryCombo.getSelectionModel().isEmpty() || firstLevel.getSelectionModel().isEmpty()) {
+            addErrors(1);
+            return false;
+        }
+        return true;
+    }
 
 
 /** Cancels and returns to MainMenu and confirms users action with a dialog box
@@ -49,11 +90,8 @@ public class AddCustomer implements Initializable {
         stage.show();
     }
 
-/** saves and returns to MainMenu and confirms users action with a dialog box
- * @param actionEvent button click of save button
- * @throws IOException while accessing information using streams, files and directories*/
-    public void saveAddHandler(ActionEvent actionEvent) {
-    }
+
+
 /** Initializes country combo box with list of countries from a query */
     public void countryComboInit(){
         ObservableList<String> CountryList = FXCollections.observableArrayList();
@@ -129,6 +167,8 @@ public class AddCustomer implements Initializable {
 
         }
     }
+
+
 
 /** Calls methods that set default data in combo boxes for creating new appointments
  * @param url resolve relative paths for the root object

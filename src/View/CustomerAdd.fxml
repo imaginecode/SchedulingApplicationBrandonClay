@@ -27,10 +27,10 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="14.0" layoutY="146.0" text="Postal_Code" />
+            <Label layoutX="267.0" layoutY="347.0" text="Postal_Code" />
             <Label layoutX="14.0" layoutY="184.0" text="Phone" />
             <TextField fx:id="Phone" layoutX="97.0" layoutY="179.0" />
-            <TextField fx:id="Postal" layoutX="97.0" layoutY="141.0" />
+            <TextField fx:id="Postal" layoutX="348.0" layoutY="343.0" />
             <TextField fx:id="Name" layoutX="97.0" layoutY="104.0" />
             <TextField fx:id="Customer_ID" editable="false" layoutX="97.0" layoutY="64.0" opacity="0.55" />
             <Button fx:id="saveAdd" layoutX="381.0" layoutY="581.0" mnemonicParsing="false" onAction="#saveAddHandler" text="Save" />
@@ -41,8 +41,6 @@
             <Label layoutX="244.0" layoutY="264.0" text="First Level Division" />
             <Label layoutX="8.0" layoutY="347.0" text="Street Address" />
             <TextField fx:id="streetAddress" layoutX="98.0" layoutY="343.0" />
-            <Label layoutX="264.0" layoutY="347.0" text="Zip Code" />
-            <TextField fx:id="zip" layoutX="339.0" layoutY="343.0" />
          </children>
       </AnchorPane>
    </children>
