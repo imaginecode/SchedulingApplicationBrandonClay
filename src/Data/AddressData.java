@@ -117,7 +117,8 @@ public class AddressData {
     }
 
 /** finding the first level ID by passing in the selected item string. ie Oklahoma
- * @param selectedItem selected first lvl division name */
+ * @param selectedItem selected first lvl division name
+ * @return  the division ID of selectedItem query*/
     public static int getFirstLvlID(String selectedItem) throws SQLException {
 
         //Selected Item

@@ -12,9 +12,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-
+/**
+ * This class contains MYSQL queries for getting customer data and inserting updating and deleting that data
+ /** @author Brandon Clay */
 public class CustomersData {
-
+/** Gets all customers
+ * @return customer objects in a Observable list*/
     public static ObservableList<Customer> getAllCustomers() throws SQLException {
         ObservableList<Customer> customerResultSet = FXCollections.observableArrayList();
         String query = "SELECT * FROM customers";
@@ -47,7 +50,12 @@ public class CustomersData {
 
     }
 
-
+/** Method performs an insert statement to add a new customer to database
+ * @param name name of customer
+ * @param address address of customer
+ * @param divID division ID of customer
+ * @param phone phone number of customer
+ * @param zip Postal code for customer*/
     public static void newCustomer(String name,String address,String zip,String phone,int divID) throws SQLException {
         String query = "INSERT INTO customers(Customer_Name, Address, Postal_Code, Phone, Division_ID)" +
                 "       VALUES (?,?,?,?,?)";
