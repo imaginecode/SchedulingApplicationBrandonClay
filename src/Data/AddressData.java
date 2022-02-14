@@ -51,6 +51,9 @@ public class AddressData {
 
     }
 
+    /** Querying first level division data that have a country ID of selected country
+     * @param selectedCountryID countryId that to filter first lvl divisions
+     * @throws SQLException stack trace printed out in catch block*/
     public static ObservableList<FirstLvlDivisions> getFirstLVLByID(int selectedCountryID) throws SQLException {
         ObservableList<FirstLvlDivisions> firstLevelResultSet = FXCollections.observableArrayList();
         String query = "SELECT * FROM first_level_divisions WHERE Country_ID =?";
