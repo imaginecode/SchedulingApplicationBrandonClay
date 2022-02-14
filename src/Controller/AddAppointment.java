@@ -54,7 +54,7 @@ public class AddAppointment implements Initializable{
 
 
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Confirm Cancel");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Confirm Cancel Action");
         Optional<ButtonType> result = alert.showAndWait();
         if(result.isPresent() && (result.get() == ButtonType.OK)) {
 
@@ -64,12 +64,6 @@ public class AddAppointment implements Initializable{
             stage.setScene(new Scene(scene));
             stage.show();
         }
-
-        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-        Parent scene = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
-        stage.setTitle("Home Screen");
-        stage.setScene(new Scene(scene));
-        stage.show();
     }
 
     /** saves and returns to MainMenu and confirms users action with a dialog box

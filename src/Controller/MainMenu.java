@@ -104,12 +104,33 @@ public class MainMenu  implements Initializable {
 
     /**Navigates to edit customer menu and passed data of selected customer
      * @param actionEvent button click */
-    public void editCustomerHandler(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-        Parent scene = FXMLLoader.load(getClass().getResource("/View/CustomerUpdate.fxml"));
-        stage.setTitle("Update Customer");
-        stage.setScene(new Scene(scene));
-        stage.show();
+    public void editCustomerHandler(ActionEvent actionEvent) throws IOException, SQLException {
+
+        if(customersTable.getSelectionModel().getSelectedItem() != null){
+
+            Customer selectedCustomer;
+            selectedCustomer = (Customer) customersTable.getSelectionModel().getSelectedItem();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/View/CustomerUpdate.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            ModifyCustomer controller = loader.getController();
+            controller.dataHandoff(selectedCustomer);
+            Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+
+        }
+
+        else  {
+            errorMsgs(2);
+        }
+//
+//        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+//        Parent scene = FXMLLoader.load(getClass().getResource("/View/CustomerUpdate.fxml"));
+//        stage.setTitle("Update Customer");
+//        stage.setScene(new Scene(scene));
+//        stage.show();
     }
     /** Deleted selected customer
      * @param actionEvent button click */
@@ -121,26 +142,26 @@ public class MainMenu  implements Initializable {
     public void editAppointmentHandler(ActionEvent actionEvent) throws IOException {
 
         if(appointmentsTable.getSelectionModel().getSelectedItem() != null){
+
+            Appointment selectedAppointment;
+            selectedAppointment = (Appointment) appointmentsTable.getSelectionModel().getSelectedItem();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/View/AppointmentUpdate.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            ModifyAppointment controller = loader.getController();
+            controller.dataHandoff(selectedAppointment);
+            Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+
+        }
+
+        else  {
             errorMsgs(2);
         }
 
-                Appointment selectedAppointment;
-        selectedAppointment = (Appointment) appointmentsTable.getSelectionModel().getSelectedItem();
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/View/AppointmentUpdate.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        ModifyAppointment controller = loader.getController();
-        controller.dataHandoff(selectedAppointment);
-        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
 
-//        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-//        Parent scene = FXMLLoader.load(getClass().getResource("/View/AppointmentUpdate.fxml"));
-//        stage.setTitle("Edit Appointment");
-//        stage.setScene(new Scene(scene));
-//        stage.show();
     }
     /**Deletes selected appointment and displays confirmation before delete
      * @param actionEvent button */

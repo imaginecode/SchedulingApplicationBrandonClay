@@ -121,8 +121,6 @@ public class AddressData {
  * @return  the division ID of selectedItem query*/
     public static int getFirstLvlID(String selectedItem) throws SQLException {
 
-        //Selected Item
-        System.out.println(selectedItem);
         String query = "SELECT * FROM first_level_divisions WHERE Division =?";
         DBQuery.setPreparedStatement(JDBC.getConnection(), query);
         PreparedStatement ps = DBQuery.getPreparedStatement();
