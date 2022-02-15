@@ -144,4 +144,66 @@ public class AddressData {
         return -1;
     }
 
+    /** Finding division name and country ID by querying divisionID */
+    public static FirstLvlDivisions getDivisionName(int selectedItem) throws SQLException {
+
+        String query = "SELECT * FROM first_level_divisions WHERE Division_ID =?";
+        DBQuery.setPreparedStatement(JDBC.getConnection(), query);
+        PreparedStatement ps = DBQuery.getPreparedStatement();
+        ps.setInt(1, selectedItem);
+
+        try {
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+//            //Going through result set
+            while (rs.next()) {
+
+               String divisionName = rs.getString("Division");
+               int countryID = rs.getInt("Country_ID");
+
+//                //Creating new country object
+                return new FirstLvlDivisions(selectedItem,divisionName,countryID);
+
+            }
+        }
+
+        catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Could exe query for getting Division ID name and Country ID");
+            return null;
+        }
+        return null;
+    }
+
+    /** Getting country name by ID
+     * @return name of country that has the passed in name*/
+    public static Country getCountryName(int countryID) throws SQLException {
+        String query = "SELECT * FROM countries WHERE Country_ID =?";
+        DBQuery.setPreparedStatement(JDBC.getConnection(), query);
+        PreparedStatement ps = DBQuery.getPreparedStatement();
+        ps.setInt(1, countryID);
+
+        try {
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+            //Going through result set
+            while (rs.next()) {
+                String countryName = rs.getString("Country");
+
+
+
+//                //Creating new country object
+                return new Country(countryID,countryName);
+
+            }
+        }
+
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return null;
+    }
+
+
 }

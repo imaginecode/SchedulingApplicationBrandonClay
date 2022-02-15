@@ -2,6 +2,7 @@ package Controller;
 
 import Data.AddressData;
 import Data.CustomersData;
+import Model.Country;
 import Model.Customer;
 import Model.FirstLvlDivisions;
 import javafx.collections.FXCollections;
@@ -26,13 +27,13 @@ import java.util.ResourceBundle;
  /** @author Brandon Clay */
 public class ModifyCustomer implements Initializable {
     public TextField streetAddress;
-    public ComboBox firstLevelUpdate;
     public ComboBox countryCombo;
     public Button saveAdd;
     public TextField Customer_ID;
     public TextField Name;
     public TextField Postal;
     public TextField Phone;
+    public ComboBox firstLevel;
 
     /**  Takes data from selected customer and populates fields for customers to edit*/
     public void dataHandoff(Customer selectedCustomer) throws SQLException {
@@ -42,15 +43,20 @@ public class ModifyCustomer implements Initializable {
         Postal.setText(selectedCustomer.getPostalCode());
         Phone.setText(selectedCustomer.getPhone());
         // Does a query to find the first level division by division ID and passes that as the arg for set val
-//        int divName = AddressData.getFirstLVLByID(selectedCustomer.getDivisionID());
-//        firstLevelUpdate.setValue();
+        int divID = selectedCustomer.getDivisionID();
+        //divisionName returns object that also has countryID
+        FirstLvlDivisions divisionName = AddressData.getDivisionName(divID);
+        firstLevel.setValue(divisionName.getDivision());
+        Country countryName = AddressData.getCountryName(divisionName.getCountryID());
+        countryCombo.setValue(countryName.getCountry());
+
 
     }
 
     /** saves and returns to MainMenu and confirms users action with a dialog box
      * @param actionEvent button click of save button
      * @throws IOException while accessing information using streams, files and directories*/
-    public void saveAddHandler(ActionEvent actionEvent) {
+    public void saveAddHandler(ActionEvent actionEvent) throws SQLException, IOException {
         if(customerChecks()){
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Confirm Update");
             Optional<ButtonType> result = alert.showAndWait();
@@ -164,9 +170,27 @@ public class ModifyCustomer implements Initializable {
 
     }
 
+    /** Initializes country combo box with list of countries from a query */
+    public void countryComboInit(){
+        ObservableList<String> CountryList = FXCollections.observableArrayList();
+        try {
+
+            if (AddressData.getAllCountries() != null){
+                for (Country country: AddressData.getAllCountries()) {
+                    CountryList.add(country.getCountry());
+                }
+            }
+            countryCombo.setItems(CountryList);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        countryComboUpdateInit();
+        countryComboInit();
     }
 
 

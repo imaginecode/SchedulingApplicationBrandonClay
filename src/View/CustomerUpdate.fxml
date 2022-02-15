@@ -36,7 +36,7 @@
             <Button fx:id="saveAdd" layoutX="430.0" layoutY="396.0" mnemonicParsing="false" onAction="#saveAddHandler" text="Save" />
             <Button fx:id="cancelUpdate" layoutX="494.0" layoutY="396.0" mnemonicParsing="false" onAction="#cancelUpdateHandler" text="Cancel" />
             <ComboBox fx:id="countryCombo" layoutX="73.0" layoutY="296.0" onAction="#countryComboHandler" prefWidth="150.0" />
-            <ComboBox fx:id="firstLevelUpdate" layoutX="244.0" layoutY="296.0" prefWidth="150.0" />
+            <ComboBox fx:id="firstLevel" layoutX="244.0" layoutY="296.0" prefWidth="150.0" />
             <Label layoutX="75.0" layoutY="264.0" text="Country" />
             <Label layoutX="244.0" layoutY="264.0" text="First Level Division" />
             <Label layoutX="8.0" layoutY="347.0" text="Street Address" />
