@@ -1,36 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CustomerAppointmentReport">
    <children>
-      <Button fx:id="exitReport" layoutX="506.0" layoutY="336.0" mnemonicParsing="false" onAction="#exitReportHandler" text="Exit" />
-      <TableView fx:id="monthTable" layoutX="100.0" layoutY="209.0" prefHeight="108.0" prefWidth="602.0">
+      <Button fx:id="exitReport" layoutX="571.0" layoutY="353.0" mnemonicParsing="false" onAction="#exitReportHandler" text="Back to Report Menu" />
+      <Label layoutX="66.0" layoutY="340.0" text="Count:">
+         <font>
+            <Font size="13.0" />
+         </font></Label>
+      <Label fx:id="countVal" layoutX="114.0" layoutY="334.0" prefHeight="31.0" prefWidth="65.0" />
+      <TableView fx:id="appointmentsTable" layoutX="31.0" layoutY="77.0" prefHeight="218.0" prefWidth="668.0">
          <columns>
-            <TableColumn fx:id="janCol" prefWidth="48.0" text="Jan" />
-            <TableColumn fx:id="febCol" prefWidth="38.0" text="Feb" />
-            <TableColumn fx:id="marCol" prefWidth="63.0" text="Mar" />
-            <TableColumn fx:id="aprCol" prefWidth="47.0" text="Apr" />
-            <TableColumn fx:id="mayCol" prefWidth="56.0" text="May" />
-            <TableColumn fx:id="juneCol" prefWidth="47.0" text="Jun" />
-            <TableColumn fx:id="julCol" prefWidth="50.0" text="Jul" />
-            <TableColumn fx:id="augCol" prefWidth="52.0" text="Aug" />
-            <TableColumn fx:id="sepCol" prefWidth="54.0" text="Sept" />
-            <TableColumn fx:id="octCol" prefWidth="40.0" text="Oct" />
-            <TableColumn fx:id="novCol" prefWidth="50.0" text="Nov" />
-            <TableColumn fx:id="decCol" prefWidth="52.0" text="Dec" />
+            <TableColumn fx:id="appointmentID" prefWidth="113.0" text="Appointment_ID" />
+            <TableColumn minWidth="0.0" prefWidth="0.0" text="Title" />
+            <TableColumn fx:id="description" prefWidth="70.0" text="Description" />
+            <TableColumn fx:id="place" prefWidth="61.0" text="Location" />
+            <TableColumn fx:id="contact" prefWidth="57.0" text="Contact" />
+            <TableColumn fx:id="type" prefWidth="55.0" text="Type" />
+            <TableColumn fx:id="start" prefWidth="52.0" text="Start Date &amp; Time" />
+            <TableColumn fx:id="end" prefWidth="41.0" text="End Date &amp; Time" />
+            <TableColumn fx:id="customerIDAptTable" prefWidth="84.0" text="Customer_ID" />
+            <TableColumn fx:id="userID" prefWidth="53.0" text="User_ID" />
          </columns>
       </TableView>
-      <Label layoutX="36.0" layoutY="14.0" text="Report by appointment type and date" />
-      <TableView fx:id="appointmentTypes" layoutX="288.0" layoutY="90.0" prefHeight="83.0" prefWidth="150.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="Type 1" />
-          <TableColumn prefWidth="75.0" text="Type 2" />
-        </columns>
-      </TableView>
+      <ComboBox fx:id="aptTypes" layoutX="290.0" layoutY="337.0" onAction="#aptTypesHandler" prefWidth="150.0" />
+      <Text layoutX="33.0" layoutY="383.0" opacity="0.41" strokeType="OUTSIDE" strokeWidth="0.0" text="Legacy appointments with old types must be updated to approved appointment types to display." />
+      <Text layoutX="316.0" layoutY="319.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pick Type" />
    </children>
 </AnchorPane>

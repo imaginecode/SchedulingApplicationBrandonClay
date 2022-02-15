@@ -8,21 +8,24 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ReportsByZip">
    <children>
-      <TableView fx:id="customersByZipTable" layoutX="14.0" layoutY="135.0" onSort="#customersByZipTableHandler" prefHeight="130.0" prefWidth="288.0">
-         <columns>
-            <TableColumn fx:id="Name" prefWidth="174.0" text="Name" />
-            <TableColumn fx:id="Customer_IDPostalCode" prefWidth="110.0" text="Customer_ID" />
-         </columns>
-      </TableView>
       <Label layoutX="14.0" layoutY="14.0" text="Customers by Zip">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
       <Button fx:id="exitReport" layoutX="544.0" layoutY="361.0" mnemonicParsing="false" onAction="#exitReportHandler" text="Exit" />
-      <TextField fx:id="searchPostalCode" layoutX="14.0" layoutY="87.0" onAction="#searchPostalCodeHandler" promptText="Enter Zip" />
+      <TextField fx:id="searchPostalCode" layoutX="153.0" layoutY="349.0" promptText="Enter Zip" />
+      <TableView fx:id="customersTable" layoutX="14.0" layoutY="41.0" prefHeight="283.0" prefWidth="569.0">
+         <columns>
+            <TableColumn fx:id="customerID" prefWidth="107.99996662139893" text="Customer_ID" />
+            <TableColumn fx:id="name" prefWidth="59.999969482421875" text="Name" />
+            <TableColumn fx:id="zip" prefWidth="94.40000915527344" text="Postal_Code" />
+            <TableColumn fx:id="phone" prefWidth="109.5999755859375" text="Phone" />
+            <TableColumn fx:id="address" prefWidth="129.60003662109375" text="Address" />
+         </columns>
+      </TableView>
+      <Button fx:id="search" layoutX="326.0" layoutY="349.0" mnemonicParsing="false" onAction="#searchHandler" text="Search" />
    </children>
 </AnchorPane>

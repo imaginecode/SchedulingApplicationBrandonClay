@@ -22,24 +22,40 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-/** This class shows 3 reports that can be generated and displays areas where users can input information to generate these reports */
+/** This class shows 3 reports that can be generated and displays areas where users can input information to generate these reports
+ * @author Brandon Clay */
 public class Reports implements Initializable {
-    public Button genCustomerSchedule;
-    public TextField searchPostalCode;
     public Button exitReports;
-    public ComboBox pickCustomerSchedule;
     public Button zipReports;
     public Button customerAppointmentsReport;
     public ComboBox pickContact;
+    public Button contactScheduleBtn;
 
-    /** Generates customer schedule based on selected customer
-     * @param actionEvent button click of Generate*/
-    public void genCustomerScheduleHandler(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-        Parent scene = FXMLLoader.load(getClass().getResource("/View/customerScheduleReport.fxml"));
-        stage.setTitle("Customer Schedule Report");
-        stage.setScene(new Scene(scene));
-        stage.show();
+    /** Passes data after the generate button is passed for selected contact
+     * @param actionEvent button click of generate */
+    public void contactScheduleHandler(ActionEvent actionEvent) throws SQLException, IOException {
+
+        try{String selectedContact;
+            selectedContact = pickContact.getSelectionModel().getSelectedItem().toString();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/View/contactSchedule.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            ContactScheduleReport controller = loader.getController();
+            controller.dataHandoff(selectedContact);
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();}
+
+        catch (NullPointerException e){
+            e.getMessage();
+            Errors(1);
+        }
+
+
+
+
+
     }
 
     /**Allows user to enter zip code for a report that shows appointments by zip code of customer
@@ -66,69 +82,17 @@ public class Reports implements Initializable {
         stage.show();
     }
 
-    /**Goes to customer appointment handler controller and view and passes data from selected customer object
+    /**Goes to contact appointment handler controller and view and passes data from selected contact object
      * @param actionEvent button click of Generate */
     public void customerAppointmentsReportHandler(ActionEvent actionEvent) throws IOException, SQLException {
-        if(pickCustomerSchedule.getSelectionModel().getSelectedItem() != null){
-
-            Contact selectedContact;
-            selectedContact = (Contact) pickCustomerSchedule.getSelectionModel().getSelectedItem();
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/View/customerScheduleReport.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            CustomerScheduleReport controller = loader.getController();
-            controller.dataHandoff(selectedContact);
-            Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
-
-        }
-
-        else  {
-            errorMsgs(1);
-        }
-
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         Parent scene = FXMLLoader.load(getClass().getResource("/View/appointmentReport.fxml"));
-        stage.setTitle("Appointments Report");
+        stage.setTitle("Appointment Report");
         stage.setScene(new Scene(scene));
         stage.show();
-    }
-
-    /**Populates all customer names from query in combo box */
-    public void customerNameCombo() {
-        ObservableList<String> customerNameList = FXCollections.observableArrayList();
-
-        try {
-            if (CustomersData.getAllCustomers() != null) {
-                for (Customer customer : CustomersData.getAllCustomers()) {
-                    customerNameList.add(customer.getCustomerName());
-                }
-            }
-            pickCustomerSchedule.setItems(customerNameList);
-        } catch (SQLException e) {
-            System.out.println(e.getStackTrace());
-        }
-    }
-
-    /** Displays messages for empty login fields and invalid usernames and passwords
-     * @param alertnum is for selecting which specific alert case is needed */
-    public void errorMsgs(int alertnum) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-
-        switch (alertnum) {
-
-            case 1:
-                alert.setTitle("Please Select a customer");
-                alert.setHeaderText("Please Select a customer");
-                alert.setContentText("Please Select a customer you wish to make an appointment for.");
-                alert.showAndWait();
-                break;
 
 
 
-        }
     }
 
     /** initializes contact combo  */
@@ -146,6 +110,28 @@ public class Reports implements Initializable {
 
         catch (SQLException e){
             System.out.println(e.getStackTrace());
+        }
+    }
+
+    /** Displays messages for add appointment errors such as empty fields
+     * @param alertnum is for selecting which specific alert case is needed */
+    public void Errors(int alertnum) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+
+        switch (alertnum) {
+            case 1:
+                alert.setTitle("A contact must be selected");
+                alert.setHeaderText("A contact must be selected");
+                alert.setContentText("A contact must be selected");
+                alert.showAndWait();
+                break;
+            case 2:
+                alert.setTitle("A country must be selected");
+                alert.setHeaderText("A country must be selected");
+                alert.setContentText("A country must be selected before getting first level division");
+                break;
+
+
         }
     }
 

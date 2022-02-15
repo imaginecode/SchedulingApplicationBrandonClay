@@ -25,13 +25,12 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 /** This class generates a schedule for the selected contact */
-public class CustomerScheduleReport implements Initializable {
+public class ContactScheduleReport {
     public Button exitReport;
     public TableColumn end;
     public TableColumn start;
     public TableColumn title;
     public TableColumn appointmentID;
-    public ComboBox contactComboPick;
     public TableView appointmentsTable;
     public TableColumn userID;
     public TableColumn description;
@@ -52,11 +51,16 @@ public class CustomerScheduleReport implements Initializable {
         stage.show();
     }
 
-    /** Hands off the selected Contact so that the tableview can be populated */
-    public void dataHandoff(Contact selectedContact) throws SQLException {
-        int CID = selectedContact.getContactID();
-        System.out.println(CID);
-        appointments = AppointmentsData.appointmentsByContactID(selectedContact.getContactID());
+    /** Hands off the selected Contact so that the tableview can be populated
+     * @param selectedContact*/
+    public void dataHandoff(String selectedContact) throws SQLException {
+
+        int CID = ContactsData.getContactByID(selectedContact).getContactID();
+        appointments = AppointmentsData.appointmentsByContactID(CID);
+
+
+
+
         //Initializing Appointment table values
         appointmentsTable.setItems(appointments);
 
@@ -70,15 +74,5 @@ public class CustomerScheduleReport implements Initializable {
         customerIDAptTable.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         userID.setCellValueFactory(new PropertyValueFactory<>("userID"));
     }
-
-
-    /** Calls methods that set default data in combo boxes for creating new appointments
-     * @param url resolve relative paths for the root object
-     * @param resourceBundle resources used to localize the root object */
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-    }
-
 
 }

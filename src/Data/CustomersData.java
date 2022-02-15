@@ -16,11 +16,11 @@ public class CustomersData {
         ObservableList<Customer> customerResultSet = FXCollections.observableArrayList();
         String query = "SELECT * FROM customers";
         DBQuery.setPreparedStatement(JDBC.getConnection(), query);
-        PreparedStatement preparedStatement = DBQuery.getPreparedStatement();
+        PreparedStatement ps = DBQuery.getPreparedStatement();
 
         try {
-            preparedStatement.execute();
-            ResultSet rs = preparedStatement.getResultSet();
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
             //Going through result set
             while (rs.next()) {
                 int customerID = rs.getInt("Customer_ID");
@@ -101,7 +101,7 @@ public class CustomersData {
             System.out.println("Error: Update Customer Not performed");
         }
     }
-
+/**Deleted selected customer from mysql database  */
     public static void deleteCustomer(int customerID) throws SQLException {
         String query = "DELETE from customers WHERE Customer_ID=?";
         DBQuery.setPreparedStatement(JDBC.getConnection(), query);
@@ -120,6 +120,40 @@ public class CustomersData {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    /** get customers by postal code query
+     * @return observable list of customers*/
+    public static ObservableList<Customer> getCustomerbyZip(String postal) throws SQLException {
+        ObservableList<Customer> customerResultSet = FXCollections.observableArrayList();
+        String query = "SELECT * FROM customers WHERE Postal_Code=?";
+        DBQuery.setPreparedStatement(JDBC.getConnection(), query);
+        PreparedStatement ps = DBQuery.getPreparedStatement();
+        ps.setString(1, postal);
+
+        try {
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+            //Going through result set
+            while (rs.next()) {
+                int customerID = rs.getInt("Customer_ID");
+                String customerName = rs.getString("Customer_Name");
+                String address = rs.getString("Address");
+                String zip = rs.getString("Postal_Code");
+                String phone = rs.getString("Phone");
+                int divID = rs.getInt("Division_ID");
+
+//                System.out.println(customerID + customerName + address + zip + phone + divID);
+
+
+//                //Creating new customer object
+                Customer newCustomer = new Customer(customerID, customerName, address, zip, phone, divID);
+                customerResultSet.add(newCustomer);
+            }
+        } catch (SQLException e) {
+            return null;
+        }
+        return customerResultSet;
     }
 }
 

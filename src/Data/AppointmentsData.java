@@ -345,4 +345,50 @@ public class AppointmentsData {
         return aptResultSet;
 
     }
+
+    /**Queries appointments by type
+     * @return a result set of appointments of given type */
+    public static ObservableList<Appointment> appointmentsByType(String type) throws SQLException {
+
+        ObservableList<Appointment> aptResultSet = FXCollections.observableArrayList();
+        String query = "SELECT * FROM appointments WHERE Type=?";
+        DBQuery.setPreparedStatement(JDBC.getConnection(), query);
+        PreparedStatement ps = DBQuery.getPreparedStatement();
+        ps.setString(1,type);
+
+        try {
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+            //Going through result set
+            while (rs.next()) {
+                int appointmentID = rs.getInt("Appointment_ID");
+                String appointmentTitle = rs.getString("Title");
+                String appointmentDescription = rs.getString("Description");
+                String appointmentLocation = rs.getString("Location");
+                String appointmentType = rs.getString("Type");
+
+                // times and dates converted to local time and date of user
+                LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
+                LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
+
+                int customerID = rs.getInt("Customer_ID");
+                int userID = rs.getInt("User_ID");
+                int contactID = rs.getInt("Contact_ID");
+
+//                //Creating new appointment object
+                Appointment newApt = new Appointment(appointmentID, appointmentTitle, appointmentDescription, appointmentLocation,
+                        appointmentType, start, end , customerID, userID, contactID);
+                aptResultSet.add(newApt);
+
+            }
+        }
+        catch(SQLException e){
+            System.out.println(e.getStackTrace());
+            System.out.println("Error: could not exe query of appointments by type");
+            return null;
+        }
+        return aptResultSet;
+
+    }
+
 }
