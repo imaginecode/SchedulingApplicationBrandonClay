@@ -80,6 +80,33 @@ public class CustomersData {
             System.out.println(e.getMessage());
         }
     }
+
+    /**Updates selected customer with information entered by user in edit customer UI screen */
+    public static void editCustomer(int customerID,String name, String address, String zip, String phone, int divID) throws SQLException {
+        String query = "UPDATE customers SET Customer_Name=?, Address=?, Postal_Code=?, Phone=?, Division_ID=? WHERE Customer_ID=?";
+        DBQuery.setPreparedStatement(JDBC.getConnection(), query);
+        PreparedStatement ps = DBQuery.getPreparedStatement();
+
+        ps.setString(1, name);
+        ps.setString(2, address);
+        ps.setString(3, zip);
+        ps.setString(4, phone);
+        ps.setInt(5, divID);
+        ps.setInt(6,customerID);
+
+
+        try {
+            ps.execute();
+            if (ps.getUpdateCount() > 0) {
+                System.out.println("Rows(s) affected: " + ps.getUpdateCount());
+            } else {
+                System.out.println("No rows affected by UPDATE");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Error: Update Customer Not performed");
+        }
+    }
 }
 
 

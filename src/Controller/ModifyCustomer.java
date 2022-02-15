@@ -49,6 +49,7 @@ public class ModifyCustomer implements Initializable {
         firstLevel.setValue(divisionName.getDivision());
         Country countryName = AddressData.getCountryName(divisionName.getCountryID());
         countryCombo.setValue(countryName.getCountry());
+        firstLvlInit(divisionName.getCountryID());
 
 
     }
@@ -65,7 +66,7 @@ public class ModifyCustomer implements Initializable {
                 // Getting first level division ID to pass into insert customer query
                 int divID = AddressData.getFirstLvlID((String) firstLevel.getSelectionModel().getSelectedItem());
 
-                CustomersData.newCustomer(Name.getText(),streetAddress.getText(),Postal.getText(),Phone.getText(),divID);
+                CustomersData.editCustomer(Integer.parseInt(Customer_ID.getText()),Name.getText(),streetAddress.getText(),Postal.getText(),Phone.getText(),divID);
 
                 Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
                 Parent scene = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
@@ -107,6 +108,24 @@ public class ModifyCustomer implements Initializable {
             return false;
         }
         return true;
+    }
+
+    /** Initializes first level combo box based off what country is selected. A query of the country name returns the ID
+     * of the country and first lvl divs with that ID are loaded into the second combo box */
+    public void countryComboHandler(ActionEvent actionEvent)  {
+        try{if(!countryCombo.getSelectionModel().isEmpty()) {
+
+            String selectedCountry =  countryCombo.getSelectionModel().getSelectedItem().toString();
+            firstLvlInit(AddressData.getCountryID(selectedCountry).getCountryID());
+            System.out.println("Item Selected move to next step and select FLD");
+
+
+        }}
+        catch (SQLException e){
+            e.getStackTrace();
+        }
+
+
     }
 
 
@@ -152,23 +171,6 @@ public class ModifyCustomer implements Initializable {
         }
     }
 
-    /** Initializes first level combo box based off what country is selected. A query of the country name returns the ID
-     * of the country and first lvl divs with that ID are loaded into the second combo box */
-    public void countryComboHandler(ActionEvent actionEvent)  {
-        try{if(!countryCombo.getSelectionModel().isEmpty()) {
-
-            String selectedCountry =  countryCombo.getSelectionModel().getSelectedItem().toString();
-            firstLvlInit(AddressData.getCountryID(selectedCountry).getCountryID());
-            System.out.println("Item Selected move to next step and select FLD");
-
-
-        }}
-        catch (SQLException e){
-            e.getStackTrace();
-        }
-
-
-    }
 
     /** Initializes country combo box with list of countries from a query */
     public void countryComboInit(){
