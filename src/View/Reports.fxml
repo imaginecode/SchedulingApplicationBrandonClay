@@ -16,8 +16,8 @@
       </Label>
       <Label layoutX="17.0" layoutY="74.0" text="Total number of customer appointments by type and month" />
       <Label layoutX="17.0" layoutY="279.0" text="Customers by Postal Code" />
-      <Label layoutX="17.0" layoutY="182.0" text="Customer Schedule" />
-      <ComboBox fx:id="pickCustomerSchedule" layoutX="127.0" layoutY="178.0" onAction="#pickCustomerScheduleHandler" prefWidth="150.0" promptText="Pick customer" />
+      <Label layoutX="17.0" layoutY="182.0" text="Contact Schedule" />
+      <ComboBox fx:id="pickContact" layoutX="134.0" layoutY="178.0" prefWidth="150.0" promptText="Pick contact" />
       <Button fx:id="customerAppointmentsReport" layoutX="361.0" layoutY="70.0" mnemonicParsing="false" onAction="#customerAppointmentsReportHandler" text="Generate" />
       <Button fx:id="exitReports" layoutX="447.0" layoutY="355.0" mnemonicParsing="false" onAction="#ExitReportsHandler" text="Exit Reports" />
       <TextField fx:id="searchPostalCode" layoutX="166.0" layoutY="275.0" onAction="#searchPostalCodeHandler" promptText="Enter Zip" />

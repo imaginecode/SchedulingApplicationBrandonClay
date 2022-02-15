@@ -125,17 +125,34 @@ public class MainMenu  implements Initializable {
         else  {
             errorMsgs(2);
         }
-//
-//        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-//        Parent scene = FXMLLoader.load(getClass().getResource("/View/CustomerUpdate.fxml"));
-//        stage.setTitle("Update Customer");
-//        stage.setScene(new Scene(scene));
-//        stage.show();
     }
     /** Deleted selected customer
      * @param actionEvent button click */
-    public void deleteCustomerHandler(ActionEvent actionEvent) {
-        errorMsgs(1);
+    public void deleteCustomerHandler(ActionEvent actionEvent) throws SQLException {
+        Customer selectedCustomer = (Customer) customersTable.getSelectionModel().getSelectedItem();
+
+        if (customersTable.getSelectionModel().getSelectedItem() == null)  {
+            errorMsgs(2);
+        }
+        if(customersTable.getSelectionModel().getSelectedItem() != null){
+        //Deleting appointments associated with customer first
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Confirm Delete. This will also delete associated appointments");
+            Optional<ButtonType> result = alert.showAndWait();
+            if(result.isPresent() && (result.get() == ButtonType.OK)){
+                AppointmentsData.deleteAppointmentsByCustomer(selectedCustomer.getCustomerID());
+                appointments = AppointmentsData.getAllAppointments();
+                //Refreshing Appointment table values
+                appointmentsTable.setItems(appointments);
+                CustomersData.deleteCustomer(selectedCustomer.getCustomerID());
+                customers = CustomersData.getAllCustomers();
+                customersTable.setItems(customers);
+
+
+
+            }
+
+
+        }
     }
     /** Navigates to edit appointment menu and passes data of selected appointment for editing
      * @param actionEvent button click */

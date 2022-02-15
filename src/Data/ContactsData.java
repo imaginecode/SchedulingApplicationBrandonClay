@@ -49,7 +49,7 @@ public class ContactsData {
         return contactResultSet;
 
     }
-  /** Getting contactID by name */
+  /** Getting contactID by  contact name */
     public static Contact getContactByID(String nameOfContact) throws SQLException {
         String query = "SELECT * FROM contacts WHERE Contact_Name =?";
         DBQuery.setPreparedStatement(JDBC.getConnection(), query);

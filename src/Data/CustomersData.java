@@ -1,17 +1,11 @@
 package Data;
-
-import Model.Appointment;
-import Model.Country;
 import Model.Customer;
 import Utilities.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 /**
  * This class contains MYSQL queries for getting customer data and inserting updating and deleting that data
  /** @author Brandon Clay */
@@ -105,6 +99,26 @@ public class CustomersData {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Error: Update Customer Not performed");
+        }
+    }
+
+    public static void deleteCustomer(int customerID) throws SQLException {
+        String query = "DELETE from customers WHERE Customer_ID=?";
+        DBQuery.setPreparedStatement(JDBC.getConnection(), query);
+        PreparedStatement ps = DBQuery.getPreparedStatement();
+
+        ps.setInt(1, customerID);
+
+        try {
+            ps.execute();
+            if (ps.getUpdateCount() > 0) {
+                System.out.println("Rows(s) affected: " + ps.getUpdateCount());
+            } else {
+                System.out.println("No rows affected by INSERT");
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 }
