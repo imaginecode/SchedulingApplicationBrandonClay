@@ -1,12 +1,8 @@
 package Data;
-
-import Controller.LoginScreen;
-import Model.Contact;
 import Model.User;
 import Utilities.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -115,7 +111,9 @@ public class UserNamePassQuery {
             return null;
         }
     }
-
+/**Gets the user ID by the name passed in
+ * @param username name of user that's queried for ID
+ * @throws SQLException*/
     public static Integer getUserIDByName(String username) throws SQLException {
         ObservableList<User> allUsers = FXCollections.observableArrayList();
         //Select Statement

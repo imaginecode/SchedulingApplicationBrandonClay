@@ -144,17 +144,15 @@ public class LoginScreen implements Initializable {
         }
     }
 
-/** Method alerts user of appointment within 15 minutes of login */
+/** Method alerts user of appointment within 15 minutes of login and displays alert messages regarding upcoming appointments*/
 public void appointmentAlert() throws SQLException {
-
-
 
     try {
         userID =UserNamePassQuery.getUserIDByName(userNameFld.getText());
 
         Appointment returnedAppoint = AppointmentsData.within15Minutes(userID);
         if(returnedAppoint != null) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Upcoming appointment: " + +returnedAppoint.getAptID() + " " + returnedAppoint.getStart() + "For active User ID: " + userID);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Upcoming appointment: " +"Apt ID: "+returnedAppoint.getAptID() + "Start: " + returnedAppoint.getStart() + "For active User ID: " + userID);
             alert.showAndWait();
         }
         else{
