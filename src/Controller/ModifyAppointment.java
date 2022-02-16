@@ -109,18 +109,19 @@ public class ModifyAppointment implements Initializable {
     private boolean appointmentChecks() {
 
         //Checking to make sure text fields aren't empty
-        if(contactCombo.getSelectionModel().isEmpty()) {
-            addErrors(1);
-            return false;
-        }
-        if(endTime.getSelectionModel().isEmpty()) {
-            addErrors(1);
-            return false;
-        }
-        if(startTime.getSelectionModel().isEmpty()) {
-            addErrors(1);
-            return false;
-        }
+        // commented fields are not able to be empty due to data passed in automatically set to fields.
+//        if(contactCombo.getSelectionModel().isEmpty()) {
+//            addErrors(1);
+//            return false;
+//        }
+//        if(endTime.getSelectionModel().isEmpty()) {
+//            addErrors(1);
+//            return false;
+//        }
+//        if(startTime.getSelectionModel().isEmpty()) {
+//            addErrors(1);
+//            return false;
+//        }
         if(title.getText().isEmpty()) {
             addErrors(1);
             return false;
@@ -133,22 +134,22 @@ public class ModifyAppointment implements Initializable {
             addErrors(1);
             return false;
         }
-        if(customerCombo.getSelectionModel().isEmpty()) {
-            addErrors(1);
-            return false;
-        }
-        if(userIDCombo.getSelectionModel().isEmpty()) {
-            addErrors(1);
-            return false;
-        }
-        if(typeCombo.getSelectionModel().isEmpty()) {
-            addErrors(1);
-            return false;
-        }
-        if(aptLocationCombo.getSelectionModel().isEmpty()) {
-            addErrors(1);
-            return false;
-        }
+//        if(customerCombo.getSelectionModel().isEmpty()) {
+//            addErrors(1);
+//            return false;
+//        }
+//        if(userIDCombo.getSelectionModel().isEmpty()) {
+//            addErrors(1);
+//            return false;
+//        }
+//        if(typeCombo.getSelectionModel().isEmpty()) {
+//            addErrors(1);
+//            return false;
+//        }
+//        if(aptLocationCombo.getSelectionModel().isEmpty()) {
+//            addErrors(1);
+//            return false;
+//        }
 
         //Checking to make sure end time is after start time
         LocalTime start = LocalTime.parse(startTime.getSelectionModel().getSelectedItem());
@@ -156,7 +157,7 @@ public class ModifyAppointment implements Initializable {
         long diffBetweenAptTimes = ChronoUnit.MINUTES.between(end,start);
 //        System.out.println(diffBetweenAptTimes);
         // Appointments are min 30 minutes and appointments can't start at the same time so difference must be less than 0 and !=
-        if(diffBetweenAptTimes >= 30 || diffBetweenAptTimes == 0){
+        if(diffBetweenAptTimes >= 31 || diffBetweenAptTimes == 0){
             addErrors(6);
             return false;
         }
@@ -178,7 +179,7 @@ public class ModifyAppointment implements Initializable {
             for(Appointment appointment : existingAppointments){
                 LocalDate existingDate = appointment.getStart().toLocalDate();
 
-
+                //Checking to see if the date has changed
                 if(aptStartDate.getValue().isEqual(existingDate)){
                     LocalTime existingStart = appointment.getStart().toLocalTime();
                     LocalTime existingEnd = appointment.getEnd().toLocalTime();
@@ -193,22 +194,22 @@ public class ModifyAppointment implements Initializable {
 
                     }
 
-                    else{
+                    else if(!appointment_ID.getText().equals(String.valueOf(appointment.getAptID()))){
 
-                        if(potentialStart.isBefore(existingStart) & potentialEnd.isAfter(existingEnd))
-                        {
-                            addErrors(7);
-                            return false;
-                        }
-                        if(potentialStart.isBefore(existingEnd) & potentialEnd.isAfter(existingEnd)) {
-                            addErrors(7);
-                            return false;
-                        }
-                        if((potentialStart.isAfter(existingStart) & (potentialEnd.isBefore(existingEnd)))){
-                            addErrors(7);
-                            return false;
-                        }
-                        addErrors(7);
+
+                            if(potentialStart.isBefore(existingStart) & potentialEnd.isAfter(existingEnd))
+                            {
+                                addErrors(7);
+                                return false;
+                            }
+                            if(potentialStart.isBefore(existingEnd) & potentialEnd.isAfter(existingEnd)) {
+                                addErrors(7);
+                                return false;
+                            }
+                            if((potentialStart.isAfter(existingStart) & (potentialEnd.isBefore(existingEnd)))){
+                                addErrors(7);
+                                return false;
+                            }
                     }
 
 
