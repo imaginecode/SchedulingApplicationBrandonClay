@@ -17,7 +17,10 @@ import java.time.ZoneId;
 /**
  * Main class.
  * This is a scheduling application  and contains methods for contact  and appointment management and reports */
-/** @author Brandon Clay */
+/** @author Brandon Clay
+ *
+ *  * First lambda expression is in CustomerAppointmentReport line 69 in reports handler method
+ *  * Second lambda is in method ReportsByZip line 66 */
 
 /** Java docs location \SchedulingApplicationBrandonClay\JavaDocs*/
 

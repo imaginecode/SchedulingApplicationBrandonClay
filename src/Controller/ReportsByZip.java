@@ -2,6 +2,7 @@ package Controller;
 
 import Data.CustomersData;
 import Model.Customer;
+import Utilities.printable;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +21,7 @@ import java.util.ResourceBundle;
 
 /** Report of customers by zip code
  * @author Brandon Clay*/
-public class ReportsByZip implements Initializable {
+public class ReportsByZip implements Initializable, printable {
     public TableColumn Name;
     public Button exitReport;
     public TextField searchPostalCode;
@@ -44,7 +45,8 @@ public class ReportsByZip implements Initializable {
 
     }
 
-    /** Takes text entered by user in field for postal code and searches against the data base and returns customers with that zip
+    /**  Second Lambda is a printable error message and can be used to clean up code where you have lots of error messages printing to the console. It keeps code readable and concise.
+     * Takes text entered by user in field for postal code and searches against the data base and returns customers with that zip
      * @param actionEvent button click of search */
     public void searchHandler(ActionEvent actionEvent) {
         try{customers = CustomersData.getCustomerbyZip(searchPostalCode.getText());
@@ -55,11 +57,15 @@ public class ReportsByZip implements Initializable {
             }
         }
         catch (SQLException e){
-            System.out.println("Postal Code does not exist please try an existing code");
+            msg.print();
             Alert alert = new Alert(Alert.AlertType.ERROR, "Postal Code does not exist please try an existing code");
             alert.showAndWait();
         }
     }
+    //Lambda Expression 2
+    printable msg = () -> {
+        System.out.println("Error: PostalCode does not exist please try an existing code");
+    };
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -72,5 +78,8 @@ public class ReportsByZip implements Initializable {
         phone.setCellValueFactory(new PropertyValueFactory<>("phone"));
     }
 
-
+/** print method implemented by printable interface used by lambda expression on line 60,65 */
+    @Override
+    public void print() {
+    }
 }

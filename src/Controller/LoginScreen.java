@@ -3,9 +3,7 @@ package Controller;
 import Data.AppointmentsData;
 import Data.UserNamePassQuery;
 import Model.Appointment;
-import Model.User;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,7 +19,6 @@ import java.io.PrintWriter;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -43,8 +40,6 @@ public class LoginScreen implements Initializable {
     public PasswordField PasswordFld;
     private ResourceBundle rb;
     public int userID;
-// Future implementation tracking user across the application
-// private String currentUser;
     /** Status of if user name and password credentials are valid */
     private boolean successStatus;
 
@@ -66,6 +61,7 @@ public class LoginScreen implements Initializable {
                 appointmentAlert();
 
                 try {
+
                     Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
                     Parent scene = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
                     stage.setTitle("Home");
@@ -218,6 +214,8 @@ public void appointmentAlert() throws SQLException {
         // Sets user location based on time zone of users system
         userLocationTxt.setText(String.valueOf(ZoneId.systemDefault()));
 
-
     }
+
+
+
 }

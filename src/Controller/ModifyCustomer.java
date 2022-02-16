@@ -2,6 +2,7 @@ package Controller;
 
 import Data.AddressData;
 import Data.CustomersData;
+import Model.Appointment;
 import Model.Country;
 import Model.Customer;
 import Model.FirstLvlDivisions;
@@ -174,6 +175,8 @@ public class ModifyCustomer implements Initializable {
 
     /** Initializes country combo box with list of countries from a query */
     public void countryComboInit(){
+
+
         ObservableList<String> CountryList = FXCollections.observableArrayList();
         try {
 
@@ -189,6 +192,8 @@ public class ModifyCustomer implements Initializable {
         }
 
     }
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

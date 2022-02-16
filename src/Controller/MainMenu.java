@@ -4,7 +4,7 @@ import Data.AppointmentsData;
 import Data.CustomersData;
 import Model.Appointment;
 import Model.Customer;
-import javafx.beans.Observable;
+import Utilities.printable;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -20,8 +20,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalTime;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -290,13 +288,17 @@ public class MainMenu  implements Initializable {
             }
     }
 
-    /**Pulls data into tableview for customer and appointment tableviews
+
+
+    /**
+     * Pulls data into tableview for customer and appointment tableviews
      * @param url resolve relative paths for the root object
      * @param resourceBundle resources used to localize the root object
      * catches SQLException prints stack trace */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
+
             appointments = AppointmentsData.getAllAppointments();
             customers = CustomersData.getAllCustomers();
 

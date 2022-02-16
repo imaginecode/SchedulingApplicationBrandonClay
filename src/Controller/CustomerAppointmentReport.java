@@ -18,6 +18,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 /**This class is customer appointment report that filters appointments by type and gets a count of how many appointments are of that type
  * @author Brandon Clay */
@@ -49,7 +51,8 @@ public class CustomerAppointmentReport implements Initializable {
         stage.setScene(new Scene(scene));
         stage.show();
     }
-    /** Combo box handler that takes selected type and populates tableview also gets a count of how many of that type of appointment*/
+    /**Second Lambda expression used to simplify loop for outputting data
+     * Combo box handler that takes selected type and populates tableview also gets a count of how many of that type of appointment*/
     public void aptTypesHandler(ActionEvent actionEvent) throws SQLException {
         int count = 0;
         if(!aptTypes.getSelectionModel().isEmpty()){
@@ -58,6 +61,12 @@ public class CustomerAppointmentReport implements Initializable {
             appointmentsTable.setItems(appointments);
             for (Appointment appointment: appointments){
                 ++count;
+                List<String> pointList = new ArrayList();
+
+                pointList.add("There are " + count + " of this appointment type");
+                pointList.add(appointment.getType());
+
+                pointList.forEach( p ->  { System.out.println(p); } );
 
             }
             countVal.setText(String.valueOf(count));
