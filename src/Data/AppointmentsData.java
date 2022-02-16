@@ -394,7 +394,7 @@ public class AppointmentsData {
 /**Method that queries to find appointment that are with 15 minutes of login for active user
  * @param UID  ID of active user to find appointments with 15 minutes*/
     public static Appointment within15Minutes(int UID) throws SQLException {
-        String query = "SELECT * FROM appointments WHERE Start BETWEEN now() AND date_add(now(),interval 30 MINUTE) AND User_ID=?";
+        String query = "SELECT * FROM appointments WHERE Start BETWEEN now() AND date_add(now(),interval 15 MINUTE) AND User_ID=?";
 
         DBQuery.setPreparedStatement(JDBC.getConnection(), query);
         PreparedStatement ps = DBQuery.getPreparedStatement();
@@ -428,7 +428,7 @@ public class AppointmentsData {
             }
         }
         catch(SQLException e){
-//            System.out.println(e.getStackTrace());
+            System.out.println(e.getStackTrace());
             System.out.println("15 min apt query not exe properly");
             return null;
         }

@@ -151,52 +151,20 @@ public void appointmentAlert() throws SQLException {
 
     try {
         userID =UserNamePassQuery.getUserIDByName(userNameFld.getText());
-//        userID = 2;
-        System.out.println(userID);
 
         Appointment returnedAppoint = AppointmentsData.within15Minutes(userID);
-        if(returnedAppoint != null)
-            System.out.println(returnedAppoint.getAptID());
-        else{
-            System.out.println("No upcoming apts");
+        if(returnedAppoint != null) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Upcoming appointment: " + +returnedAppoint.getAptID() + " " + returnedAppoint.getStart() + "For active User ID: " + userID);
+            alert.showAndWait();
         }
-
+        else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, " No Upcoming appointment for active USER ID: "  + userID);
+            alert.showAndWait();
+        }
     }
-    catch(SQLException e){
+    catch(SQLException | NullPointerException e){
         e.printStackTrace();
     }
-
-
-//    LocalDateTime localDateTime = LocalDateTime.now();
-//    LocalDateTime localDateTimePlus15 = localDateTime.plusMinutes(15);
-//
-//    ObservableList<Appointment> upcomingAppointments = FXCollections.observableArrayList();
-//
-//
-//    try {ObservableList<Appointment> appointments = AppointmentsData.getAllAppointments();
-//
-//        if (appointments != null) {
-//            for (Appointment appointment : appointments) {
-//                if (appointment.getStart().isAfter(localDateTime) & appointment.getStart().isBefore(localDateTimePlus15)) {
-//                    if(userID.)
-//                    upcomingAppointments.add(appointment);
-//                }
-//            }
-//        } }
-//    catch(SQLException e){
-//        e.getMessage();
-//    }
-
-
-
-
-
-//         alert displays appointment ID, date, and time
-//            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Upcoming appointment" + "ID:" + upcoming.getAptID() +
-//                    "DateTime:" + upcoming.getStart());
-//            alert.showAndWait();
-
-
 }
 
 
