@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 /** @author Brandon Clay */
 
@@ -390,5 +391,47 @@ public class AppointmentsData {
         return aptResultSet;
 
     }
+/**Method that queries to find appointment that are with 15 minutes of login for active user
+ * @param UID  ID of active user to find appointments with 15 minutes*/
+    public static Appointment within15Minutes(int UID) throws SQLException {
+        String query = "SELECT * FROM appointments WHERE Start BETWEEN now() AND date_add(now(),interval 30 MINUTE) AND User_ID=?";
 
+        DBQuery.setPreparedStatement(JDBC.getConnection(), query);
+        PreparedStatement ps = DBQuery.getPreparedStatement();
+
+        ps.setInt(1,UID);
+
+        try {
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+            //Going through result set
+            while (rs.next()) {
+                int appointmentID = rs.getInt("Appointment_ID");
+                String appointmentTitle = rs.getString("Title");
+                String appointmentDescription = rs.getString("Description");
+                String appointmentLocation = rs.getString("Location");
+                String appointmentType = rs.getString("Type");
+
+                // times and dates converted to local time and date of user
+                LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
+                LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
+
+                int customerID = rs.getInt("Customer_ID");
+                int userID = rs.getInt("User_ID");
+                int contactID = rs.getInt("Contact_ID");
+
+//                //Creating new appointment object
+                System.out.println("15 min query almost complete");
+                return new Appointment(appointmentID, appointmentTitle, appointmentDescription, appointmentLocation,
+                        appointmentType, start, end , customerID, userID, contactID);
+
+            }
+        }
+        catch(SQLException e){
+//            System.out.println(e.getStackTrace());
+            System.out.println("15 min apt query not exe properly");
+            return null;
+        }
+        return null;
+    }
 }

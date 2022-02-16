@@ -1,7 +1,11 @@
 package Controller;
 
+import Data.AppointmentsData;
 import Data.UserNamePassQuery;
-import com.mysql.cj.log.Log;
+import Model.Appointment;
+import Model.User;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,9 +21,9 @@ import java.io.PrintWriter;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -38,6 +42,7 @@ public class LoginScreen implements Initializable {
     public Label SchedulingAppLoginTxt;
     public PasswordField PasswordFld;
     private ResourceBundle rb;
+    public int userID;
 // Future implementation tracking user across the application
 // private String currentUser;
     /** Status of if user name and password credentials are valid */
@@ -139,7 +144,60 @@ public class LoginScreen implements Initializable {
         }
     }
 
+/** Method alerts user of appointment within 15 minutes of login */
+public void appointmentAlert() throws SQLException {
 
+
+
+    try {
+        userID =UserNamePassQuery.getUserIDByName(userNameFld.getText());
+//        userID = 2;
+        System.out.println(userID);
+
+        Appointment returnedAppoint = AppointmentsData.within15Minutes(userID);
+        if(returnedAppoint != null)
+            System.out.println(returnedAppoint.getAptID());
+        else{
+            System.out.println("No upcoming apts");
+        }
+
+    }
+    catch(SQLException e){
+        e.printStackTrace();
+    }
+
+
+//    LocalDateTime localDateTime = LocalDateTime.now();
+//    LocalDateTime localDateTimePlus15 = localDateTime.plusMinutes(15);
+//
+//    ObservableList<Appointment> upcomingAppointments = FXCollections.observableArrayList();
+//
+//
+//    try {ObservableList<Appointment> appointments = AppointmentsData.getAllAppointments();
+//
+//        if (appointments != null) {
+//            for (Appointment appointment : appointments) {
+//                if (appointment.getStart().isAfter(localDateTime) & appointment.getStart().isBefore(localDateTimePlus15)) {
+//                    if(userID.)
+//                    upcomingAppointments.add(appointment);
+//                }
+//            }
+//        } }
+//    catch(SQLException e){
+//        e.getMessage();
+//    }
+
+
+
+
+
+//         alert displays appointment ID, date, and time
+//            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Upcoming appointment" + "ID:" + upcoming.getAptID() +
+//                    "DateTime:" + upcoming.getStart());
+//            alert.showAndWait();
+
+
+}
 
 
     /** Logs successful and unsuccessful logins to Login_Attempt.txt   */
@@ -172,10 +230,6 @@ public class LoginScreen implements Initializable {
         catch (IOException e){ e.printStackTrace();}
 
     }
-
-
-    /** Alerts User to appointment that is within 15 minutes of user login */
-    private void appointmentAlert(){}
 
     @Override
     public void initialize(URL url, ResourceBundle bundle) {

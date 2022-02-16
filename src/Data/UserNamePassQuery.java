@@ -116,5 +116,37 @@ public class UserNamePassQuery {
         }
     }
 
+    public static Integer getUserIDByName(String username) throws SQLException {
+        ObservableList<User> allUsers = FXCollections.observableArrayList();
+        //Select Statement
+        String findUserStatement = "SELECT * FROM users WHERE User_Name=?";
+
+        DBQuery.setPreparedStatement(JDBC.getConnection(), findUserStatement);
+        PreparedStatement ps = DBQuery.getPreparedStatement();
+        ps.setString(1,username);
+        //Execute Statement
+        try {
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+            //Going through result set
+            while (rs.next()) {
+                int UserID = rs.getInt("User_ID");
+                String password = rs.getString("Password");
+                String userName = rs.getString("User_Name");
+
+
+//                //Creating new contact object
+                User newUser = new User(UserID, userName, password);
+                allUsers.add(newUser);
+                return newUser.getUserID();
+
+            }
+            return null;
+        } catch (SQLException e) {
+            System.out.println(e.getStackTrace());
+            System.out.println("Could not find username by ID");
+            return null;
+        }
+    }
 }
 

@@ -224,6 +224,7 @@ public class ModifyAppointment implements Initializable {
         }
         catch(SQLException e){
             e.printStackTrace();
+            return false;
         }
 
 

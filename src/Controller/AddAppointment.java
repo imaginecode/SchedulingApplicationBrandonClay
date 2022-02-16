@@ -209,6 +209,7 @@ public class AddAppointment implements Initializable{
         }
         catch(SQLException e){
             e.printStackTrace();
+
         }
 
 
