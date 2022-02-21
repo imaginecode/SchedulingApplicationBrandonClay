@@ -12,7 +12,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CustomerAppointmentReport">
    <children>
       <Button fx:id="exitReport" layoutX="571.0" layoutY="353.0" mnemonicParsing="false" onAction="#exitReportHandler" text="Back to Report Menu" />
-      <Label layoutX="66.0" layoutY="340.0" text="Count:">
+      <Label layoutX="65.0" layoutY="340.0" text="Count:">
          <font>
             <Font size="13.0" />
          </font></Label>
@@ -33,6 +33,10 @@
       </TableView>
       <ComboBox fx:id="aptTypes" layoutX="290.0" layoutY="337.0" onAction="#aptTypesHandler" prefWidth="150.0" />
       <Text layoutX="33.0" layoutY="383.0" opacity="0.41" strokeType="OUTSIDE" strokeWidth="0.0" text="Legacy appointments with old types must be updated to approved appointment types to display." />
-      <Text layoutX="316.0" layoutY="319.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pick Type" />
+      <Text layoutX="316.0" layoutY="319.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pick an appointment type to get a total by Type" />
+      <Text layoutX="84.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pick Month to display total amount of appointments for that selected month" wrappingWidth="169.94140625" />
+      <ComboBox fx:id="monthCombo" layoutX="254.0" layoutY="33.0" onAction="#monthCombo" prefWidth="150.0" />
+      <Text layoutX="440.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total by month" />
+      <Text fx:id="monthTotal" layoutX="547.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="65.0" />
    </children>
 </AnchorPane>
