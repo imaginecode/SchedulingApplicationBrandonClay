@@ -7,11 +7,13 @@ This application is an multipurpose scheduling tool that can be used for many di
  as well as time zone translation so that geographically separated teams can keep appointments synced and display upcoming appointments in local time.
   There are 3 reports that give detailed breakdowns of appointments using filters built into the UI. Additionally, the log in UI is EN-FR translatable
 ---------------------------------------------------------------------------------------------------------------------------
+Built completely in the WGU provided VM.
 
-IDE: IntelliJ Community 2021.1.1 x64), JavaFX API of version 16 by JavaFX runtime of version 11.0.2
+IDE: IntelliJ Community 2021.1.1 x64, JavaFX API of version 16 by JavaFX runtime of version 11.0.2
 ---------------------------------------------------------------------------------------------------------------------------
   Directions for how to run the program.
-Open main.java in IDE of choice, once opened you will see the login UI the default credentials: Username:admin Password:admin
+Note: This project was completely built in the WGU VM for Java 11. However, as a convience I have included a zipped version of the JDK and mysql connector.
+Unzip, open main.java in IDE of choice, once opened you will see the login UI the default credentials: Username:admin Password:admin
 
 ---------------------------------------------------------------------------------------------------------------------------
 An additional report is run, finding customers by zip code through a MySQL of the database, a valid zip code must be entered or no results

@@ -66,7 +66,7 @@ public class ModifyAppointment implements Initializable {
         try{
 
             if (appointmentChecks()){
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Confirm Save");
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Confirm Save for appointment ID: " + appointment_ID.getText() + " Type: " + typeCombo.getSelectionModel().getSelectedItem());
                 Optional<ButtonType> result = alert.showAndWait();
                 if(result.isPresent() && (result.get() == ButtonType.OK)) {
                     AppointmentsData.editAppointment(Integer.valueOf(appointment_ID.getText()),title.getText(), description.getText(), aptLocationCombo.getSelectionModel().getSelectedItem(),
@@ -91,7 +91,7 @@ public class ModifyAppointment implements Initializable {
      * @throws IOException thrown while accessing information using streams, files and directories*/
     public void cancelUpdateHandler(ActionEvent actionEvent) throws IOException {
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Confirm Cancel");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Confirm Cancel for appointment ID: " + appointment_ID.getText() + " Type: " + typeCombo.getSelectionModel().getSelectedItem());
         Optional<ButtonType> result = alert.showAndWait();
         if(result.isPresent() && (result.get() == ButtonType.OK)) {
 

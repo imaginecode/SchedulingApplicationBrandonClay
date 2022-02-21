@@ -133,8 +133,10 @@ public class MainMenu  implements Initializable {
             errorMsgs(2);
         }
         if(customersTable.getSelectionModel().getSelectedItem() != null){
+            //Customer Selected for delete for alert statement
+
         //Deleting appointments associated with customer first
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Confirm Delete. This will also delete associated appointments");
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Confirm Delete. This will also delete associated appointments for customer ID: " + ((Customer) customersTable.getSelectionModel().getSelectedItem()).getCustomerID());
             Optional<ButtonType> result = alert.showAndWait();
             if(result.isPresent() && (result.get() == ButtonType.OK)){
                 AppointmentsData.deleteAppointmentsByCustomer(selectedCustomer.getCustomerID());
@@ -184,7 +186,8 @@ public class MainMenu  implements Initializable {
         Appointment selectedForDelete = (Appointment) appointmentsTable.getSelectionModel().getSelectedItem();
         if(appointmentsTable.getSelectionModel().getSelectedItem() != null) {
 
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Confirm Delete");
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Confirm Delete for appointment ID: " + ((Appointment) appointmentsTable.getSelectionModel().getSelectedItem()).getAptID() +
+                    " Type: " + ((Appointment) appointmentsTable.getSelectionModel().getSelectedItem()).getType());
             Optional<ButtonType> result = alert.showAndWait();
             if(result.isPresent() && (result.get() == ButtonType.OK)){
                 AppointmentsData.deleteAppointment(selectedForDelete.getAptID());

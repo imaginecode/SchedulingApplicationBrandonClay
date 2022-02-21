@@ -60,7 +60,7 @@ public class ModifyCustomer implements Initializable {
      * @throws IOException while accessing information using streams, files and directories*/
     public void saveAddHandler(ActionEvent actionEvent) throws SQLException, IOException {
         if(customerChecks()){
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Confirm Update");
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Confirm Update for customer: " + Customer_ID.getText() );
             Optional<ButtonType> result = alert.showAndWait();
 
             if(result.isPresent() && (result.get() == ButtonType.OK)) {
@@ -82,7 +82,7 @@ public class ModifyCustomer implements Initializable {
      * @param actionEvent button click of cancel button
      * @throws IOException thrown while accessing information using streams, files and directories*/
     public void cancelUpdateHandler(ActionEvent actionEvent) throws IOException {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Confirm Cancel Action");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Confirm Cancel Action for Customer ID: " + Customer_ID.getText());
         Optional<ButtonType> result = alert.showAndWait();
         if(result.isPresent() && (result.get() == ButtonType.OK)) {
 
